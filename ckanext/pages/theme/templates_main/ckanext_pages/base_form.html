@@ -3,6 +3,11 @@
 
 {% set data = data or {} %}
 {% set errors = errors or {} %}
+{% if data.parents is mapping %}
+  {% set parents = [data.parents] or [] %}
+{% else %}
+  {% set parents = data.parents or [] %}
+{% endif %}
 
 {% if type == 'org' %}
     {% set prefix = 'organization_pages_' %}
@@ -60,6 +65,7 @@
 
   {#{{ form.input('name', id='field-name', label=_('Name'), placeholder=_('my-name'), value=data.name, error=errors.name, classes=['control-full']) }}#}
 
+    {% if not hide_private %}
   <div class="control-group">
     <label for="field-private" class="control-label">{{ _('Visibility') }}</label>
     <div class="controls">
@@ -70,6 +76,7 @@
       </select>
     </div>
   </div>
+    {% endif %}
 
   {% if not hide_field_order %}
     <div class="control-group">
@@ -78,6 +85,32 @@
         <select id="field-order" class="form-control" name="order">
             {% for option in [('', _('Not in Menu')), ('1','1'), ('2', '2'), ('3', '3') , ('4', '4')] %}
           <option value="{{ option[0] }}" {% if option[0] == data.order %}selected="selected"{% endif %}>{{ option[1] }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  {% endif %}
+
+   {% if not hide_side_order %}
+    <div class="control-group">
+      <label for="field-side_menu_order" class="control-label">{{ _('Left Menu Order') }}</label>
+      <div class="controls">
+        <select id="field-side_menu_order" class="form-control" name="side_menu_order">
+          {% for option in [('0', '0'), ('1','1'), ('2', '2'), ('3', '3') , ('4', '4') , ('5', '5') , ('6', '6') , ('7', '7') , ('8', '8') , ('9', '9')] %}
+            <option value="{{ option[0] }}" {% if option[0] == data.side_menu_order %}selected="selected"{% endif %}>{{ option[1] }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if not hide_parents %}
+    <div class="control-group">
+      <label for="field-parent_name" class="control-label">{{ _('Parent page') }}</label>
+      <div class="controls">
+        <select id="field-parent_name" class="form-control" name="parent_name">
+            {% for option in ([{'name': '', 'title': 'About'}] + parents) %}
+          <option value="{{ option.name }}" {% if option.name == data.parent_name %}selected="selected"{% endif %}>{{ option.title }}</option>
           {% endfor %}
         </select>
       </div>

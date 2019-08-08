@@ -7,13 +7,15 @@ import ckan.lib.uploader as uploader
 import ckan.lib.helpers as h
 from ckan.plugins import toolkit as tk
 from HTMLParser import HTMLParser
+
 try:
     import ckan.authz as authz
 except ImportError:
     import ckan.new_authz as authz
 
-
 import db
+
+
 def page_name_validator(key, data, errors, context):
     session = context['session']
     page = context.get('page')
@@ -27,11 +29,13 @@ def page_name_validator(key, data, errors, context):
         errors[key].append(
             p.toolkit._('Page name already exists in database'))
 
+
 def not_empty_if_blog(key, data, errors, context):
     value = data.get(key)
     if data.get(('page_type',), '') == 'blog':
         if value is df.missing or not value:
             errors[key].append('Publish Date Must be supplied')
+
 
 class HTMLFirstImage(HTMLParser):
     def __init__(self):
@@ -42,6 +46,7 @@ class HTMLFirstImage(HTMLParser):
         if tag == 'img' and not self.first_image:
             self.first_image = dict(attrs)['src']
 
+
 schema = {
     'id': [p.toolkit.get_validator('ignore_empty'), unicode],
     'title': [p.toolkit.get_validator('not_empty'), unicode],
@@ -49,7 +54,7 @@ schema = {
              p.toolkit.get_validator('name_validator'), page_name_validator],
     'content': [p.toolkit.get_validator('ignore_missing'), unicode],
     'page_type': [p.toolkit.get_validator('ignore_missing'), unicode],
-  #  'lang': [p.toolkit.get_validator('not_empty'), unicode],
+    #  'lang': [p.toolkit.get_validator('not_empty'), unicode],
     'order': [p.toolkit.get_validator('ignore_missing'),
               unicode],
     'private': [p.toolkit.get_validator('ignore_missing'),
@@ -61,6 +66,8 @@ schema = {
     'publish_date': [not_empty_if_blog,
                      p.toolkit.get_validator('ignore_missing'),
                      p.toolkit.get_validator('isodate')],
+    'parent_name': [p.toolkit.get_validator('ignore_missing'), unicode],
+    'side_menu_order': [p.toolkit.get_validator('ignore_missing'), unicode],
 }
 
 
@@ -118,7 +125,8 @@ def _pages_list(context, data_dict):
                   'publish_date': pg.publish_date.isoformat() if pg.publish_date else None,
                   'group_id': pg.group_id,
                   'page_type': pg.page_type,
-                 }
+                  'private': pg.private
+                  }
         if img:
             pg_row['image'] = img
         extras = pg.extras
@@ -126,6 +134,28 @@ def _pages_list(context, data_dict):
             pg_row.update(json.loads(pg.extras))
         out_list.append(pg_row)
     return out_list
+
+
+def _menu_list(context, data_dict):
+    search = {}
+    if db.pages_table is None:
+        db.init_db(context['model'])
+    search['private'] = False
+    search['group_id'] = None
+    search['order_side_menu_order'] = True
+    search['parent_name'] = data_dict.get('parent_name')
+
+    out = db.Page.pages(**search)
+    out_list = []
+
+    for pg in out:
+        pg_row = {'title': pg.title,
+                  'name': pg.name,
+                  }
+        out_list.append(pg_row)
+
+    return out_list
+
 
 def _pages_delete(context, data_dict):
     if db.pages_table is None:
@@ -159,9 +189,10 @@ def _pages_update(context, data_dict):
         out.group_id = org_id
         out.name = page
     items = ['title', 'content', 'name', 'private',
-             'order', 'page_type', 'publish_date']
+             'order', 'page_type', 'publish_date', 'parent_name', 'side_menu_order']
     for item in items:
-        setattr(out, item, data.get(item,'page' if item =='page_type' else None)) #backward compatible with older version where page_type does not exist
+        setattr(out, item, data.get(item,
+                                    'page' if item == 'page_type' else None))  # backward compatible with older version where page_type does not exist
 
     extras = {}
     extra_keys = set(schema.keys()) - set(items + ['id', 'created'])
@@ -177,8 +208,8 @@ def _pages_update(context, data_dict):
     session.add(out)
     session.commit()
 
-def pages_upload(context, data_dict):
 
+def pages_upload(context, data_dict):
     try:
         p.toolkit.check_access('ckanext_pages_upload', context, data_dict)
     except p.toolkit.NotAuthorized:
@@ -195,10 +226,11 @@ def pages_upload(context, data_dict):
     image_url = data_dict.get('image_url')
     if image_url:
         image_url = h.url_for_static(
-           'uploads/page_images/%s' % image_url,
-            qualified = True
+            'uploads/page_images/%s' % image_url,
+            qualified=True
         )
     return {'url': image_url}
+
 
 @tk.side_effect_free
 def pages_show(context, data_dict):
@@ -224,6 +256,7 @@ def pages_delete(context, data_dict):
         p.toolkit.abort(401, p.toolkit._('Not authorized to see this page'))
     return _pages_delete(context, data_dict)
 
+
 @tk.side_effect_free
 def pages_list(context, data_dict):
     try:
@@ -231,6 +264,12 @@ def pages_list(context, data_dict):
     except p.toolkit.NotAuthorized:
         p.toolkit.abort(401, p.toolkit._('Not authorized to see this page'))
     return _pages_list(context, data_dict)
+
+
+@tk.side_effect_free
+def menu_list(context, data_dict):
+    return _menu_list(context, data_dict)
+
 
 @tk.side_effect_free
 def org_pages_show(context, data_dict):
@@ -258,6 +297,7 @@ def org_pages_delete(context, data_dict):
         p.toolkit.abort(401, p.toolkit._('Not authorized to see this page'))
     return _pages_delete(context, data_dict)
 
+
 @tk.side_effect_free
 def org_pages_list(context, data_dict):
     try:
@@ -265,6 +305,7 @@ def org_pages_list(context, data_dict):
     except p.toolkit.NotAuthorized:
         p.toolkit.abort(401, p.toolkit._('Not authorized to see this page'))
     return _pages_list(context, data_dict)
+
 
 @tk.side_effect_free
 def group_pages_show(context, data_dict):
@@ -291,6 +332,7 @@ def group_pages_delete(context, data_dict):
     except p.toolkit.NotAuthorized:
         p.toolkit.abort(401, p.toolkit._('Not authorized to see this page'))
     return _pages_delete(context, data_dict)
+
 
 @tk.side_effect_free
 def group_pages_list(context, data_dict):

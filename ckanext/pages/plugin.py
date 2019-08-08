@@ -24,13 +24,13 @@ log = logging.getLogger(__name__)
 
 
 def build_pages_nav_main(*args):
-    about_menu = toolkit.asbool(config.get('ckanext.pages.about_menu', True))
-    group_menu = toolkit.asbool(config.get('ckanext.pages.group_menu', True))
+    about_menu = toolkit.asbool(config.get('ckanext.pages.about_menu', False))
+    group_menu = toolkit.asbool(config.get('ckanext.pages.group_menu', False))
     org_menu = toolkit.asbool(config.get('ckanext.pages.organization_menu', True))
 
     new_args = []
     for arg in args:
-        if arg[0] == 'about' and not about_menu:
+        if arg[0] == 'home.about' and not about_menu:
             continue
         if arg[0] == 'organizations_index' and not org_menu:
             continue
@@ -194,6 +194,7 @@ class PagesPlugin(PagesPluginBase):
             'ckanext_pages_delete': actions.pages_delete,
             'ckanext_pages_list': actions.pages_list,
             'ckanext_pages_upload': actions.pages_upload,
+            'ckanext_menu_list': actions.menu_list,
         }
         if self.organization_pages:
             org_actions = {

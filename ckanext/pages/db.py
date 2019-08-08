@@ -31,6 +31,8 @@ def init_db(model):
             '''Finds a single entity in the register.'''
             order = kw.pop('order', False)
             order_publish_date = kw.pop('order_publish_date', False)
+            order_publish_date_asc = kw.pop('order_publish_date_asc', False)
+            order_side_menu_order = kw.pop('order_side_menu_order', False)
 
             query = model.Session.query(cls).autoflush(False)
             query = query.filter_by(**kw)
@@ -38,6 +40,10 @@ def init_db(model):
                 query = query.order_by(cls.order).filter(cls.order != '')
             elif order_publish_date:
                 query = query.order_by(cls.publish_date.desc()).filter(cls.publish_date != None)
+            elif order_publish_date_asc:
+                query = query.order_by(cls.publish_date.asc()).filter(cls.publish_date != None)
+            elif order_side_menu_order:
+                query = query.order_by(cls.side_menu_order.asc())
             else:
                 query = query.order_by(cls.created.desc())
             return query.all()
@@ -93,6 +99,28 @@ def init_db(model):
         pass
     model.Session.commit()
 
+    sql_upgrade_07 = ('ALTER TABLE ckanext_pages add column parent_name Text;',
+                      "UPDATE ckanext_pages set parent_name = '';")
+
+    conn = model.Session.connection()
+    try:
+        for statement in sql_upgrade_07:
+            conn.execute(statement)
+    except sa.exc.ProgrammingError:
+        pass
+    model.Session.commit()
+
+    sql_upgrade_08 = ('ALTER TABLE ckanext_pages add column side_menu_order Text;',
+                      "UPDATE ckanext_pages set side_menu_order = '0';")
+
+    conn = model.Session.connection()
+    try:
+        for statement in sql_upgrade_08:
+            conn.execute(statement)
+    except sa.exc.ProgrammingError:
+        pass
+    model.Session.commit()
+
     types = sa.types
     global pages_table
     pages_table = sa.Table('ckanext_pages', model.meta.metadata,
@@ -110,6 +138,8 @@ def init_db(model):
         sa.Column('created', types.DateTime, default=datetime.datetime.utcnow),
         sa.Column('modified', types.DateTime, default=datetime.datetime.utcnow),
         sa.Column('extras', types.UnicodeText, default=u'{}'),
+        sa.Column('parent_name', types.UnicodeText, default=u''),
+        sa.Column('side_menu_order', types.UnicodeText, default=u'0'),
         extend_existing=True
     )
 
@@ -117,6 +147,19 @@ def init_db(model):
         Page,
         pages_table,
     )
+
+    # Create the default about-page
+    about_page = Page.get(name='about')
+    if not about_page:
+        about_page = Page()
+        about_page.name = "about"
+        about_page.title = "About"
+        about_page.parent_name = ""
+        about_page.private = False
+        about_page.order = "4"
+        about_page.side_menu_order = "0"
+        model.Session.add(about_page)
+        model.Session.commit()
 
 
 def table_dictize(obj, context, **kw):

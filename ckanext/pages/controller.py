@@ -201,7 +201,7 @@ class PagesController(p.toolkit.BaseController):
                 error_summary = e.error_summary
                 return self.group_edit(id, '/' + page, data,
                                  errors, error_summary)
-            p.toolkit.redirect_to('group_pages', id=id, page='/' + _page['name'])
+            p.toolkit.redirect_to(p.toolkit.url_for('group_pages', id=id, page='/' + _page['name']))
 
         if not data:
             data = _page
@@ -302,6 +302,25 @@ class PagesController(p.toolkit.BaseController):
         )
         if _page is None:
             return self._pages_list_pages(page_type)
+
+        _childs = p.toolkit.get_action('ckanext_menu_list')(
+            data_dict={'parent_name': _page.get('name')}
+        )
+
+        _parent = p.toolkit.get_action('ckanext_pages_show')(
+            data_dict={'org_id': None,
+                       'page': _page.get('parent_name')}
+        )
+
+        if _childs:
+            p.toolkit.c.pages_dict = _childs
+            p.toolkit.c.parent = _page
+        else:
+            p.toolkit.c.pages_dict = p.toolkit.get_action('ckanext_menu_list')(
+                data_dict={'parent_name': _page.get('parent_name')}
+            )
+            p.toolkit.c.parent = _parent
+
         p.toolkit.c.page = _page
         self._inject_views_into_page(_page)
 
@@ -359,11 +378,19 @@ class PagesController(p.toolkit.BaseController):
             data_dict={'org_id': None,
                        'page': page,}
         )
+
+        _parents = p.toolkit.get_action('ckanext_menu_list')(
+            data_dict={'parent_name': 'about'}
+        )
+
         if _page is None:
             _page = {}
 
         if p.toolkit.request.method == 'POST' and not data:
             data = dict(p.toolkit.request.POST)
+
+            if not (data['name'] == 'about') and (data['parent_name'] == ''):
+                data['parent_name'] = 'about'
 
             _page.update(data)
 
@@ -380,7 +407,8 @@ class PagesController(p.toolkit.BaseController):
                 error_summary = e.error_summary
                 return self.pages_edit('/' + page, data,
                                        errors, error_summary, page_type=page_type)
-            p.toolkit.redirect_to('%s_show' % page_type, page='/' + _page['name'])
+            p.toolkit.redirect_to(p.toolkit.url_for('%s_show' % page_type,
+                                                    page='/' + _page['name']))
 
         try:
             p.toolkit.check_access('ckanext_pages_update', {'user': p.toolkit.c.user or p.toolkit.c.author})
@@ -393,6 +421,7 @@ class PagesController(p.toolkit.BaseController):
         errors = errors or {}
         error_summary = error_summary or {}
 
+        data["parents"] = _parents
         form_snippet = config.get('ckanext.pages.form', 'ckanext_pages/base_form.html')
 
         vars = {'data': data, 'errors': errors,
