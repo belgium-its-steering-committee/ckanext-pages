@@ -3,15 +3,16 @@ import logging
 import urllib
 from ckan.common import config
 import ckan.plugins.toolkit as toolkit
-ignore_missing = toolkit.get_validator('ignore_missing')
-
 import ckan.plugins as p
 import ckan.lib.helpers as h
 import actions
 import auth
 
-if toolkit.check_ckan_version(min_version='2.5'):
+ignore_missing = toolkit.get_validator('ignore_missing')
+
+if toolkit.check_ckan_version(min_version='2.8'):
     from ckan.lib.plugins import DefaultTranslation
+
 
     class PagesPluginBase(p.SingletonPlugin, DefaultTranslation):
         p.implements(p.ITranslation, inherit=True)
@@ -21,8 +22,8 @@ else:
 
 log = logging.getLogger(__name__)
 
-def build_pages_nav_main(*args):
 
+def build_pages_nav_main(*args):
     about_menu = toolkit.asbool(config.get('ckanext.pages.about_menu', True))
     group_menu = toolkit.asbool(config.get('ckanext.pages.group_menu', True))
     org_menu = toolkit.asbool(config.get('ckanext.pages.organization_menu', True))
@@ -45,7 +46,7 @@ def build_pages_nav_main(*args):
     page_name = ''
 
     if (toolkit.c.action in ('pages_show', 'blog_show')
-       and toolkit.c.controller == 'ckanext.pages.controller:PagesController'):
+            and toolkit.c.controller == 'ckanext.pages.controller:PagesController'):
         page_name = toolkit.c.environ['routes.url'].current().split('/')[-1]
 
     for page in pages_list:
@@ -92,7 +93,7 @@ def get_recent_blog_posts(number=5, exclude=None):
 
 
 def get_plus_icon():
-    if toolkit.check_ckan_version(min_version='2.7'):
+    if toolkit.check_ckan_version(min_version='2.8'):
         return 'plus-square'
     return 'plus-sign-alt'
 
@@ -104,7 +105,6 @@ class PagesPlugin(PagesPluginBase):
     p.implements(p.IRoutes, inherit=True)
     p.implements(p.IActions, inherit=True)
     p.implements(p.IAuthFunctions, inherit=True)
-
 
     def update_config(self, config):
         self.organization_pages = toolkit.asbool(config.get('ckanext.pages.organization', False))
@@ -144,9 +144,11 @@ class PagesPlugin(PagesPluginBase):
             map.connect('organization_pages_edit', '/organization/pages_edit/{id}{page:/.*|}',
                         action='org_edit', ckan_icon='edit', controller=controller)
             map.connect('organization_pages_index', '/organization/pages/{id}',
-                        action='org_show', ckan_icon='file', controller=controller, highlight_actions='org_edit org_show', page='')
+                        action='org_show', ckan_icon='file', controller=controller,
+                        highlight_actions='org_edit org_show', page='')
             map.connect('organization_pages', '/organization/pages/{id}{page:/.*|}',
-                        action='org_show', ckan_icon='file', controller=controller, highlight_actions='org_edit org_show')
+                        action='org_show', ckan_icon='file', controller=controller,
+                        highlight_actions='org_edit org_show')
 
         if self.group_pages:
             map.connect('group_pages_delete', '/group/pages_delete/{id}{page:/.*|}',
@@ -154,19 +156,22 @@ class PagesPlugin(PagesPluginBase):
             map.connect('group_pages_edit', '/group/pages_edit/{id}{page:/.*|}',
                         action='group_edit', ckan_icon='edit', controller=controller)
             map.connect('group_pages_index', '/group/pages/{id}',
-                        action='group_show', ckan_icon='file', controller=controller, highlight_actions='group_edit group_show', page='')
+                        action='group_show', ckan_icon='file', controller=controller,
+                        highlight_actions='group_edit group_show', page='')
             map.connect('group_pages', '/group/pages/{id}{page:/.*|}',
-                        action='group_show', ckan_icon='file', controller=controller, highlight_actions='group_edit group_show')
-
+                        action='group_show', ckan_icon='file', controller=controller,
+                        highlight_actions='group_edit group_show')
 
         map.connect('pages_delete', '/pages_delete{page:/.*|}',
                     action='pages_delete', ckan_icon='delete', controller=controller)
         map.connect('pages_edit', '/pages_edit{page:/.*|}',
                     action='pages_edit', ckan_icon='edit', controller=controller)
         map.connect('pages_index', '/pages',
-                    action='pages_index', ckan_icon='file', controller=controller, highlight_actions='pages_edit pages_index pages_show')
+                    action='pages_index', ckan_icon='file', controller=controller,
+                    highlight_actions='pages_edit pages_index pages_show')
         map.connect('pages_show', '/pages{page:/.*|}',
-                    action='pages_show', ckan_icon='file', controller=controller, highlight_actions='pages_edit pages_index pages_show')
+                    action='pages_show', ckan_icon='file', controller=controller,
+                    highlight_actions='pages_edit pages_index pages_show')
         map.connect('pages_upload', '/pages_upload',
                     action='pages_upload', controller=controller)
 
@@ -175,11 +180,12 @@ class PagesPlugin(PagesPluginBase):
         map.connect('blog_edit', '/blog_edit{page:/.*|}',
                     action='blog_edit', ckan_icon='edit', controller=controller)
         map.connect('blog_index', '/blog',
-                    action='blog_index', ckan_icon='file', controller=controller, highlight_actions='blog_edit blog_index blog_show')
+                    action='blog_index', ckan_icon='file', controller=controller,
+                    highlight_actions='blog_edit blog_index blog_show')
         map.connect('blog_show', '/blog{page:/.*|}',
-                    action='blog_show', ckan_icon='file', controller=controller, highlight_actions='blog_edit blog_index blog_show')
+                    action='blog_show', ckan_icon='file', controller=controller,
+                    highlight_actions='blog_edit blog_index blog_show')
         return map
-
 
     def get_actions(self):
         actions_dict = {
@@ -190,7 +196,7 @@ class PagesPlugin(PagesPluginBase):
             'ckanext_pages_upload': actions.pages_upload,
         }
         if self.organization_pages:
-            org_actions={
+            org_actions = {
                 'ckanext_org_pages_show': actions.org_pages_show,
                 'ckanext_org_pages_update': actions.org_pages_update,
                 'ckanext_org_pages_delete': actions.org_pages_delete,
@@ -198,7 +204,7 @@ class PagesPlugin(PagesPluginBase):
             }
             actions_dict.update(org_actions)
         if self.group_pages:
-            group_actions={
+            group_actions = {
                 'ckanext_group_pages_show': actions.group_pages_show,
                 'ckanext_group_pages_update': actions.group_pages_update,
                 'ckanext_group_pages_delete': actions.group_pages_delete,
@@ -222,10 +228,10 @@ class PagesPlugin(PagesPluginBase):
             'ckanext_group_pages_update': auth.group_pages_update,
             'ckanext_group_pages_delete': auth.group_pages_delete,
             'ckanext_group_pages_list': auth.group_pages_list,
-       }
+        }
+
 
 class TextBoxView(p.SingletonPlugin):
-
     p.implements(p.IConfigurer, inherit=True)
     p.implements(p.IResourceView, inherit=True)
 
