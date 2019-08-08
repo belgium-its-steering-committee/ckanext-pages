@@ -7,7 +7,9 @@ This extension gives you an easy way to add simple pages to CKAN.
 
 By default you can add pages to the main CKAN menu.
 
-Works for ckan>=2.3
+Works for ckan 2.8
+
+Custom version for Belgian ITS NAP, forked from [ckan/ckanext-pages](https://github.com/ckan/ckanext-pages)
 
 ## Installation
 
