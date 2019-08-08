@@ -1,7 +1,7 @@
 import cgi
 import logging
 import urllib
-from pylons import config
+from ckan.common import config
 import ckan.plugins.toolkit as toolkit
 ignore_missing = toolkit.get_validator('ignore_missing')
 
