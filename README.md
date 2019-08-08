@@ -13,10 +13,10 @@ Custom version for Belgian ITS NAP, forked from [ckan/ckanext-pages](https://git
 
 ## Installation
 
-Use `pip` to install this plugin. This example installs it in `/home/www-data/pyenv`, assuming you have [setup a virtualenv](http://docs.ckan.org/en/latest/maintaining/installing/install-from-source.html#install-ckan-into-a-python-virtual-environment) there:
+Use `pip` to install this plugin. This example installs it in `/usr/lib/ckan/default`, assuming you have [setup a virtualenv](http://docs.ckan.org/en/latest/maintaining/installing/install-from-source.html#install-ckan-into-a-python-virtual-environment) there:
 
 ```
-source /home/www-data/pyenv/bin/activate
+. /usr/lib/ckan/default/bin/activate
 pip install -e 'git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages'
 ```
 
@@ -58,18 +58,14 @@ To enable HTML output for the pages (along with Markdown), add the following to 
 ckanext.pages.allow_html = True
 ```
 
-By default this option is set to False. Note that this feature is only available for CKAN >= 2.3. For older versions of CKAN, this option has no effect.
-Use this option with care and only allow this if you trust the input of your users.
+By default this option is set to False. Use this option with care and only allow this if you trust the input of your users.
 
 If you want to use the WYSIWYG editor instead of Markdown:
-```
-ckanext.pages.editor = medium
-```
-or
+
 ```
 ckanext.pages.editor = ckeditor
 ```
-This enables either the [medium](https://jakiestfu.github.io/Medium.js/docs/) or [ckeditor](http://ckeditor.com/)
+This enables the [ckeditor](http://ckeditor.com/)
 
 ## Dependencies
 
