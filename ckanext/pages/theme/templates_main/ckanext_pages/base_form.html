@@ -118,16 +118,33 @@
   {% endif %}
 
   {% set editor = h.get_wysiwyg_editor() %}
-  {% if editor == 'medium' %}
-    {{ wysiwyg.editor('content', id='field-content', label=_('Content'), placeholder=_('Enter content here'), value=data.content|safe, error=errors.content) }}
-  {% elif editor == 'ckeditor' %}
+  {% if editor == 'ckeditor' %}
     {% resource 'ckanext-pages/main' %}
     <div class="control-group">
-        <label for="field-content-ck" class="control-label">{{ _('Content') }}</label>
+        <label for="field-content-ck" class="control-label">{{ _('Content EN (default)') }}</label>
     </div>
     <textarea id="field-content-ck" name="content" placeholder="{{_('My content')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content }}</textarea>
+    <br/>
+    <div class="control-group">
+        <label for="field-content-nl-ck" class="control-label">{{ _('Content NL') }}</label>
+    </div>
+    <textarea id="field-content-nl-ck" name="content_nl" placeholder="{{_('Mijn  inhoud')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content_nl }}</textarea>
+    <br/>
+    <div class="control-group">
+        <label for="field-content-fr-ck" class="control-label">{{ _('Content FR') }}</label>
+    </div>
+    <textarea id="field-content-fr-ck" name="content_fr" placeholder="{{_('Mon contenu')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content_fr }}</textarea>
+    <br/>
+    <div class="control-group">
+        <label for="field-content-de-ck" class="control-label">{{ _('Content DE') }}</label>
+    </div>
+    <textarea id="field-content-de-ck" name="content_de" placeholder="{{_('Mein Inhalt')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content_de }}</textarea>
+    <br/>
   {% else %}
-    {{ form.markdown('content', id='field-content', label=_('Content'), placeholder=_('Enter content here'), value=data.content, error=errors.content) }}
+    {{ form.markdown('content', id='field-content', label=_('Content EN (default)'), placeholder=_('My content'), value=data.content, error=errors.content) }}
+    {{ form.markdown('content_nl', id='field-content-nl', label=_('Content NL'), placeholder=_('Mijn  inhoud'), value=data.content_nl, error=errors.content_nl) }}
+    {{ form.markdown('content_fr', id='field-content-fr', label=_('Content FR'), placeholder=_('Mon contenu'), value=data.content_fr, error=errors.content_fr) }}
+    {{ form.markdown('content_de', id='field-content-de', label=_('Content DE'), placeholder=_('Mein Inhalt'), value=data.content_de, error=errors.content_de) }}
   {% endif %}
 
   <div class="form-actions">

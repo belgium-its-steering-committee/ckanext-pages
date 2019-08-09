@@ -53,6 +53,9 @@ schema = {
     'name': [p.toolkit.get_validator('not_empty'), unicode,
              p.toolkit.get_validator('name_validator'), page_name_validator],
     'content': [p.toolkit.get_validator('ignore_missing'), unicode],
+    'content_nl': [p.toolkit.get_validator('ignore_missing'), unicode],
+    'content_fr': [p.toolkit.get_validator('ignore_missing'), unicode],
+    'content_de': [p.toolkit.get_validator('ignore_missing'), unicode],
     'page_type': [p.toolkit.get_validator('ignore_missing'), unicode],
     #  'lang': [p.toolkit.get_validator('not_empty'), unicode],
     'order': [p.toolkit.get_validator('ignore_missing'),
@@ -188,7 +191,7 @@ def _pages_update(context, data_dict):
         out = db.Page()
         out.group_id = org_id
         out.name = page
-    items = ['title', 'content', 'name', 'private',
+    items = ['title', 'content', 'content_nl', 'content_fr', 'content_de', 'name', 'private',
              'order', 'page_type', 'publish_date', 'parent_name', 'side_menu_order']
     for item in items:
         setattr(out, item, data.get(item,

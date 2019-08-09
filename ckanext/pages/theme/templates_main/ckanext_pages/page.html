@@ -32,13 +32,38 @@
     {% if c.page.content %}
       <div class="ckanext-pages-content">
         {% set editor = h.get_wysiwyg_editor() %}
+        {% set selected_lang = h.lang() %}
         <!-- editor set to "{{ editor }}"-->
         {% if editor %}
           <div>
+            {% if selected_lang %}
+              {% if selected_lang=="nl" and c.page.content_nl %}
+                {{c.page.content_nl|safe}}
+              {% elif selected_lang=="fr" and c.page.content_fr %}
+                {{c.page.content_fr|safe}}
+              {% elif selected_lang=="de" and c.page.content_de %}
+                {{c.page.content_de|safe}}
+              {% else %}
+                {{c.page.content|safe}}
+              {% endif %}
+            {% else %}
               {{c.page.content|safe}}
+            {% endif %}
           </div>
         {% else %}
-          {{ h.render_content(c.page.content) }}
+            {% if selected_lang %}
+              {% if selected_lang=="nl" and c.page.content_nl %}
+                {{ h.render_content(c.page.content_nl) }}
+              {% elif selected_lang=="fr" and c.page.content_fr %}
+                {{ h.render_content(c.page.content_fr) }}
+              {% elif selected_lang=="de" and c.page.content_de %}
+                {{ h.render_content(c.page.content_de) }}
+              {% else %}
+                {{ h.render_content(c.page.content) }}
+              {% endif %}
+            {% else %}
+              {{ h.render_content(c.page.content) }}
+            {% endif %}
         {% endif %}
       </div>
     {% else %}
