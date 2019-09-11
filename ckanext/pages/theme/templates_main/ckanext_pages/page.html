@@ -1,22 +1,23 @@
 {% extends 'page.html' %}
 
-{% block subtitle %}{{ c.page.title }}{% endblock %}
+{% set selected_lang = h.lang() %}
+{% block subtitle %}{{ h.pages_page_title(selected_lang, c.page) }}{% endblock %}
 
 {% block breadcrumb_content %}
   {% set bread_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + c.page.name) %}
   {% if c.page.name == 'about' %}
-    <li class="active"><a href="{{ bread_url }}" >{{ c.page.title }}</a></li>
+    <li class="active"><a href="{{ bread_url }}" >{{ h.pages_page_title(selected_lang, c.page) }}</a></li>
   {% else %}
     {% set about_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/about') %}
     <li class="home"><a href="{{ about_url }}" >{{ _('About') }}</a></li>
   {% endif %}
 
   {% if c.page.parent_name == 'about' %}
-    <li class="active"><a href="{{ bread_url }}" >{{ c.page.title }}</a></li>
+    <li class="active"><a href="{{ bread_url }}" >{{ h.pages_page_title(selected_lang, c.page) }}</a></li>
   {% elif not c.page.parent_name == '' %}
     {% set parent_bread_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + c.parent.name) %}
     <li class="home"><a href="{{ parent_bread_url }}" >{{ c.parent.title }}</a></li>
-    <li class="active"><a href="{{ bread_url }}" >{{ c.page.title }}</a></li>
+    <li class="active"><a href="{{ bread_url }}" >{{ h.pages_page_title(selected_lang, c.page) }}</a></li>
   {% endif %}
 {% endblock %}
 
@@ -28,11 +29,10 @@
       {% link_for _('Edit'), controller='ckanext.pages.controller:PagesController', action='pages_edit', page='/' + c.page.name, class_='btn btn-primary pull-right', icon='edit' %}
         </div>
     {% endif %}
-    <h1 class="page-heading">{{ c.page.title }}</h1>
+    <h1 class="page-heading">{{ h.pages_page_title(selected_lang, c.page) }}</h1>
     {% if c.page.content %}
       <div class="ckanext-pages-content">
         {% set editor = h.get_wysiwyg_editor() %}
-        {% set selected_lang = h.lang() %}
         <!-- editor set to "{{ editor }}"-->
         {% if editor %}
           <div>
@@ -78,7 +78,7 @@
   <h2 class="module-heading">
     {% if c.parent %}
       {% set parent_bread_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + c.parent.name) %}
-      <a href="{{ parent_bread_url }}" >{{ c.parent.title }}</a>
+      <a href="{{ parent_bread_url }}" >{{ h.pages_page_title(selected_lang, c.parent) }}</a>
     {% else %}
         {{ _('Menu') }}
     {% endif %}
@@ -88,9 +88,9 @@
       {% for page in c.pages_dict %}
         {% set url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + page.name) %}
         {% if page.name == c.page.name %}
-          <li class="pages-menu-item active-menu-item"><a href="{{ url }}" >{{ page.title }}</a></li>
+          <li class="pages-menu-item active-menu-item"><a href="{{ url }}" >{{ h.pages_page_title(selected_lang, page) }}</a></li>
         {% else %}
-          <li class="pages-menu-item"><a href="{{ url }}" >{{ page.title }}</a></li>
+          <li class="pages-menu-item"><a href="{{ url }}" >{{ h.pages_page_title(selected_lang, page) }}</a></li>
         {% endif %}
       {% endfor %}
     </ul>

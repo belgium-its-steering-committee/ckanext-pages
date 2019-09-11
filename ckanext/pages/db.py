@@ -137,6 +137,22 @@ def init_db(model):
         pass
     model.Session.commit()
 
+    sql_upgrade_10 = ('ALTER TABLE ckanext_pages add column title_nl Text;',
+                      'ALTER TABLE ckanext_pages add column title_fr Text;',
+                      'ALTER TABLE ckanext_pages add column title_de Text;',
+                      "UPDATE ckanext_pages set title_nl = ''",
+                      "UPDATE ckanext_pages set title_fr = ''",
+                      "UPDATE ckanext_pages set title_de = ''"
+                      )
+
+    conn = model.Session.connection()
+    try:
+        for statement in sql_upgrade_10:
+            conn.execute(statement)
+    except sa.exc.ProgrammingError:
+        pass
+    model.Session.commit()
+
 
 
     types = sa.types
@@ -144,6 +160,9 @@ def init_db(model):
     pages_table = sa.Table('ckanext_pages', model.meta.metadata,
         sa.Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
         sa.Column('title', types.UnicodeText, default=u''),
+        sa.Column('title_nl', types.UnicodeText, default=u''),
+        sa.Column('title_fr', types.UnicodeText, default=u''),
+        sa.Column('title_de', types.UnicodeText, default=u''),
         sa.Column('name', types.UnicodeText, default=u''),
         sa.Column('content', types.UnicodeText, default=u''),
         sa.Column('content_nl', types.UnicodeText, default=u''),

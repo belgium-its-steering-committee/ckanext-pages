@@ -52,7 +52,10 @@
 
 <form class="form-horizontal" method="post" action="{{ action_url }}" data-module="basic-form">
 
-  {{ form.input('title', id='field-title', label=_('Title'), placeholder=title_placeholder, value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target'}) }}
+  {{ form.input('title', id='field-title', label=_('Title EN (default)'), placeholder=title_placeholder, value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target'}) }}
+  {{ form.input('title_nl', id='field-title-nl', label=_('Title NL'), placeholder=title_placeholder, value=data.title_nl, error=errors.title_nl, classes=['control-full', 'control-large']) }}
+  {{ form.input('title_fr', id='field-title-fr', label=_('Title FR'), placeholder=title_placeholder, value=data.title_fr, error=errors.title_fr, classes=['control-full', 'control-large']) }}
+  {{ form.input('title_de', id='field-title-de', label=_('Title DE'), placeholder=title_placeholder, value=data.title_de, error=errors.title_de, classes=['control-full', 'control-large']) }}
 
   {% set domain = slug_domain|replace("http://", "")|replace("https://", "") %}
   {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain~'/', 'data-module-placeholder': '<page>'} %}

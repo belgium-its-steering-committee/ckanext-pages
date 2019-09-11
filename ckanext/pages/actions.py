@@ -50,6 +50,9 @@ class HTMLFirstImage(HTMLParser):
 schema = {
     'id': [p.toolkit.get_validator('ignore_empty'), unicode],
     'title': [p.toolkit.get_validator('not_empty'), unicode],
+    'title_nl': [p.toolkit.get_validator('ignore_missing'), unicode],
+    'title_fr': [p.toolkit.get_validator('ignore_missing'), unicode],
+    'title_de': [p.toolkit.get_validator('ignore_missing'), unicode],
     'name': [p.toolkit.get_validator('not_empty'), unicode,
              p.toolkit.get_validator('name_validator'), page_name_validator],
     'content': [p.toolkit.get_validator('ignore_missing'), unicode],
@@ -123,7 +126,13 @@ def _pages_list(context, data_dict):
         parser.feed(pg.content)
         img = parser.first_image
         pg_row = {'title': pg.title,
+                  'title_nl': pg.title_nl,
+                  'title_fr': pg.title_fr,
+                  'title_de': pg.title_de,
                   'content': pg.content,
+                  'content_nl': pg.content_nl,
+                  'content_fr': pg.content_fr,
+                  'content_de': pg.content_de,
                   'name': pg.name,
                   'publish_date': pg.publish_date.isoformat() if pg.publish_date else None,
                   'group_id': pg.group_id,
@@ -153,6 +162,9 @@ def _menu_list(context, data_dict):
 
     for pg in out:
         pg_row = {'title': pg.title,
+                  'title_nl': pg.title_nl,
+                  'title_fr': pg.title_fr,
+                  'title_de': pg.title_de,
                   'name': pg.name,
                   }
         out_list.append(pg_row)
@@ -191,7 +203,7 @@ def _pages_update(context, data_dict):
         out = db.Page()
         out.group_id = org_id
         out.name = page
-    items = ['title', 'content', 'content_nl', 'content_fr', 'content_de', 'name', 'private',
+    items = ['title', 'title_nl', 'title_fr', 'title_de', 'content', 'content_nl', 'content_fr', 'content_de', 'name', 'private',
              'order', 'page_type', 'publish_date', 'parent_name', 'side_menu_order']
     for item in items:
         setattr(out, item, data.get(item,
