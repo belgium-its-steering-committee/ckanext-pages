@@ -52,7 +52,7 @@ def build_pages_nav_main(*args):
     for page in pages_list:
         type_ = 'blog' if page['page_type'] == 'blog' else 'pages'
         name = urllib.quote(page['name'].encode('utf-8')).decode('utf-8')
-        title = cgi.escape(page['title'])
+        title = cgi.escape(pages_page_title(h.lang(), page))
         link = h.literal(u'<a href="/{}/{}">{}</a>'.format(type_, name, title))
         if page['name'] == page_name:
             li = h.literal('<li class="active">') + link + h.literal('</li>')
