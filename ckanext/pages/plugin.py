@@ -40,6 +40,13 @@ def build_pages_nav_main(*args):
 
     output = h.build_nav_main(*new_args)
 
+    # add forum link
+    forum_url = config.get('ckan.pages.forum.link', False)
+    if forum_url:
+        link = h.literal(u'<a href="{}" target="_blank">{}</a>'.format(forum_url, "Forum"))
+        li = h.literal('<li>') + link + h.literal('</li>')
+        output = output + li
+
     # do not display any private datasets in menu even for sysadmins
     pages_list = toolkit.get_action('ckanext_pages_list')(None, {'order': True, 'private': False})
 
