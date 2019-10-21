@@ -119,8 +119,7 @@ msgstr "Was ist Pages?"
 msgid ""
 " <p>Pages are are simple way to add extra pages to your ckan instance. "
 "You can assign an order to them.</p> "
-msgstr ""
-"Pages ist ein einfacher Weg extra Seiten zu deinem CKAN Portal "
+msgstr "Pages ist ein einfacher Weg extra Seiten zu deinem CKAN Portal "
 "hinzuzufügen. Du kannst sogar die Anordnung bestimmen."
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:36
@@ -154,7 +153,7 @@ msgstr "Seiten Titel"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:55
 msgid "Title EN (default)"
-msgstr ""
+msgstr "Titel EN (Standard)"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:56
 #, fuzzy
@@ -208,7 +207,7 @@ msgstr "Seite bearbeiten"
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:127
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:147
 msgid "Content EN (default)"
-msgstr ""
+msgstr "Inhalt DE (Standard)"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:129
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:147
@@ -224,7 +223,7 @@ msgstr "Text"
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:134
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:148
 msgid "Mijn inhoud"
-msgstr ""
+msgstr "Mein Inhalt"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:137
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:149
@@ -247,7 +246,7 @@ msgstr "Text"
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:144
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:150
 msgid "Mein Inhalt"
-msgstr ""
+msgstr "Mein Inhalt"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:155
 #: ckanext/pages/theme/templates_main/ckanext_pages/confirm_delete.html:15
@@ -298,7 +297,7 @@ msgstr "Blogeinträge"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog_edit_base.html:12
 msgid " <p>Add blog articles to CKAN here.</p> "
-msgstr "<p>Füge Blogeinträge hier zu CKAN hinzu."
+msgstr "<p>Füge Blogeinträge hier zu CKAN hinzu.</p>"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog_list.html:5
 msgid "Add Article"
@@ -311,15 +310,15 @@ msgstr "Bestätige die Löschung"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/confirm_delete.html:11
 msgid "Are you sure you want to delete page - {name}?"
-msgstr "{name}, willst du die Seite wirklich löschen?"
+msgstr "willst du die Seite {name} wirklich löschen?"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/page.html:12
 msgid "About"
-msgstr ""
+msgstr "Über"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/page.html:83
 msgid "Menu"
-msgstr ""
+msgstr "Menü"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_edit.html:3
 msgid "Edit Page"

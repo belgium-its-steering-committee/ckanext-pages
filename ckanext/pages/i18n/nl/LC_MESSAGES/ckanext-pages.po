@@ -21,7 +21,7 @@ msgstr ""
 
 #: ckanext/pages/actions.py:30
 msgid "Page name already exists in database"
-msgstr ""
+msgstr "Paginanaam bestaat al in de database"
 
 #: ckanext/pages/actions.py:231 ckanext/pages/actions.py:255
 #: ckanext/pages/actions.py:263 ckanext/pages/actions.py:271
@@ -31,62 +31,62 @@ msgstr ""
 #: ckanext/pages/actions.py:339 ckanext/pages/actions.py:348
 #: ckanext/pages/actions.py:357
 msgid "Not authorized to see this page"
-msgstr ""
+msgstr "Niet geautoriseerd om deze pagina te bekijken"
 
 #: ckanext/pages/auth.py:66
 #, python-format
 msgid "User %s not authorized to read this page"
-msgstr ""
+msgstr "Gebruiker %s is niet gemachtigd om deze pagina te lezen"
 
 #: ckanext/pages/controller.py:18 ckanext/pages/controller.py:65
 msgid "Organization not found"
-msgstr ""
+msgstr "Organisatie niet gevonden"
 
 #: ckanext/pages/controller.py:20
 #, python-format
 msgid "Unauthorized to read organization %s"
-msgstr ""
+msgstr "Onbevoegd om organisatie %s te lezen"
 
 #: ckanext/pages/controller.py:61 ckanext/pages/controller.py:159
 #: ckanext/pages/controller.py:363
 msgid "Page Not Found"
-msgstr ""
+msgstr "Pagina niet gevonden"
 
 #: ckanext/pages/controller.py:63 ckanext/pages/controller.py:161
 #: ckanext/pages/controller.py:365
 msgid "Unauthorized to delete page"
-msgstr ""
+msgstr "Niet geautoriseerd om pagina te verwijderen"
 
 #: ckanext/pages/controller.py:122 ckanext/pages/controller.py:163
 #: ckanext/pages/controller.py:367
 msgid "Group not found"
-msgstr ""
+msgstr "Groep niet gevonden"
 
 #: ckanext/pages/controller.py:124
 #, python-format
 msgid "Unauthorized to read group %s"
-msgstr ""
+msgstr "Onbevoegd om groep %s te lezen"
 
 #: ckanext/pages/controller.py:267
 msgid "ERROR: View not found {view_id}"
-msgstr ""
+msgstr "FOUT: weergave niet gevonden {view_id}"
 
 #: ckanext/pages/controller.py:275
 msgid "Your browser does not support iframes."
-msgstr ""
+msgstr "Uw browser ondersteunt geen iframes."
 
 #: ckanext/pages/controller.py:416
 msgid "Unauthorized to create or edit a page"
-msgstr ""
+msgstr "Niet geautoriseerd om een pagina te maken of te bewerken"
 
 #: ckanext/pages/controller.py:436
 msgid "Only Posting is availiable"
-msgstr ""
+msgstr "Alleen posten is beschikbaar"
 
 #: ckanext/pages/controller.py:441
 #, python-format
 msgid "Unauthorized to upload file %s"
-msgstr ""
+msgstr "Onbevoegd om bestand %s te uploaden"
 
 #: ckanext/pages/theme/templates_group/group/read_base.html:5
 #: ckanext/pages/theme/templates_main/ckanext_pages/edit_base.html:3
@@ -102,167 +102,167 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/header.html:5
 #: ckanext/pages/theme/templates_organization/organization/read_base.html:5
 msgid "Pages"
-msgstr ""
+msgstr "Pagina's"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog.html:34
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog_edit_base.html:9
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog_list.html:10
 #: ckanext/pages/theme/templates_main/header.html:10
 msgid "Blog"
-msgstr ""
+msgstr "Blog"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base.html:15
 msgid "What are Pages?"
-msgstr ""
+msgstr "Wat zijn pagina's?"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base.html:18
 msgid ""
 " <p>Pages are are simple way to add extra pages to your ckan instance. "
 "You can assign an order to them.</p> "
-msgstr ""
+msgstr "<p>Pagina's zijn een eenvoudige manier om extra pagina's aan uw ckan-instantie toe te voegen. U kunt een bestelling aan hen toewijzen.</p>"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:36
 msgid "Add Blog Article"
-msgstr ""
+msgstr "Blogartikel toevoegen"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:38
 msgid "Edit Blog Article"
-msgstr ""
+msgstr "Blogartikel bewerken"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:41
 msgid "eg. Blog Article Title"
-msgstr ""
+msgstr "bv. Titel van blogartikel"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:44
 #: ckanext/pages/theme/templates_main/ckanext_pages/group_page_list.html:5
 #: ckanext/pages/theme/templates_main/ckanext_pages/organization_page_list.html:5
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:5
 msgid "Add page"
-msgstr ""
+msgstr "Pagina toevoegen"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:46
 #: ckanext/pages/theme/templates_main/ckanext_pages/group_page.html:7
 #: ckanext/pages/theme/templates_main/ckanext_pages/organization_page.html:7
 msgid "Edit page"
-msgstr ""
+msgstr "Pagina bijwerken"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:49
 msgid "eg. Page Title"
-msgstr ""
+msgstr "bv. Pagina titel"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:55
 msgid "Title EN (default)"
-msgstr ""
+msgstr "Titel EN (standaard)"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:56
 msgid "Title NL"
-msgstr ""
+msgstr "Titel NL"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:57
 msgid "Title FR"
-msgstr ""
+msgstr "Titel FR"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:58
 msgid "Title DE"
-msgstr ""
+msgstr "Titel DE"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:62
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:73
-msgid "Visibility"
+msgid "zichtbaarheid"
 msgstr ""
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:76
 msgid "Private"
-msgstr ""
+msgstr "Privaat"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:76
 msgid "Public"
-msgstr ""
+msgstr "Openbaar"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:86
 msgid "Menu Order"
-msgstr ""
+msgstr "Menuvolgorde"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:89
 msgid "Not in Menu"
-msgstr ""
+msgstr "Niet in menu"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:99
 msgid "Left Menu Order"
-msgstr ""
+msgstr "Linkermenuvolgorde"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:112
 msgid "Parent page"
-msgstr ""
+msgstr "Bovenliggende pagina"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:127
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:147
 msgid "Content EN (default)"
-msgstr ""
+msgstr "Inhoud EN (standaard)"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:129
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:147
 msgid "My content"
-msgstr ""
+msgstr "Mijn inhoud"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:132
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:148
 msgid "Content NL"
-msgstr ""
+msgstr "Inhoud NL"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:134
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:148
 msgid "Mijn inhoud"
-msgstr ""
+msgstr "Mijn inhoud"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:137
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:149
 msgid "Content FR"
-msgstr ""
+msgstr "Inhoud FR"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:139
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:149
 msgid "Mon contenu"
-msgstr ""
+msgstr "Mijn inhoud"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:142
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:150
 msgid "Content DE"
-msgstr ""
+msgstr "Inhoud DE"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:144
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:150
 msgid "Mein Inhalt"
-msgstr ""
+msgstr "Mijn inhoud"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:155
 #: ckanext/pages/theme/templates_main/ckanext_pages/confirm_delete.html:15
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleer"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:156
 msgid "Add"
-msgstr ""
+msgstr "Toevoegen"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:161
 msgid "Are you sure you want to delete this Page?"
-msgstr ""
+msgstr "Weet u zeker dat u deze pagina wilt verwijderen?"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:162
 msgid "Delete"
-msgstr ""
+msgstr "Verwijder"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:166
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog.html:8
 #: ckanext/pages/theme/templates_main/ckanext_pages/page.html:29
 msgid "Edit"
-msgstr ""
+msgstr "Bewerk"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog.html:24
 #: ckanext/pages/theme/templates_main/ckanext_pages/group_page.html:20
@@ -271,54 +271,54 @@ msgstr ""
 #: ckanext/pages/theme/templates_main/ckanext_pages/snippets/pages_list.html:51
 #: ckanext/pages/theme/templates_main/ckanext_pages/snippets/pages_list.html:71
 msgid "This page currently has no content"
-msgstr ""
+msgstr "Deze pagina heeft momenteel geen inhoud"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog.html:51
 msgid "More"
-msgstr ""
+msgstr "Meer"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog_edit.html:3
 msgid "Edit Article"
-msgstr ""
+msgstr "Artikel bijwerken"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog_edit_base.html:3
 msgid "Blog Articles"
-msgstr ""
+msgstr "Blog Articles"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog_edit_base.html:12
 msgid " <p>Add blog articles to CKAN here.</p> "
-msgstr ""
+msgstr "<p>Voeg hier blogartikelen toe aan CKAN.</p>"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog_list.html:5
 msgid "Add Article"
-msgstr ""
+msgstr "Artikel toevoegen"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/confirm_delete.html:3
 #: ckanext/pages/theme/templates_main/ckanext_pages/confirm_delete.html:16
 msgid "Confirm Delete"
-msgstr ""
+msgstr "Bevestig verwijderen"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/confirm_delete.html:11
 msgid "Are you sure you want to delete page - {name}?"
-msgstr ""
+msgstr "Weet u zeker dat u pagina {name} wilt verwijderen?"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/page.html:12
 msgid "About"
-msgstr ""
+msgstr "Over"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/page.html:83
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_edit.html:3
 msgid "Edit Page"
-msgstr ""
+msgstr "Pagina aanpassen"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/snippets/pages_list.html:80
 msgid "There are currently no blog articles here"
-msgstr ""
+msgstr "Er zijn momenteel geen blogartikelen hier"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/snippets/pages_list.html:82
 msgid "There are currently no pages here"
-msgstr ""
+msgstr "Er zijn momenteel geen pagina's hier"
 
