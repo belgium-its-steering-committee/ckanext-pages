@@ -119,7 +119,7 @@ msgstr "Que sont les pages?"
 msgid ""
 " <p>Pages are are simple way to add extra pages to your ckan instance. "
 "You can assign an order to them.</p> "
-msgstr "<p>Les pages sont un moyen simple d’ajouter des pages supplémentaires à votre instance ckan. "Vous pouvez leur assigner un ordre.</p>"
+msgstr "<p>Les pages sont un moyen simple d’ajouter des pages supplémentaires à votre instance ckan. Vous pouvez leur assigner un ordre.</p>"
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:36
 msgid "Add Blog Article"
