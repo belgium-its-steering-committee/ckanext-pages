@@ -209,6 +209,12 @@ class PagesPlugin(PagesPluginBase):
         map.connect('blog_show', '/blog{page:/.*|}',
                     action='blog_show', ckan_icon='file', controller=controller,
                     highlight_actions='blog_edit blog_index blog_show')
+        # Forum
+        forum_controller = 'ckanext.pages.controller:ForumController'
+        map.connect('forum_show', '/forum',
+                    action='forum_show', ckan_icon='file', controller=forum_controller,
+                    highlight_actions='forum_show')
+
         return map
 
     def get_actions(self):

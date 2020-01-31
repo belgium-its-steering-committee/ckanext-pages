@@ -448,7 +448,7 @@ class PagesController(p.toolkit.BaseController):
 class ForumController(p.toolkit.BaseController):
     controller = 'ckanext.pages.controller:ForumController'
 
-    def show_forum(self, id):
+    def forum_show(self, id=None):
         print("@"*35)
         print(id)
         print("@"*35)
