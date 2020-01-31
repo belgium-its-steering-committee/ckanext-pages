@@ -43,7 +43,7 @@ def build_pages_nav_main(*args):
     # add forum link
     forum_url = config.get('ckan.pages.forum.link', False)
     if forum_url:
-        link = h.literal(u'<a href="{}" target="_blank">{}</a>'.format(forum_url, "Forum"))
+        link = h.literal(u'<a href="/{}/{}">{}</a>'.format(h.lang(), 'forum', "Forum"))
         li = h.literal('<li>') + link + h.literal('</li>')
         output = output + li
 
@@ -120,6 +120,7 @@ def pages_page_title(selected_lang, page_data):
 
 
 class PagesPlugin(PagesPluginBase):
+    p.implements(p.ITranslation)
     p.implements(p.IConfigurer, inherit=True)
     p.implements(p.ITemplateHelpers, inherit=True)
     p.implements(p.IConfigurable, inherit=True)
@@ -207,6 +208,12 @@ class PagesPlugin(PagesPluginBase):
         map.connect('blog_show', '/blog{page:/.*|}',
                     action='blog_show', ckan_icon='file', controller=controller,
                     highlight_actions='blog_edit blog_index blog_show')
+        # Forum
+        forum_controller = 'ckanext.pages.controller:ForumController'
+        map.connect('forum_show', '/forum',
+                    action='forum_show', ckan_icon='file', controller=forum_controller,
+                    highlight_actions='forum_show')
+
         return map
 
     def get_actions(self):
