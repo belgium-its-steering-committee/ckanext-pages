@@ -10,20 +10,12 @@ from setuptools import setup, find_packages
 # Extract version
 HERE = os.path.abspath(os.path.dirname(__file__))
 INIT_PY = os.path.join(HERE, 'ckanext', 'pages', '__init__.py')
-version = None
-with io.open(INIT_PY) as f:
-    for line in f:
-        m = re.match(r'__version__\s*=\s*u?[\'"](.*)[\'"]', line)
-        if m:
-            version = m.groups()[0]
-            break
-if version is None:
-    raise RuntimeError('Could not extract version from "{}".'.format(INIT_PY))
+
 
 
 setup(
     name='ckanext-pages',
-    version=version,
+    version='1.1.0',
     description='Basic CMS extension for ckan',
     long_description='',
     classifiers=[

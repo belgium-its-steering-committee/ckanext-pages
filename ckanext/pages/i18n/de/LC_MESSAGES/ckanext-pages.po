@@ -281,5 +281,5 @@ msgstr "Sie werden zum NAP-Forum weitergeleitet. Dieses Forum wird auf Englisch 
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/forum_page.html:15
 msgid "Or go directly to the"
-msgstr ""
+msgstr "Oder gehen Sie direkt zum"
 
