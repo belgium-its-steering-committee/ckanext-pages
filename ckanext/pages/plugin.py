@@ -43,7 +43,7 @@ def build_pages_nav_main(*args):
     # add forum link
     forum_url = config.get('ckan.pages.forum.link', False)
     if forum_url:
-        link = h.literal(u'<a href="/{}">{}</a>'.format('forum', "Forum"))
+        link = h.literal(u'<a href="/{}/{}">{}</a>'.format(h.lang(), 'forum', "Forum"))
         li = h.literal('<li>') + link + h.literal('</li>')
         output = output + li
 

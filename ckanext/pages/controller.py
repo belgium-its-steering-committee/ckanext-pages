@@ -449,8 +449,6 @@ class ForumController(p.toolkit.BaseController):
     controller = 'ckanext.pages.controller:ForumController'
 
     def forum_show(self, id=None):
-        print("@"*35)
-        print("@"*35)
         forum_url = config.get('ckan.pages.forum.link', False)
         return p.toolkit.render('ckanext_pages/forum_page.html',
                                  {'forum_url': forum_url})
