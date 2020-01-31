@@ -448,6 +448,9 @@ class PagesController(p.toolkit.BaseController):
 class ForumController(p.toolkit.BaseController):
     controller = 'ckanext.pages.controller:ForumController'
 
-    def show_forum(self):
+    def show_forum(self, id):
+        print("@"*35)
+        print(id)
+        print("@"*35)
         return p.toolkit.render('ckanext_pages/forum_page.html',
                                 {'group_type': 'forum'})
