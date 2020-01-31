@@ -276,10 +276,10 @@ msgid "There are currently no pages here"
 msgstr ""
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/forum_page.html:13
-msgid "U wordt doorverwezen naar het NAP forum. Dit forum wordt standaard weergegeven in het Engels. U kan de weergavetaal wijzigen door een account aan te maken op het forum en uw taal te kiezen bij de accountinstellingen."
-msgstr ""
+msgid "You are being redirected to the NAP forum."
+msgstr "U wordt doorverwezen naar het NAP forum. Dit forum wordt standaard weergegeven in het Engels. U kan de weergavetaal wijzigen door een account aan te maken op het forum en uw taal te kiezen bij de accountinstellingen."
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/forum_page.html:15
-msgid "Of ga direct naar het"
-msgstr ""
+msgid "Or go directly to the"
+msgstr "Of ga direct naar het"
 

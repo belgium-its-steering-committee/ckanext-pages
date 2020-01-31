@@ -276,8 +276,8 @@ msgid "There are currently no pages here"
 msgstr ""
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/forum_page.html:13
-msgid "Vous allez être redirigé(e) vers le forum du NAP. Ce dernier s’affiche d’abord en anglais, mais vous pouvez changer la langue en créant un compte et en modifiant ensuite les paramètres de langue."
-msgstr ""
+msgid "You are being redirected to the NAP forum."
+msgstr "Vous allez être redirigé(e) vers le forum du NAP. Ce dernier s’affiche d’abord en anglais, mais vous pouvez changer la langue en créant un compte et en modifiant ensuite les paramètres de langue."
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/forum_page.html:15
 msgid "Or go directly to the"
