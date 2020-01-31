@@ -120,6 +120,7 @@ def pages_page_title(selected_lang, page_data):
 
 
 class PagesPlugin(PagesPluginBase):
+    p.implements(p.ITranslation)
     p.implements(p.IConfigurer, inherit=True)
     p.implements(p.ITemplateHelpers, inherit=True)
     p.implements(p.IConfigurable, inherit=True)
