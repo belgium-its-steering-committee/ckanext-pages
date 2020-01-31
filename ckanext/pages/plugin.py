@@ -43,7 +43,9 @@ def build_pages_nav_main(*args):
     # add forum link
     forum_url = config.get('ckan.pages.forum.link', False)
     if forum_url:
-        link = h.literal(u'<a href="{}" target="_blank">{}</a>'.format(forum_url, "Forum"))
+        forum_url = h.url_for(controller='ckanext.pages.controller:ForumController')
+        #link = h.literal(u'<a href="{}" target="_blank">{}</a>'.format(forum_url, "Forum"))
+        link = h.literal(u'<a href="{}">{}</a>'.format(forum_url, "Forum"))
         li = h.literal('<li>') + link + h.literal('</li>')
         output = output + li
 

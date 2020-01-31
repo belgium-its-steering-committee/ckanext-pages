@@ -443,3 +443,11 @@ class PagesController(p.toolkit.BaseController):
         return """<script type='text/javascript'>
                       window.parent.CKEDITOR.tools.callFunction(%s, '%s');
                   </script>""" % (p.toolkit.request.GET['CKEditorFuncNum'], url['url'])
+
+
+class ForumController(p.toolkit.BaseController):
+    controller = 'ckanext.pages.controller:ForumController'
+
+    def show_forum(self):
+        return p.toolkit.render('ckanext_pages/forum_page.html',
+                                {'group_type': 'forum'})
