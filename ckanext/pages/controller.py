@@ -450,7 +450,7 @@ class ForumController(p.toolkit.BaseController):
 
     def forum_show(self, id=None):
         print("@"*35)
-        print(id)
         print("@"*35)
+        forum_url = config.get('ckan.pages.forum.link', False)
         return p.toolkit.render('ckanext_pages/forum_page.html',
-                                {'group_type': 'forum'})
+                                {'group_type': 'forum', 'forum_url': 'forum_url'})
