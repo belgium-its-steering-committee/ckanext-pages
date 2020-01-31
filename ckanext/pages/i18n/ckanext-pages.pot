@@ -1,14 +1,14 @@
 # Translations template for ckanext-pages.
-# Copyright (C) 2016 ORGANIZATION
+# Copyright (C) 2019 ORGANIZATION
 # This file is distributed under the same license as the ckanext-pages project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ckanext-pages 0.1\n"
+"Project-Id-Version: ckanext-pages 0.1.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-12-22 18:51+0100\n"
+"POT-Creation-Date: 2019-10-15 10:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,69 +17,71 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: ckanext/pages/actions.py:28
+#: ckanext/pages/actions.py:30
 msgid "Page name already exists in database"
 msgstr ""
 
-#: ckanext/pages/actions.py:185 ckanext/pages/actions.py:208
-#: ckanext/pages/actions.py:216 ckanext/pages/actions.py:224
-#: ckanext/pages/actions.py:232 ckanext/pages/actions.py:240
-#: ckanext/pages/actions.py:248 ckanext/pages/actions.py:256
-#: ckanext/pages/actions.py:264 ckanext/pages/actions.py:272
-#: ckanext/pages/actions.py:280 ckanext/pages/actions.py:288
-#: ckanext/pages/actions.py:296
+#: ckanext/pages/actions.py:231 ckanext/pages/actions.py:255
+#: ckanext/pages/actions.py:263 ckanext/pages/actions.py:271
+#: ckanext/pages/actions.py:280 ckanext/pages/actions.py:294
+#: ckanext/pages/actions.py:303 ckanext/pages/actions.py:312
+#: ckanext/pages/actions.py:321 ckanext/pages/actions.py:330
+#: ckanext/pages/actions.py:339 ckanext/pages/actions.py:348
+#: ckanext/pages/actions.py:357
 msgid "Not authorized to see this page"
 msgstr ""
 
-#: ckanext/pages/auth.py:52
+#: ckanext/pages/auth.py:66
 #, python-format
 msgid "User %s not authorized to read this page"
 msgstr ""
 
-#: ckanext/pages/controller.py:22
+#: ckanext/pages/controller.py:18 ckanext/pages/controller.py:65
 msgid "Organization not found"
 msgstr ""
 
-#: ckanext/pages/controller.py:24
+#: ckanext/pages/controller.py:20
 #, python-format
 msgid "Unauthorized to read organization %s"
 msgstr ""
 
-#: ckanext/pages/controller.py:64 ckanext/pages/controller.py:309
+#: ckanext/pages/controller.py:61 ckanext/pages/controller.py:159
+#: ckanext/pages/controller.py:363
 msgid "Page Not Found"
 msgstr ""
 
-#: ckanext/pages/controller.py:66 ckanext/pages/controller.py:311
+#: ckanext/pages/controller.py:63 ckanext/pages/controller.py:161
+#: ckanext/pages/controller.py:365
 msgid "Unauthorized to delete page"
 msgstr ""
 
-#: ckanext/pages/controller.py:68 ckanext/pages/controller.py:123
-#: ckanext/pages/controller.py:313
+#: ckanext/pages/controller.py:122 ckanext/pages/controller.py:163
+#: ckanext/pages/controller.py:367
 msgid "Group not found"
 msgstr ""
 
-#: ckanext/pages/controller.py:125
+#: ckanext/pages/controller.py:124
 #, python-format
 msgid "Unauthorized to read group %s"
 msgstr ""
 
-#: ckanext/pages/controller.py:240
+#: ckanext/pages/controller.py:267
 msgid "ERROR: View not found {view_id}"
 msgstr ""
 
-#: ckanext/pages/controller.py:248
+#: ckanext/pages/controller.py:275
 msgid "Your browser does not support iframes."
 msgstr ""
 
-#: ckanext/pages/controller.py:354
+#: ckanext/pages/controller.py:416
 msgid "Unauthorized to create or edit a page"
 msgstr ""
 
-#: ckanext/pages/controller.py:373
+#: ckanext/pages/controller.py:436
 msgid "Only Posting is availiable"
 msgstr ""
 
-#: ckanext/pages/controller.py:378
+#: ckanext/pages/controller.py:441
 #, python-format
 msgid "Unauthorized to upload file %s"
 msgstr ""
@@ -117,49 +119,53 @@ msgid ""
 "can assign an order to them.</p> "
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:40
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:36
 msgid "Add Blog Article"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:42
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:38
 msgid "Edit Blog Article"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:45
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:41
 msgid "eg. Blog Article Title"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:48
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:44
 #: ckanext/pages/theme/templates_main/ckanext_pages/group_page_list.html:5
 #: ckanext/pages/theme/templates_main/ckanext_pages/organization_page_list.html:5
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_list.html:5
 msgid "Add page"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:50
-#: ckanext/pages/theme/templates_main/ckanext_pages/group_page.html:6
-#: ckanext/pages/theme/templates_main/ckanext_pages/organization_page.html:6
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:46
+#: ckanext/pages/theme/templates_main/ckanext_pages/group_page.html:7
+#: ckanext/pages/theme/templates_main/ckanext_pages/organization_page.html:7
 msgid "Edit page"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:53
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:49
 msgid "eg. Page Title"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:59
-msgid "Title"
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:55
+msgid "Title EN (default)"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:63
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:56
+msgid "Title NL"
+msgstr ""
+
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:57
+msgid "Title FR"
+msgstr ""
+
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:58
+msgid "Title DE"
+msgstr ""
+
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:62
 msgid "URL"
-msgstr ""
-
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:65
-msgid "Publish Date"
-msgstr ""
-
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:65
-msgid "2005-01-01"
 msgstr ""
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:73
@@ -174,59 +180,92 @@ msgstr ""
 msgid "Public"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:85
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:86
 msgid "Menu Order"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:88
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:89
 msgid "Not in Menu"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:98
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:102
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:106
-msgid "Content"
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:99
+msgid "Left Menu Order"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:98
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:106
-msgid "Enter content here"
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:112
+msgid "Parent page"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:104
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:127
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:147
+msgid "Content EN (default)"
+msgstr ""
+
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:129
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:147
 msgid "My content"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:111
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:132
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:148
+msgid "Content NL"
+msgstr ""
+
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:134
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:148
+msgid "Mijn inhoud"
+msgstr ""
+
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:137
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:149
+msgid "Content FR"
+msgstr ""
+
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:139
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:149
+msgid "Mon contenu"
+msgstr ""
+
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:142
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:150
+msgid "Content DE"
+msgstr ""
+
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:144
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:150
+msgid "Mein Inhalt"
+msgstr ""
+
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:155
 #: ckanext/pages/theme/templates_main/ckanext_pages/confirm_delete.html:15
 msgid "Cancel"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:112
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:156
 msgid "Add"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:117
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:161
 msgid "Are you sure you want to delete this Page?"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:118
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:162
 msgid "Delete"
 msgstr ""
 
-#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:122
+#: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:166
 msgid "Save"
 msgstr ""
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog.html:8
-#: ckanext/pages/theme/templates_main/ckanext_pages/page.html:8
+#: ckanext/pages/theme/templates_main/ckanext_pages/page.html:29
 msgid "Edit"
 msgstr ""
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/blog.html:24
-#: ckanext/pages/theme/templates_main/ckanext_pages/group_page.html:18
-#: ckanext/pages/theme/templates_main/ckanext_pages/organization_page.html:18
-#: ckanext/pages/theme/templates_main/ckanext_pages/page.html:23
+#: ckanext/pages/theme/templates_main/ckanext_pages/group_page.html:20
+#: ckanext/pages/theme/templates_main/ckanext_pages/organization_page.html:20
+#: ckanext/pages/theme/templates_main/ckanext_pages/page.html:70
 #: ckanext/pages/theme/templates_main/ckanext_pages/snippets/pages_list.html:51
 #: ckanext/pages/theme/templates_main/ckanext_pages/snippets/pages_list.html:71
 msgid "This page currently has no content"
@@ -259,6 +298,14 @@ msgstr ""
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/confirm_delete.html:11
 msgid "Are you sure you want to delete page - {name}?"
+msgstr ""
+
+#: ckanext/pages/theme/templates_main/ckanext_pages/page.html:12
+msgid "About"
+msgstr ""
+
+#: ckanext/pages/theme/templates_main/ckanext_pages/page.html:83
+msgid "Menu"
 msgstr ""
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/pages_edit.html:3
