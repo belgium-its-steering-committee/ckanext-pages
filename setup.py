@@ -15,7 +15,7 @@ INIT_PY = os.path.join(HERE, 'ckanext', 'pages', '__init__.py')
 
 setup(
     name='ckanext-pages',
-    version='1.1.0',
+    version='1.1.1',
     description='Basic CMS extension for ckan',
     long_description='',
     classifiers=[
