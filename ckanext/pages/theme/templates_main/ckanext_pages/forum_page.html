@@ -6,13 +6,15 @@
 
 {% block subtitle %}Forum{% endblock %}
 
-{% block primary_content_inner %}
+{% block primary_content %}
   <h1 class="page-heading">Forum</h1>
 
     <p>
         {{ _('You are being redirected to the NAP forum.') }}
     </p>
-    <p>
-        {{ forum_url }}
-    </p>
+    <script language="JavaScript">
+        window.setTimeout(function(){
+            window.open({{ forum_url }},'_blank')
+        }, 10000);
+    </script>
 {% endblock %}
