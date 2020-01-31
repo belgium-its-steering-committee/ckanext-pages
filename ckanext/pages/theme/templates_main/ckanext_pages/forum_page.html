@@ -1,6 +1,10 @@
 {% extends 'page.html' %}
 
-{% block subtitle %}{{ _('Pages') }} - FORUM{% endblock %}
+{% block breadcrumb_content %}
+  <li class="active"><a href="/forum" >Forum</a></li>
+{% endblock %}
+
+{% block subtitle %}Forum{% endblock %}
 
 {% block primary_content_inner %}
   <h1 class="page-heading">Forum</h1>
@@ -9,6 +13,6 @@
         {{ _('You are being redirected to the NAP forum.') }}
     </p>
     <p>
-        {{ c.forum_url }}
+        {{ forum_url }}
     </p>
 {% endblock %}
