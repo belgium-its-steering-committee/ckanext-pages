@@ -1,17 +1,19 @@
-# Translations template for ckanext-pages.
+# Dutch translations for ckanext-pages.
 # Copyright (C) 2016 ORGANIZATION
-# This file is distributed under the same license as the ckanext-pages project.
+# This file is distributed under the same license as the ckanext-pages
+# project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-pages 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2016-12-22 18:51+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2020-01-31 16:22+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: nl\n"
+"Language-Team: nl <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -113,8 +115,8 @@ msgstr ""
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base.html:18
 msgid ""
-" <p>Pages are are simple way to add extra pages to your ckan instance. You "
-"can assign an order to them.</p> "
+" <p>Pages are are simple way to add extra pages to your ckan instance. "
+"You can assign an order to them.</p> "
 msgstr ""
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/base_form.html:40
@@ -274,9 +276,10 @@ msgid "There are currently no pages here"
 msgstr ""
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/forum_page.html:13
-msgid "You are being redirected to the NAP forum."
+msgid "U wordt doorverwezen naar het NAP forum. Dit forum wordt standaard weergegeven in het Engels. U kan de weergavetaal wijzigen door een account aan te maken op het forum en uw taal te kiezen bij de accountinstellingen."
 msgstr ""
 
 #: ckanext/pages/theme/templates_main/ckanext_pages/forum_page.html:15
-msgid "Or go directly to the"
+msgid "Of ga direct naar het"
 msgstr ""
+
