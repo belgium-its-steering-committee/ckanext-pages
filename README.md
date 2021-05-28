@@ -1,5 +1,6 @@
-[![Build Status](https://travis-ci.org/ckan/ckanext-pages.svg?branch=master)](https://travis-ci.org/ckan/ckanext-pages)
-[![Coverage Status](https://coveralls.io/repos/ckan/ckanext-pages/badge.svg?branch=master&service=github)](https://coveralls.io/github/ckan/ckanext-pages?branch=master)
+
+![Tests](https://github.com/ckan/ckanext-pages/workflows/Tests/badge.svg?branch=master)
+
 ckanext-pages
 =============
 
@@ -38,7 +39,7 @@ ckanext.pages.organization = True
 ckanext.pages.group = True
 ```
 
-These options are False by default and this feature is experimental.
+These options are False by default.
 
 
 This module also gives you a quick way to remove default elements from the CKAN menu and you may need todo this
@@ -67,9 +68,46 @@ ckanext.pages.editor = ckeditor
 ```
 This enables the [ckeditor](http://ckeditor.com/)
 
+## Extending ckanext-pages schema
+
+This extension defines an `IPagesSchema` interface that allows other extensions to update the pages schema and add custom fields.
+
+To do so, you can implement the method `update_pages_schema` in your extension:
+
+```
+import ckan.plugins as plugins
+import ckan.plugins.toolkit as toolkit
+from ckanext.pages.interfaces import IPagesSchema
+
+class MyextPlugin(plugins.SingletonPlugin):
+    plugins.implements(IPagesSchema)
+
+    #IPagesSchema
+    def update_pages_schema(self, schema):
+        schema.update({
+            'new_field': [
+                toolkit.get_validator('not_empty'),
+                toolkit.get_validator('boolean_validator')]
+            })
+        return schema
+```
+
+and also extends `ckanext_pages/base_form.html` and override the `extra_pages_form` block to add it to the form:
+
+```
+{% ckan_extends %}
+
+{% set options = [{'value': True, 'text': _('Yes')}, {'value': False, 'text': _('No')}]%}
+{% block extra_pages_form %}
+    {{ form.select('new_field', id = 'new_field', label = 'New Field', options=options, selected=data.testing) }}
+{% endblock extra_pages_form %}
+```
+
+If you want to override, make sure your extension is added before `pages` in the `ckan.plugins` config.
+
 ## Dependencies
 
-* lxml
+* lxml (optional, only used for injecting resource views into pages)
 
 
 ## License

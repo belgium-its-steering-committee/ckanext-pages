@@ -1,3 +1,5 @@
+pytest-ckan
+pytest-cov
 coverage==4.0.3
 coveralls==1.1
 ckan==2.8.3
