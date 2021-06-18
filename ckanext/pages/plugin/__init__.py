@@ -123,9 +123,23 @@ def get_plus_icon():
     return 'plus-sign-alt'
 
 
+def pages_page_title(selected_lang, page_data):
+    if selected_lang:
+        if selected_lang == "nl" and page_data.get("title_nl", False):
+            return page_data["title_nl"]
+        elif selected_lang == "fr" and page_data.get("title_fr", False):
+            return page_data["title_fr"]
+        elif selected_lang == "de" and page_data.get("title_de", False):
+            return page_data["title_de"]
+    return page_data["title"]
+
+
 class PagesPlugin(PagesPluginBase, MixinPlugin):
+    p.implements(p.ITranslation)
     p.implements(p.IConfigurer, inherit=True)
     p.implements(p.ITemplateHelpers, inherit=True)
+    p.implements(p.IConfigurable, inherit=True)
+    p.implements(p.IRoutes, inherit=True)
     p.implements(p.IActions, inherit=True)
     p.implements(p.IAuthFunctions, inherit=True)
 
@@ -151,7 +165,8 @@ class PagesPlugin(PagesPluginBase, MixinPlugin):
             'render_content': render_content,
             'get_wysiwyg_editor': get_wysiwyg_editor,
             'get_recent_blog_posts': get_recent_blog_posts,
-            'pages_get_plus_icon': get_plus_icon
+            'pages_get_plus_icon': get_plus_icon,
+            'pages_page_title': pages_page_title
         }
 
     def get_actions(self):
