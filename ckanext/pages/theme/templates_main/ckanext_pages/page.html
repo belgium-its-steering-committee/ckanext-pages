@@ -21,7 +21,7 @@
   {% endif %}
 {% endblock %}
 
-{% block primary %}
+{% block primary_content %}
 <article class="module">
   <section class="module-content">
     {% if h.check_access('ckanext_pages_update') %}
@@ -73,7 +73,7 @@
 </article>
 {% endblock %}
 
-{% block secondary %}
+{% block secondary_content %}
 <div class="module module-narrow module-shallow">
   <h2 class="module-heading">
     {% if c.parent %}
@@ -85,6 +85,7 @@
   </h2>
   <div class="module-content">
     <ul class="pages-menu">
+      <li> {{ c.pages_dict }}</li>
       {% for page in c.pages_dict %}
         {% set url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + page.name) %}
         {% if page.name == c.page.name %}
