@@ -21,7 +21,7 @@
   {% endif %}
 {% endblock %}
 
-{% block primary_content %}
+{% block primary %}
 <article class="module">
   <section class="module-content">
     {% if h.check_access('ckanext_pages_update') %}
@@ -73,7 +73,7 @@
 </article>
 {% endblock %}
 
-{% block secondary_content %}
+{% block secondary %}
 <div class="module module-narrow module-shallow">
   <h2 class="module-heading">
     {% if c.parent %}
