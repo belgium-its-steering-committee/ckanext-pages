@@ -45,4 +45,5 @@ index-css:
   filters: cssrewrite
   contents:
     - css/pages.css
+    - css/nap-pages.css
 
