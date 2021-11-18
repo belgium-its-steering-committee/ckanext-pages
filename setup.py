@@ -10,12 +10,20 @@ from setuptools import setup, find_packages
 # Extract version
 HERE = os.path.abspath(os.path.dirname(__file__))
 INIT_PY = os.path.join(HERE, 'ckanext', 'pages', '__init__.py')
-
+version = None
+with io.open(INIT_PY) as f:
+    for line in f:
+        m = re.match(r'__version__\s*=\s*u?[\'"](.*)[\'"]', line)
+        if m:
+            version = m.groups()[0]
+            break
+if version is None:
+    raise RuntimeError('Could not extract version from "{}".'.format(INIT_PY))
 
 
 setup(
     name='ckanext-pages',
-    version='1.1.1',
+    version=version,
     description='Basic CMS extension for ckan',
     long_description='',
     classifiers=[
@@ -23,6 +31,11 @@ setup(
         'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: GNU Affero General Public License v3',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content :: Content Management System',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
     ],
     keywords='CKAN CMS',
     author='David Raznick',
@@ -37,15 +50,16 @@ setup(
     },
     zip_safe=False,
     install_requires=[
-        # -*- Extra requirements: -*-
+        'six', 'ckantoolkit',
     ],
-    entry_points=\
-    """
+    entry_points="""
         [ckan.plugins]
         pages=ckanext.pages.plugin:PagesPlugin
         textboxview=ckanext.pages.plugin:TextBoxView
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan
+        [paste.paster_command]
+        pages = ckanext.pages.commands:PagesCommand
     """,
     message_extractors={
         'ckanext': [

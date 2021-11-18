@@ -1,0 +1,18 @@
+.page-list-item .image {
+  width: 168px;
+  /* hack for default theme */
+
+}
+.page-list-item .image a {
+  display: block;
+  height: 136px;
+  background-position: center center;
+  background-size: cover;
+}
+.page-list-item h3 a {
+  display: block;
+}
+
+.pages-form .form-actions {
+  margin-top: 10px;
+}
