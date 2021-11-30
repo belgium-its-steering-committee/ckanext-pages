@@ -5,6 +5,12 @@
 {% set errors = errors or {} %}
 {% set ckan_29_or_higher = h.ckan_version().split('.')[1] | int >= 9 %}
 
+{% if data.parents is mapping %}
+  {% set parents = [data.parents] or [] %}
+{% else %}
+  {% set parents = data.parents or [] %}
+{% endif %}
+
 {% if type == 'org' %}
     {% set prefix = 'organization_pages_' %}
     {% set args = {'id': id} %}
@@ -74,13 +80,16 @@
   {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
 
   {% block form_basic_fields %}
-    {{ form.input('title', id='field-title', label=_('Title'), placeholder=title_placeholder, value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
+    {{ form.input('title', id='field-title', label=_('Title EN (default)'), placeholder=title_placeholder, value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target'}) }}
+    {{ form.input('title_nl', id='field-title-nl', label=_('Title NL'), placeholder=title_placeholder, value=data.title_nl, error=errors.title_nl, classes=['control-full', 'control-large']) }}
+    {{ form.input('title_fr', id='field-title-fr', label=_('Title FR'), placeholder=title_placeholder, value=data.title_fr, error=errors.title_fr, classes=['control-full', 'control-large']) }}
+    {{ form.input('title_de', id='field-title-de', label=_('Title DE'), placeholder=title_placeholder, value=data.title_de, error=errors.title_de, classes=['control-full', 'control-large']) }}
 
     {% set domain = slug_domain|replace("http://", "")|replace("https://", "") %}
     {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain~'/', 'data-module-placeholder': '<page>'} %}
     {{ form.prepend('name', id='field-name', label=_('URL'), prepend=slug_prefix, placeholder=_(url_placeholder), value=data.name, error=errors.name, attrs=attrs) }}
 
-    {{ form.input('publish_date', id='field-publish_date', label=_('Publish Date'), placeholder=_('2021-04-23'), value=data.publish_date, error=errors.publish_date, classes=[], attrs={'data-module': 'datepicker', 'data-date-format': 'yyyy-mm-dd'}) }}
+    {#{{ form.input('publish_date', id='field-publish_date', label=_('Publish Date'), placeholder=_('2021-04-23'), value=data.publish_date, error=errors.publish_date, classes=[], attrs={'data-module': 'datepicker', 'data-date-format': 'yyyy-mm-dd'}) }}#}
 
   {% endblock %}
 
@@ -88,6 +97,7 @@
   {% endblock extra_pages_form %}
 
   {% block form_visibility_fields %}
+    {% if not hide_private %}
     <div class="control-group form-group">
       <label for="field-private" class="control-label">{{ _('Visibility') }}</label>
       <div class="controls">
@@ -98,6 +108,7 @@
         </select>
       </div>
     </div>
+    {% endif %}
 
     {% if not hide_field_order %}
       <div class="control-group form-group">
@@ -111,6 +122,32 @@
         </div>
       </div>
     {% endif %}
+
+    {% if not hide_side_order %}
+    <div class="control-group">
+      <label for="field-side_menu_order" class="control-label">{{ _('Left Menu Order') }}</label>
+      <div class="controls">
+        <select id="field-side_menu_order" class="form-control" name="side_menu_order">
+          {% for option in [('0', '0'), ('1','1'), ('2', '2'), ('3', '3') , ('4', '4') , ('5', '5') , ('6', '6') , ('7', '7') , ('8', '8') , ('9', '9')] %}
+            <option value="{{ option[0] }}" {% if option[0] == data.side_menu_order %}selected="selected"{% endif %}>{{ option[1] }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if not hide_parents %}
+    <div class="control-group">
+      <label for="field-parent_name" class="control-label">{{ _('Parent page') }}</label>
+      <div class="controls">
+        <select id="field-parent_name" class="form-control" name="parent_name">
+            {% for option in ([{'name': '', 'title': 'About'}] + parents) %}
+          <option value="{{ option.name }}" {% if option.name == data.parent_name %}selected="selected"{% endif %}>{{ option.title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  {% endif %}
 
   {% endblock %}
 
@@ -135,12 +172,31 @@
         {% snippet 'ckanext_pages/snippets/pages_' ~ type ~ '.html', name='pages/main' %}
       {% endif %}
       <div class="control-group">
-          <label for="field-content-ck" class="control-label">{{ _('Content') }}</label>
+          <label for="field-content-ck" class="control-label">{{ _('Content EN (default)') }}</label>
       </div>
       <textarea id="field-content-ck" name="content" placeholder="{{_('My content')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content }}</textarea>
+      <br/>
+      <div class="control-group">
+        <label for="field-content-nl-ck" class="control-label">{{ _('Content NL') }}</label>
+      </div>
+      <textarea id="field-content-nl-ck" name="content_nl" placeholder="{{_('Mijn  inhoud')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content_nl }}</textarea>
+      <br/>
+      <div class="control-group">
+        <label for="field-content-fr-ck" class="control-label">{{ _('Content FR') }}</label>
+      </div>
+      <textarea id="field-content-fr-ck" name="content_fr" placeholder="{{_('Mon contenu')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content_fr }}</textarea>
+      <br/>
+      <div class="control-group">
+        <label for="field-content-de-ck" class="control-label">{{ _('Content DE') }}</label>
+      </div>
+      <textarea id="field-content-de-ck" name="content_de" placeholder="{{_('Mein Inhalt')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content_de }}</textarea>
+      <br/>
     {% else %}
-      {{ form.markdown('content', id='field-content', label=_('Content'), placeholder=_('Enter content here'), value=data.content, error=errors.content) }}
-    {% endif %}
+        {{ form.markdown('content', id='field-content', label=_('Content EN (default)'), placeholder=_('My content'), value=data.content, error=errors.content) }}
+        {{ form.markdown('content_nl', id='field-content-nl', label=_('Content NL'), placeholder=_('Mijn  inhoud'), value=data.content_nl, error=errors.content_nl) }}
+        {{ form.markdown('content_fr', id='field-content-fr', label=_('Content FR'), placeholder=_('Mon contenu'), value=data.content_fr, error=errors.content_fr) }}
+        {{ form.markdown('content_de', id='field-content-de', label=_('Content DE'), placeholder=_('Mein Inhalt'), value=data.content_de, error=errors.content_de) }}
+     {% endif %}
 
   {% endblock %}
 

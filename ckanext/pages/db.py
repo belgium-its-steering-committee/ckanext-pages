@@ -58,8 +58,14 @@ def define_tables():
     pages_table = sa.Table('ckanext_pages', model.meta.metadata,
                            sa.Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
                            sa.Column('title', types.UnicodeText, default=u''),
+                           sa.Column('title_nl', types.UnicodeText, default=u''),
+                           sa.Column('title_fr', types.UnicodeText, default=u''),
+                           sa.Column('title_de', types.UnicodeText, default=u''),
                            sa.Column('name', types.UnicodeText, default=u''),
                            sa.Column('content', types.UnicodeText, default=u''),
+                           sa.Column('content_nl', types.UnicodeText, default=u''),
+                           sa.Column('content_fr', types.UnicodeText, default=u''),
+                           sa.Column('content_de', types.UnicodeText, default=u''),
                            sa.Column('lang', types.UnicodeText, default=u''),
                            sa.Column('order', types.UnicodeText, default=u''),
                            sa.Column('private', types.Boolean, default=True),
@@ -70,6 +76,8 @@ def define_tables():
                            sa.Column('created', types.DateTime, default=datetime.datetime.utcnow),
                            sa.Column('modified', types.DateTime, default=datetime.datetime.utcnow),
                            sa.Column('extras', types.UnicodeText, default=u'{}'),
+                           sa.Column('parent_name', types.UnicodeText, default=u''),
+                           sa.Column('side_menu_order', types.UnicodeText, default=u'0'),
                            extend_existing=True
                            )
 
@@ -77,6 +85,19 @@ def define_tables():
         Page,
         pages_table,
     )
+
+    # Create the default about-page
+    about_page = Page.get(name='about')
+    if not about_page:
+        about_page = Page()
+        about_page.name = "about"
+        about_page.title = "About"
+        about_page.parent_name = ""
+        about_page.private = False
+        about_page.order = "4"
+        about_page.side_menu_order = "0"
+        model.Session.add(about_page)
+        model.Session.commit()
 
 
 def table_dictize(obj, context, **kw):

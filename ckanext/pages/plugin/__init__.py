@@ -37,8 +37,8 @@ log = logging.getLogger(__name__)
 
 def build_pages_nav_main(*args):
 
-    about_menu = tk.asbool(tk.config.get('ckanext.pages.about_menu', True))
-    group_menu = tk.asbool(tk.config.get('ckanext.pages.group_menu', True))
+    about_menu = tk.asbool(tk.config.get('ckanext.pages.about_menu', False))
+    group_menu = tk.asbool(tk.config.get('ckanext.pages.group_menu', False))
     org_menu = tk.asbool(tk.config.get('ckanext.pages.organization_menu', True))
 
     # Different CKAN versions use different route names - gotta catch em all!
@@ -123,6 +123,17 @@ def get_plus_icon():
     return 'plus-sign-alt'
 
 
+def pages_page_title(selected_lang, page_data):
+    if selected_lang:
+        if selected_lang == "nl" and page_data.get("title_nl", False):
+            return page_data["title_nl"]
+        elif selected_lang == "fr" and page_data.get("title_fr", False):
+            return page_data["title_fr"]
+        elif selected_lang == "de" and page_data.get("title_de", False):
+            return page_data["title_de"]
+    return page_data["title"]
+
+
 class PagesPlugin(PagesPluginBase, MixinPlugin):
     p.implements(p.IConfigurer, inherit=True)
     p.implements(p.ITemplateHelpers, inherit=True)
@@ -152,7 +163,8 @@ class PagesPlugin(PagesPluginBase, MixinPlugin):
             'render_content': render_content,
             'get_wysiwyg_editor': get_wysiwyg_editor,
             'get_recent_blog_posts': get_recent_blog_posts,
-            'pages_get_plus_icon': get_plus_icon
+            'pages_get_plus_icon': get_plus_icon,
+            'pages_page_title': pages_page_title
         }
 
     def get_actions(self):
@@ -162,6 +174,7 @@ class PagesPlugin(PagesPluginBase, MixinPlugin):
             'ckanext_pages_delete': actions.pages_delete,
             'ckanext_pages_list': actions.pages_list,
             'ckanext_pages_upload': actions.pages_upload,
+            'ckanext_menu_list': actions.menu_list,
         }
         if self.organization_pages:
             org_actions = {

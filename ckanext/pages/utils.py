@@ -61,10 +61,18 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
         page_dict = tk.get_action('ckanext_pages_show')(
             data_dict={'org_id': None, 'page': page}
         )
+
+        _parents = tk.get_action('ckanext_menu_list')(
+            data_dict={'parent_name': 'about'}
+        )
+
     if page_dict is None:
         page_dict = {}
     if tk.request.method == 'POST' and not data:
         data = _parse_form_data(tk.request)
+
+        if not (data['name'] == 'about') and (data['parent_name'] == ''):
+            data['parent_name'] = 'about'
 
         page_dict.update(data)
 
@@ -100,6 +108,7 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
     errors = errors or {}
     error_summary = error_summary or {}
 
+    data["parents"] = _parents
     form_snippet = config.get('ckanext.pages.form', 'ckanext_pages/base_form.html')
 
     vars = {'data': data, 'errors': errors,
@@ -198,6 +207,25 @@ def pages_show(page=None, page_type='page'):
     )
     if _page is None:
         return pages_list_pages(page_type)
+
+    _childs = tk.get_action('ckanext_menu_list')(
+        data_dict={'parent_name': _page.get('name')}
+    )
+
+    _parent = tk.get_action('ckanext_pages_show')(
+        data_dict={'org_id': None,
+                   'page': _page.get('parent_name')}
+    )
+
+    if _childs:
+        tk.c.pages_dict = _childs
+        tk.c.parent = _page
+    else:
+        tk.c.pages_dict = tk.get_action('ckanext_menu_list')(
+            data_dict={'parent_name': _page.get('parent_name')}
+        )
+        tk.c.parent = _parent
+    
     tk.c.page = _page
     _inject_views_into_page(_page)
 

@@ -31,6 +31,30 @@ class HTMLFirstImage(HTMLParser):
             self.first_image = dict(attrs)['src']
 
 
+def _menu_list(context, data_dict):
+    search = {}
+    if db.pages_table is None:
+        db.init_db()
+    search['private'] = False
+    search['group_id'] = None
+    search['order_side_menu_order'] = True
+    search['parent_name'] = data_dict.get('parent_name')
+
+    out = db.Page.pages(**search)
+    out_list = []
+
+    for pg in out:
+        pg_row = {'title': pg.title,
+                  'title_nl': pg.title_nl,
+                  'title_fr': pg.title_fr,
+                  'title_de': pg.title_de,
+                  'name': pg.name,
+                  }
+        out_list.append(pg_row)
+
+    return out_list
+
+
 def _pages_show(context, data_dict):
     org_id = data_dict.get('org_id')
     page = data_dict.get('page')
@@ -76,7 +100,13 @@ def _pages_list(context, data_dict):
         parser.feed(pg.content)
         img = parser.first_image
         pg_row = {'title': pg.title,
+                  'title_nl': pg.title_nl,
+                  'title_fr': pg.title_fr,
+                  'title_de': pg.title_de,
                   'content': pg.content,
+                  'content_nl': pg.content_nl,
+                  'content_fr': pg.content_fr,
+                  'content_de': pg.content_de,
                   'name': pg.name,
                   'publish_date': pg.publish_date.isoformat() if pg.publish_date else None,
                   'group_id': pg.group_id,
@@ -119,8 +149,8 @@ def _pages_update(context, data_dict):
         out = db.Page()
         out.group_id = org_id
         out.name = page
-    items = ['title', 'content', 'name', 'private',
-             'order', 'page_type', 'publish_date']
+    items = ['title', 'title_nl', 'title_fr', 'title_de', 'content', 'content_nl', 'content_fr', 'content_de', 'name',
+             'private', 'order', 'page_type', 'publish_date', 'parent_name', 'side_menu_order']
 
     # backward compatible with older version where page_type does not exist
     for item in items:
@@ -199,6 +229,11 @@ def pages_list(context, data_dict):
     except p.toolkit.NotAuthorized:
         p.toolkit.abort(401, p.toolkit._('Not authorized to see this page'))
     return _pages_list(context, data_dict)
+
+
+@tk.side_effect_free
+def menu_list(context, data_dict):
+    return _menu_list(context, data_dict)
 
 
 @tk.side_effect_free
