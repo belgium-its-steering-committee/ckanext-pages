@@ -6,7 +6,7 @@
 {% block breadcrumb_content %}
   {% set debug_parent_name = c.page.parent_name %}
   {% set debug_parent = c.parent.name %}
-  <span>{{ debug_parent_name }} - {{ debug_parent }} </span>
+  <span>( {{ debug_parent_name }} - {{ debug_parent }} )</span>
 
   {% set bread_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + c.page.name) %}
   {% if c.page.name == 'about' or c.page.name == 'news' %}
