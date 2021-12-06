@@ -16,7 +16,7 @@
 
 
   {% if not c.page.parent_name == '' %}
-    {% set parent_bread_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + c.parent.name) %}
+    {% set parent_bread_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + c.parent.name if c.parent else 'nn') %}
     <li class="home"><a href="{{ parent_bread_url }}" >{{ c.parent.title }}</a></li>
     <li class="active"><a href="{{ bread_url }}" >{{ h.pages_page_title(selected_lang, c.page) }}</a></li>
   {% endif %}
