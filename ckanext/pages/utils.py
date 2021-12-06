@@ -94,6 +94,10 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
         page_dict['page'] = page
         page_dict['page_type'] = 'page' if page_type == 'pages' else page_type
 
+        print("#" * 25)
+        print(json.dumps(page_dict))
+        print("#" * 25)
+
         try:
             tk.get_action('ckanext_pages_update')(
                 data_dict=page_dict
