@@ -1,0 +1,12 @@
+li.pages-menu-item {
+    list-style-type: none;
+    padding-bottom:3px;
+}
+
+li.active-menu-item a {
+    color: #000;
+}
+
+ul.pages-menu {
+    margin-left:10px;
+}
