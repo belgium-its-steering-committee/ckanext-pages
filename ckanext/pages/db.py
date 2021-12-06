@@ -40,13 +40,19 @@ class Page(DomainObject):
         '''Finds a single entity in the register.'''
         order = kw.pop('order', False)
         order_publish_date = kw.pop('order_publish_date', False)
+        order_publish_date_asc = kw.pop('order_publish_date_asc', False)
+        order_side_menu_order = kw.pop('order_side_menu_order', False)
 
         query = model.Session.query(cls).autoflush(False)
         query = query.filter_by(**kw)
         if order:
             query = query.order_by(sa.cast(cls.order, sa.Integer)).filter(cls.order != '')
         elif order_publish_date:
-            query = query.order_by(cls.publish_date.desc()).filter(cls.publish_date != None)  # noqa: E711
+            query = query.order_by(cls.publish_date.desc()).filter(cls.publish_date is not None)  # noqa: E711
+        elif order_publish_date_asc:
+            query = query.order_by(cls.publish_date.asc()).filter(cls.publish_date is not None)
+        elif order_side_menu_order:
+            query = query.order_by(cls.side_menu_order.asc())
         else:
             query = query.order_by(cls.created.desc())
         return query.all()
