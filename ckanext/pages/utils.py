@@ -66,6 +66,16 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
         data_dict={'parent_name': 'about'}
     )
 
+    _new_parents = tk.get_action('ckanext_menu_list')(
+        data_dict={'parent_name': 'news'}
+    )
+
+    print("#"*25)
+    print(_parents)
+    print("#"*25)
+    print(_new_parents)
+    print("#"*25)
+
     if page_dict is None:
         page_dict = {}
     if tk.request.method == 'POST' and not data:
