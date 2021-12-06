@@ -66,14 +66,12 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
         data_dict={'parent_name': 'about'}
     )
 
-    _new_parents = tk.get_action('ckanext_menu_list')(
+    _parents = _parents + tk.get_action('ckanext_menu_list')(
         data_dict={'parent_name': 'news'}
     )
 
     print("#"*25)
     print(json.dumps(_parents))
-    print("#"*25)
-    print(json.dumps(_new_parents))
     print("#"*25)
 
     if page_dict is None:
