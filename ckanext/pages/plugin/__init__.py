@@ -77,8 +77,11 @@ def build_pages_nav_main(*args):
             name = quote(page['name'].encode('utf-8')).decode('utf-8')
         else:
             name = quote(page['name'])
-        title = html_escape(page['title'])
-        link = tk.h.literal(u'<a href="/{}/{}">{}</a>'.format(type_, name, title))
+        title = html_escape(pages_page_title(tk.h.lang(), page))
+        if tk.h.lang():
+            link = tk.h.literal(u'<a href="/{}/{}/{}">{}</a>'.format(h.lang(), type_, name, title))
+        else:
+            link = tk.h.literal(u'<a href="/{}/{}">{}</a>'.format(type_, name, title))
         if page['name'] == page_name:
             li = tk.literal('<li class="active">') + link + tk.literal('</li>')
         else:
