@@ -71,9 +71,9 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
     )
 
     print("#"*25)
-    print(_parents)
+    print(json.dumps(_parents))
     print("#"*25)
-    print(_new_parents)
+    print(json.dumps(_new_parents))
     print("#"*25)
 
     if page_dict is None:
