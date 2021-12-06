@@ -233,7 +233,7 @@ def pages_show(page=None, page_type='page'):
             data_dict={'parent_name': _page.get('parent_name')}
         )
         tk.c.parent = _parent
-    
+
     tk.c.page = _page
     _inject_views_into_page(_page)
 

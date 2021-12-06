@@ -9,6 +9,14 @@
     <li class="active"><a href="{{ bread_url }}" >{{ h.pages_page_title(selected_lang, c.page) }}</a></li>
   {% endif %}
 
+  {%
+    print("#"*25)
+    print(c.page.parent_name)
+    print(c.parent.name)
+    print(c.parent.name)
+    print("#"*25)
+  %}
+
   {% if not c.page.parent_name == '' %}
     {% set parent_bread_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + c.parent.name) %}
     <li class="home"><a href="{{ parent_bread_url }}" >{{ c.parent.title }}</a></li>
