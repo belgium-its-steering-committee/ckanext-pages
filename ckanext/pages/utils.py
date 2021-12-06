@@ -79,7 +79,7 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
     if tk.request.method == 'POST' and not data:
         data = _parse_form_data(tk.request)
 
-        if not (data['name'] == 'about') and (data['parent_name'] == ''):
+        if not (data['name'] == 'about') and not (data['name'] == 'news') and (data['parent_name'] == ''):
             data['parent_name'] = 'about'
 
         page_dict.update(data)

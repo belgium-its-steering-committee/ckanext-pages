@@ -5,16 +5,11 @@
 
 {% block breadcrumb_content %}
   {% set bread_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + c.page.name) %}
-  {% if c.page.name == 'about' %}
+  {% if c.page.name == 'about' or c.page.name == 'news' %}
     <li class="active"><a href="{{ bread_url }}" >{{ h.pages_page_title(selected_lang, c.page) }}</a></li>
-  {% else %}
-    {% set about_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/about') %}
-    <li class="home"><a href="{{ about_url }}" >{{ _('About') }}</a></li>
   {% endif %}
 
-  {% if c.page.parent_name == 'about' %}
-    <li class="active"><a href="{{ bread_url }}" >{{ h.pages_page_title(selected_lang, c.page) }}</a></li>
-  {% elif not c.page.parent_name == '' %}
+  {% if not c.page.parent_name == '' %}
     {% set parent_bread_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + c.parent.name) %}
     <li class="home"><a href="{{ parent_bread_url }}" >{{ c.parent.title }}</a></li>
     <li class="active"><a href="{{ bread_url }}" >{{ h.pages_page_title(selected_lang, c.page) }}</a></li>
