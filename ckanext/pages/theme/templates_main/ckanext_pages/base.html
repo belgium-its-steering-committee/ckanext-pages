@@ -4,7 +4,6 @@
   {{ super() }}
   {% set type = 'asset' if h.ckan_version().split('.')[1] | int >= 9 else 'resource' %}
   {% snippet 'ckanext_pages/snippets/pages_' ~ type ~ '.html', name='pages/index-css' %}
-  <link rel="stylesheet" type="text/css" href="/css/nap-pages.css">
 
 {% endblock %}
 
