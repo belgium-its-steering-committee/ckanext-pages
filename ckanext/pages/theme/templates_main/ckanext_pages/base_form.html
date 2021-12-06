@@ -141,7 +141,7 @@
       <label for="field-parent_name" class="control-label">{{ _('Parent page') }}</label>
       <div class="controls">
         <select id="field-parent_name" class="form-control" name="parent_name">
-            {% for option in ([{'name': '', 'title': 'About'}, {'name': '', 'title': 'News'}] + parents) %}
+            {% for option in ([{'name': 'about', 'title': 'About'}, {'name': 'news', 'title': 'News'}] + parents) %}
           <option value="{{ option.name }}" {% if option.name == data.parent_name %}selected="selected"{% endif %}>{{ option.title }}</option>
           {% endfor %}
         </select>
