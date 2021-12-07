@@ -153,7 +153,7 @@ def _pages_update(context, data_dict):
              'private', 'order', 'page_type', 'publish_date', 'parent_name', 'side_menu_order']
 
     print("#" * 25)
-    print(json.dumps(data))
+    print(data)
     print("#" * 25)
 
     # backward compatible with older version where page_type does not exist
@@ -161,7 +161,7 @@ def _pages_update(context, data_dict):
         setattr(out, item, data.get(item, 'page' if item == 'page_type' else None))
 
     print("#" * 25)
-    print(json.dumps(out))
+    print(out)
     print("#" * 25)
 
     extras = {}
