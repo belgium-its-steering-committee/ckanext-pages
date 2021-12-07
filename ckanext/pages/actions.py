@@ -152,20 +152,9 @@ def _pages_update(context, data_dict):
     items = ['title', 'title_nl', 'title_fr', 'title_de', 'content', 'content_nl', 'content_fr', 'content_de', 'name',
              'private', 'order', 'page_type', 'publish_date', 'parent_name', 'side_menu_order']
 
-    print("#" * 25)
-    print(data)
-    print("#" * 25)
-    print(data.get('parent_name', 'npn'))
-    print(data.get('parent_name', None))
-    print("#" * 25)
-
     # backward compatible with older version where page_type does not exist
     for item in items:
         setattr(out, item, data.get(item, 'page' if item == 'page_type' else None))
-
-    print("#" * 25)
-    print(out)
-    print("#" * 25)
 
     extras = {}
 

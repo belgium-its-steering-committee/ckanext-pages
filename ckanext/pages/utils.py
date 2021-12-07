@@ -62,7 +62,9 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
             data_dict={'org_id': None, 'page': page}
         )
 
-    _parents = tk.get_action('ckanext_menu_list')(
+    _parents = [{'name': 'about', 'title': 'About'}, {'name': 'news', 'title': 'News'}]
+
+    _parents = _parents + tk.get_action('ckanext_menu_list')(
         data_dict={'parent_name': 'about'}
     )
 
@@ -70,6 +72,14 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
         data_dict={'parent_name': 'news'}
     )
 
+    print("#"*25)
+    print(tk.get_action('ckanext_menu_list')(
+        data_dict={'parent_name': 'about'}
+    ))
+    print("#"*25)
+    print(tk.get_action('ckanext_menu_list')(
+        data_dict={'parent_name': 'news'}
+    ))
     print("#"*25)
     print(json.dumps(_parents))
     print("#"*25)
@@ -79,12 +89,6 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
     if tk.request.method == 'POST' and not data:
         data = _parse_form_data(tk.request)
 
-        print("#" * 25)
-        print(data)
-        print("#" * 25)
-        print((data['parent_name'] == ''))
-        print("#" * 25)
-
         if not (data['name'] == 'about') and not (data['name'] == 'news') and (data['parent_name'] == ''):
             data['parent_name'] = 'about'
 
@@ -93,10 +97,6 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
         page_dict['org_id'] = None
         page_dict['page'] = page
         page_dict['page_type'] = 'page' if page_type == 'pages' else page_type
-
-        print("#" * 25)
-        print(json.dumps(page_dict))
-        print("#" * 25)
 
         try:
             tk.get_action('ckanext_pages_update')(
