@@ -17,9 +17,16 @@ def default_pages_schema():
     return {
         'id': [ignore_empty, unicode_safe],
         'title': [not_empty, unicode_safe],
+        'title_nl': [not_empty, unicode_safe],
+        'title_fr': [not_empty, unicode_safe],
+        'title_de': [not_empty, unicode_safe],
         'name': [
             not_empty, unicode_safe, name_validator, page_name_validator],
         'content': [ignore_missing, unicode_safe],
+        'content_nl': [ignore_missing, unicode_safe],
+        'content_fr': [ignore_missing, unicode_safe],
+        'content_de': [ignore_missing, unicode_safe],
+        'lang': [ignore_missing, unicode_safe],
         'page_type': [ignore_missing, unicode_safe],
         'order': [ignore_missing, unicode_safe],
         'private': [ignore_missing,
@@ -27,6 +34,9 @@ def default_pages_schema():
         'group_id': [ignore_missing, unicode_safe],
         'user_id': [ignore_missing, unicode_safe],
         'created': [ignore_missing, isodate],
+        'modified': [ignore_missing, isodate],
+        'parent_name': [ignore_missing, unicode_safe],
+        'side_menu_order': [ignore_missing, unicode_safe],
         'publish_date': [
             not_empty_if_blog, ignore_missing, isodate],
     }
