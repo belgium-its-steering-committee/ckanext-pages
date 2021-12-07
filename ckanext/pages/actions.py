@@ -155,6 +155,10 @@ def _pages_update(context, data_dict):
     print("#" * 25)
     print(data)
     print("#" * 25)
+    print(data.get('parent_name', None))
+    print("#" * 25)
+    print(out)
+    print("#" * 25)
 
     # backward compatible with older version where page_type does not exist
     for item in items:
