@@ -105,6 +105,19 @@ def define_tables():
         model.Session.add(about_page)
         model.Session.commit()
 
+    # Create the default news-page
+    news_page = Page.get(name='news')
+    if not news_page:
+        news_page = Page()
+        news_page.name = "news"
+        news_page.title = "News"
+        news_page.parent_name = ""
+        news_page.private = False
+        news_page.order = "3"
+        news_page.side_menu_order = "0"
+        model.Session.add(news_page)
+        model.Session.commit()
+
 
 def table_dictize(obj, context, **kw):
     '''Get any model object and represent it as a dict'''
