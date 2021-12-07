@@ -34,7 +34,6 @@ def default_pages_schema():
         'group_id': [ignore_missing, unicode_safe],
         'user_id': [ignore_missing, unicode_safe],
         'created': [ignore_missing, isodate],
-        'modified': [ignore_missing, isodate],
         'parent_name': [ignore_missing, unicode_safe],
         'side_menu_order': [ignore_missing, unicode_safe],
         'publish_date': [
