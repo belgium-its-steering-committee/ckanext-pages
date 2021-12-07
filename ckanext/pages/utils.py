@@ -62,7 +62,7 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
             data_dict={'org_id': None, 'page': page}
         )
 
-    _parents = [{'name': 'about', 'title': 'About'}, {'name': 'news', 'title': 'News'}]
+    _parents = [{'name': '', 'title': 'N/A'}, {'name': 'about', 'title': 'About'}, {'name': 'news', 'title': 'News'}]
 
     _parents = _parents + tk.get_action('ckanext_menu_list')(
         data_dict={'parent_name': 'about'}
