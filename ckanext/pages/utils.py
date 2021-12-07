@@ -72,18 +72,6 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
         data_dict={'parent_name': 'news'}
     )
 
-    print("#"*25)
-    print(tk.get_action('ckanext_menu_list')(
-        data_dict={'parent_name': 'about'}
-    ))
-    print("#"*25)
-    print(tk.get_action('ckanext_menu_list')(
-        data_dict={'parent_name': 'news'}
-    ))
-    print("#"*25)
-    print(json.dumps(_parents))
-    print("#"*25)
-
     if page_dict is None:
         page_dict = {}
     if tk.request.method == 'POST' and not data:
@@ -234,14 +222,6 @@ def pages_show(page=None, page_type='page'):
         data_dict={'org_id': None,
                    'page': _page.get('parent_name')}
     )
-
-    print("#"*25)
-    print(_page)
-    print("-"*25)
-    print(_childs)
-    print("-"*25)
-    print(_parent)
-    print("#"*25)
 
     if _childs:
         tk.c.pages_dict = _childs
