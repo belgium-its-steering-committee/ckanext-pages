@@ -235,6 +235,14 @@ def pages_show(page=None, page_type='page'):
                    'page': _page.get('parent_name')}
     )
 
+    print("#"*25)
+    print(_page)
+    print("-"*25)
+    print(_childs)
+    print("-"*25)
+    print(_parent)
+    print("#"*25)
+
     if _childs:
         tk.c.pages_dict = _childs
         tk.c.parent = _page
