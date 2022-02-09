@@ -128,8 +128,8 @@
       <label for="field-side_menu_order" class="control-label">{{ _('Left Menu Order') }}</label>
       <div class="controls">
         <select id="field-side_menu_order" class="form-control" name="side_menu_order">
-          {% for option in [(str(i),str(i)) for i in range(25)] %}
-            <option value="{{ option[0] }}" {% if option[0] == data.side_menu_order %}selected="selected"{% endif %}>{{ option[1] }}</option>
+          {% for option in range(25) %}
+            <option value="{{ str(option) }}" {% if str(option) == data.side_menu_order %}selected="selected"{% endif %}>{{ str(option) }}</option>
           {% endfor %}
         </select>
       </div>
