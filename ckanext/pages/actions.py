@@ -37,7 +37,7 @@ def _menu_list(context, data_dict):
         db.init_db()
     search['private'] = False
     search['group_id'] = None
-    search['order_side_menu_order'] = True
+    # search['order_side_menu_order'] = True
     search['parent_name'] = data_dict.get('parent_name')
 
     out = db.Page.pages(**search)
