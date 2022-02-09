@@ -56,7 +56,7 @@ def _menu_list(context, data_dict):
             pg_row.update(json.loads(pg.extras))
         print("-" * 25)
         print(pg_row)
-        for key in pg_row:
+        for key in pg:
             if key == 'name':
                 print("{0} : {1}".format(key, pg_row[key]))
             else:
