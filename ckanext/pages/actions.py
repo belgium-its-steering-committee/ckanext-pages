@@ -60,8 +60,7 @@ def _menu_list(context, data_dict):
             if 'side_menu_order' in extra_dict:
                 pg_row.update({'side_menu_order': extra_dict['side_menu_order']})
         print("-" * 25)
-        for key in pg_row:
-            print("{0} : {1}".format(key, pg_row[key]))
+        print(pg_row)
         print("-" * 25)
         out_list.append(pg_row)
 
