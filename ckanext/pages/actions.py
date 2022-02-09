@@ -47,18 +47,13 @@ def _menu_list(context, data_dict):
 
     print("#" * 25)
     for pg in out:
-        print(hasattr(pg, 'side_menu_order'))
         pg_row = {'title': pg.title,
                   'title_nl': pg.title_nl,
                   'title_fr': pg.title_fr,
                   'title_de': pg.title_de,
                   'name': pg.name,
+                  'side_menu_order': pg.side_menu_order if print(hasattr(pg, 'side_menu_order')) else '0'
                   }
-        extras = pg.extras
-        if extras:
-            extra_dict = json.loads(pg.extras)
-            if 'side_menu_order' in extra_dict:
-                pg_row.update({'side_menu_order': extra_dict['side_menu_order']})
         print("-" * 25)
         print(pg_row)
         print("-" * 25)
