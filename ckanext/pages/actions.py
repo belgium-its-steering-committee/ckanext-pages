@@ -39,13 +39,12 @@ def _menu_list(context, data_dict):
         db.init_db()
     search['private'] = False
     search['group_id'] = None
-    # search['order_side_menu_order'] = True
+    search['order_side_menu_order'] = True
     search['parent_name'] = data_dict.get('parent_name')
 
     out = db.Page.pages(**search)
     out_list = []
 
-    print("#" * 25)
     for pg in out:
         pg_row = {'title': pg.title,
                   'title_nl': pg.title_nl,
@@ -54,14 +53,9 @@ def _menu_list(context, data_dict):
                   'name': pg.name,
                   'side_menu_order': pg.side_menu_order if hasattr(pg, 'side_menu_order') else '0'
                   }
-        print("-" * 25)
-        print(pg_row)
-        print("-" * 25)
         out_list.append(pg_row)
 
-    # sorted(out_list, key=lambda k: (k['name'], k['name']))
-
-    print("#"*25)
+    out_list = sorted(out_list, key=lambda k: (int(k['side_menu_order']), k['name']))
     return out_list
 
 
