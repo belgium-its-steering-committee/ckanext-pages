@@ -7,6 +7,9 @@ import ckan.lib.navl.dictization_functions as df
 import ckan.lib.uploader as uploader
 import ckan.lib.helpers as h
 from ckan.plugins import toolkit as tk
+
+from ckanext.pages.db import table_dictize
+
 try:
     from html.parser import HTMLParser
 except ImportError:
@@ -56,7 +59,7 @@ def _menu_list(context, data_dict):
             pg_row.update(json.loads(pg.extras))
         print("-" * 25)
         print(pg_row)
-        for key in pg:
+        for key in table_dictize(pg, {}):
             if key == 'name':
                 print("{0} : {1}".format(key, pg_row[key]))
             else:
