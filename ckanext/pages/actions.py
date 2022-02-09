@@ -126,7 +126,10 @@ def _pages_list(context, data_dict):
     for item in out_list:
         print("-" * 25)
         for key in item:
-            print(key)
+            if key == 'name':
+                print("{0} : {1}".format(key, item[key]))
+            else:
+                print(key)
         print("-" * 25)
     print("#"*25)
     return out_list
