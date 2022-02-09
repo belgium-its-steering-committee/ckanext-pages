@@ -52,7 +52,7 @@ def _menu_list(context, data_dict):
                   'title_fr': pg.title_fr,
                   'title_de': pg.title_de,
                   'name': pg.name,
-                  'side_menu_order': pg.side_menu_order if print(hasattr(pg, 'side_menu_order')) else '0'
+                  'side_menu_order': pg.side_menu_order if hasattr(pg, 'side_menu_order') else '0'
                   }
         print("-" * 25)
         print(pg_row)
