@@ -37,7 +37,6 @@ def pages_list_pages(page_type):
     data_dict = {'org_id': None, 'page_type': page_type}
     if page_type == 'blog':
         data_dict['order_publish_date'] = True
-        data_dict['order_side_menu_order'] = False
     tk.c.pages_dict = tk.get_action('ckanext_pages_list')(
         data_dict=data_dict
     )
