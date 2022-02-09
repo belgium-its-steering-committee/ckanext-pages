@@ -43,6 +43,7 @@ def _menu_list(context, data_dict):
     out = db.Page.pages(**search)
     out_list = []
 
+    print("#" * 25)
     for pg in out:
         pg_row = {'title': pg.title,
                   'title_nl': pg.title_nl,
@@ -53,18 +54,18 @@ def _menu_list(context, data_dict):
         extras = pg.extras
         if extras:
             pg_row.update(json.loads(pg.extras))
-        out_list.append(pg_row)
-
-    # sorted(out_list, key=lambda k: (k['name'], k['name']))
-    print("#" * 25)
-    for item in out_list:
         print("-" * 25)
-        for key in item:
+        print(pg_row)
+        for key in pg_row:
             if key == 'name':
-                print("{0} : {1}".format(key, item[key]))
+                print("{0} : {1}".format(key, pg_row[key]))
             else:
                 print(key)
         print("-" * 25)
+        out_list.append(pg_row)
+
+    # sorted(out_list, key=lambda k: (k['name'], k['name']))
+
     print("#"*25)
     return out_list
 
