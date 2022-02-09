@@ -8,7 +8,6 @@ import ckan.lib.uploader as uploader
 import ckan.lib.helpers as h
 from ckan.plugins import toolkit as tk
 
-from ckanext.pages.db import table_dictize
 
 try:
     from html.parser import HTMLParser
@@ -48,6 +47,7 @@ def _menu_list(context, data_dict):
 
     print("#" * 25)
     for pg in out:
+        print(hasattr(pg, 'side_menu_order'))
         pg_row = {'title': pg.title,
                   'title_nl': pg.title_nl,
                   'title_fr': pg.title_fr,
@@ -56,14 +56,12 @@ def _menu_list(context, data_dict):
                   }
         extras = pg.extras
         if extras:
-            pg_row.update(json.loads(pg.extras))
+            extra_dict = json.loads(pg.extras)
+            if 'side_menu_order' in extra_dict:
+                pg_row.update({'side_menu_order': extra_dict['side_menu_order']})
         print("-" * 25)
-        print(pg_row)
-        for key in table_dictize(pg, {}):
-            if key == 'name':
-                print("{0} : {1}".format(key, pg_row[key]))
-            else:
-                print(key)
+        for key in pg_row:
+            print("{0} : {1}".format(key, pg_row[key]))
         print("-" * 25)
         out_list.append(pg_row)
 
