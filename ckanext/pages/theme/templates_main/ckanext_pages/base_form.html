@@ -129,7 +129,7 @@
       <div class="controls">
         <select id="field-side_menu_order" class="form-control" name="side_menu_order">
           {% for option in range(25) %}
-            <option value="{{ option }}" {% if str(option) == data.side_menu_order %}selected="selected"{% endif %}>{{ option }}</option>
+            <option value="{{ option }}" {% if option|string == data.side_menu_order %}selected="selected"{% endif %}>{{ option }}</option>
           {% endfor %}
         </select>
       </div>
