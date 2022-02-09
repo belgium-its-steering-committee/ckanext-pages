@@ -7,6 +7,8 @@ import ckan.lib.navl.dictization_functions as df
 import ckan.lib.uploader as uploader
 import ckan.lib.helpers as h
 from ckan.plugins import toolkit as tk
+
+
 try:
     from html.parser import HTMLParser
 except ImportError:
@@ -49,9 +51,11 @@ def _menu_list(context, data_dict):
                   'title_fr': pg.title_fr,
                   'title_de': pg.title_de,
                   'name': pg.name,
+                  'side_menu_order': pg.side_menu_order if hasattr(pg, 'side_menu_order') else '0'
                   }
         out_list.append(pg_row)
 
+    out_list = sorted(out_list, key=lambda k: (int(k['side_menu_order']), k['name']))
     return out_list
 
 
