@@ -118,6 +118,9 @@ def _pages_list(context, data_dict):
         if extras:
             pg_row.update(json.loads(pg.extras))
         out_list.append(pg_row)
+    print("#"*25)
+    print(out_list)
+    print("#"*25)
     return out_list
 
 
