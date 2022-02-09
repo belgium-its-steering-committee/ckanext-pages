@@ -69,6 +69,7 @@ def _pages_list(context, data_dict):
     org_id = data_dict.get('org_id')
     ordered = data_dict.get('order')
     order_publish_date = data_dict.get('order_publish_date')
+    order_side_menu_order = data_dict.get('order_side_menu_order', True)
     page_type = data_dict.get('page_type')
     private = data_dict.get('private', True)
     if ordered:
@@ -77,6 +78,8 @@ def _pages_list(context, data_dict):
         search['page_type'] = page_type
     if order_publish_date:
         search['order_publish_date'] = True
+    if order_side_menu_order:
+        search['order_side_menu_order'] = True
     if not org_id:
         search['group_id'] = None
         try:
@@ -119,7 +122,12 @@ def _pages_list(context, data_dict):
             pg_row.update(json.loads(pg.extras))
         out_list.append(pg_row)
     print("#"*25)
-    print(out_list)
+    # sorted(out_list, key=lambda k: (k['name'], k['name']))
+    for item in out_list:
+        print("-" * 25)
+        for key in item:
+            print(key)
+        print("-" * 25)
     print("#"*25)
     return out_list
 
