@@ -98,7 +98,7 @@
   </h2>
   <div class="module-content">
     {% for grouping in c.pages_dict %}
-      {% if grouping.grouping != 'None' %}
+      {% if grouping.grouping != None %}
         <p>{{ grouping.grouping }}</p>
       {% endif %}
       <ul class="pages-menu" style="margin-left:10px;">
