@@ -120,7 +120,7 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
 
     extra_vars = {'data': data, 'errors': errors,
                   'error_summary': error_summary, 'page': page or '',
-                  'form_snippet': form_snippet }
+                  'form_snippet': form_snippet}
 
     return tk.render(
         'ckanext_pages/%s_edit.html' % page_type, extra_vars=extra_vars)
