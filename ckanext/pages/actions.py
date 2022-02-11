@@ -146,6 +146,10 @@ def _pages_update(context, data_dict):
 
     data, errors = df.validate(data_dict, schema, context)
 
+    print("-"*25)
+    print(data)
+    print("-"*25)
+
     if errors:
         raise p.toolkit.ValidationError(errors)
 
@@ -159,6 +163,7 @@ def _pages_update(context, data_dict):
 
     # backward compatible with older version where page_type does not exist
     for item in items:
+        print("{0}: {1}".format(item, data.get(item, 'page' if item == 'page_type' else None)))
         setattr(out, item, data.get(item, 'page' if item == 'page_type' else None))
 
     extras = {}
