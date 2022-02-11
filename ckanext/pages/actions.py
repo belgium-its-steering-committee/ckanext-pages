@@ -167,7 +167,6 @@ def _pages_update(context, data_dict):
 
     # backward compatible with older version where page_type does not exist
     for item in items:
-        print("{0}: {1}".format(item, data.get(item, 'page' if item == 'page_type' else None)))
         setattr(out, item, data.get(item, 'page' if item == 'page_type' else None))
 
     extras = {}
@@ -177,11 +176,6 @@ def _pages_update(context, data_dict):
         if key in data:
             extras[key] = data.get(key)
     out.extras = json.dumps(extras)
-
-    print("-" * 25)
-    print(out)
-    print("-" * 25)
-
     out.modified = datetime.datetime.utcnow()
     user = model.User.get(context['user'])
     out.user_id = user.id
