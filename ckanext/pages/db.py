@@ -5,7 +5,6 @@ import json
 from six import text_type
 import sqlalchemy as sa
 from sqlalchemy.orm import class_mapper
-from migrate.versioning.schema import Table, Column
 
 try:
     from sqlalchemy.engine.result import RowProxy
@@ -39,9 +38,7 @@ def init_db():
         if 'side_menu_grouping' not in [c.name for c in pages_columns]:
             print('side_menu_grouping')
             pages_table.append_column(sa.Column('side_menu_grouping', sa.types.UnicodeText, default=None))
-            table = Table('ckanext_pages', model.meta.metadata)
-            col = Column('side_menu_grouping', sa.types.UnicodeText, default=None)
-            # col.create(table)
+            model.Session.get_bind().execute('alter table ckanext_pages add column side_menu_grouping text')
 
 
 class Page(DomainObject):

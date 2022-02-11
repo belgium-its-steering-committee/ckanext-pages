@@ -32,7 +32,7 @@ setup(
     },
     zip_safe=False,
     install_requires=[
-        'six', 'ckantoolkit', 'sqlalchemy-migrate'
+        'six', 'ckantoolkit'
     ],
     entry_points="""
         [ckan.plugins]
