@@ -67,12 +67,18 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
     about_pages = tk.get_action('ckanext_menu_list')(
         data_dict={'parent_name': 'about'}
     )
-    about_pages = [p for p in g['grouping_list'] for g in about_pages]
+    about_pages = [g['grouping_list'] for g in about_pages]
+    about_pages = [p for p in about_pages]
+
+    print(about_pages)
 
     news_pages = tk.get_action('ckanext_menu_list')(
         data_dict={'parent_name': 'news'}
     )
-    news_pages = [p for p in g['grouping_list'] for g in news_pages]
+    news_pages = [g['grouping_list'] for g in news_pages]
+    news_pages = [p for p in news_pages]
+
+    print(news_pages)
 
     _parents = _parents + about_pages + news_pages
 
