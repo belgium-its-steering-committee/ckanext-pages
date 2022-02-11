@@ -86,7 +86,6 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
         page_dict['org_id'] = None
         page_dict['page'] = page
         page_dict['page_type'] = 'page' if page_type == 'pages' else page_type
-        page_dict['current_year'] = datetime.datetime.now().year
 
         try:
             tk.get_action('ckanext_pages_update')(
@@ -121,7 +120,8 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
 
     vars = {'data': data, 'errors': errors,
             'error_summary': error_summary, 'page': page or '',
-            'form_snippet': form_snippet}
+            'form_snippet': form_snippet,
+            'current_year': datetime.datetime.now().year}
 
     return tk.render(
         'ckanext_pages/%s_edit.html' % page_type, extra_vars=vars)
