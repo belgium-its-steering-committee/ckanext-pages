@@ -36,6 +36,7 @@ def default_pages_schema():
         'created': [ignore_missing, isodate],
         'parent_name': [ignore_missing, unicode_safe],
         'side_menu_order': [ignore_missing, unicode_safe],
+        'side_menu_grouping': [ignore_missing, unicode_safe],
         'publish_date': [
             not_empty_if_blog, ignore_missing, isodate],
     }

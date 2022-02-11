@@ -32,7 +32,7 @@ setup(
     },
     zip_safe=False,
     install_requires=[
-        'six', 'ckantoolkit',
+        'six', 'ckantoolkit'
     ],
     entry_points="""
         [ckan.plugins]

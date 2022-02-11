@@ -97,16 +97,21 @@
     {% endif %}
   </h2>
   <div class="module-content">
-    <ul class="pages-menu" style="margin-left:10px;">
-      {% for page in c.pages_dict %}
-        {% set url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + page.name) %}
-        {% if page.name == c.page.name %}
-          <li class="pages-menu-item active-menu-item" style="list-style-type: none;padding-bottom:3px;"><a href="{{ url }}" style="color: #000;">{{ h.pages_page_title(selected_lang, page) }}</a></li>
-        {% else %}
-          <li class="pages-menu-item" style="list-style-type: none;padding-bottom:3px;"><a href="{{ url }}" >{{ h.pages_page_title(selected_lang, page) }}</a></li>
-        {% endif %}
-      {% endfor %}
-    </ul>
+    {% for grouping in c.pages_dict %}
+      {% if grouping.grouping != None %}
+        <p>{{ grouping.grouping }}</p>
+      {% endif %}
+      <ul class="pages-menu" style="margin-left:10px;">
+        {% for page in grouping.grouping_list %}
+          {% set url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + page.name) %}
+          {% if page.name == c.page.name %}
+            <li class="pages-menu-item active-menu-item" style="list-style-type: none;padding-bottom:3px;"><a href="{{ url }}" style="color: #000;">{{ h.pages_page_title(selected_lang, page) }}</a></li>
+          {% else %}
+            <li class="pages-menu-item" style="list-style-type: none;padding-bottom:3px;"><a href="{{ url }}" >{{ h.pages_page_title(selected_lang, page) }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

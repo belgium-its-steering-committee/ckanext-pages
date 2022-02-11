@@ -44,18 +44,27 @@ def _menu_list(context, data_dict):
 
     out = db.Page.pages(**search)
     out_list = []
+    out_dict = {}
 
     for pg in out:
+        side_menu_grouping = pg.side_menu_grouping if hasattr(pg, 'side_menu_grouping') else None
         pg_row = {'title': pg.title,
                   'title_nl': pg.title_nl,
                   'title_fr': pg.title_fr,
                   'title_de': pg.title_de,
                   'name': pg.name,
-                  'side_menu_order': pg.side_menu_order if hasattr(pg, 'side_menu_order') else '0'
+                  'side_menu_order': pg.side_menu_order if hasattr(pg, 'side_menu_order') else '0',
+                  'side_menu_grouping': pg.side_menu_grouping if hasattr(pg, 'side_menu_grouping') else None
                   }
-        out_list.append(pg_row)
+        if side_menu_grouping not in out_dict:
+            out_dict[side_menu_grouping] = []
+        out_dict[side_menu_grouping].append(pg_row)
 
-    out_list = sorted(out_list, key=lambda k: (int(k['side_menu_order']), k['name']))
+    for out_grouping in out_dict:
+        grouping_list = sorted(out_dict[out_grouping], key=lambda k: (int(k['side_menu_order']), k['name']))
+        out_list.append({'grouping': out_grouping, 'grouping_list': grouping_list})
+
+    out_list = sorted(out_list, key=lambda k: k['grouping'])
     return out_list
 
 
@@ -154,7 +163,7 @@ def _pages_update(context, data_dict):
         out.group_id = org_id
         out.name = page
     items = ['title', 'title_nl', 'title_fr', 'title_de', 'content', 'content_nl', 'content_fr', 'content_de', 'name',
-             'private', 'order', 'page_type', 'publish_date', 'parent_name', 'side_menu_order']
+             'private', 'order', 'page_type', 'publish_date', 'parent_name', 'side_menu_order', 'side_menu_grouping']
 
     # backward compatible with older version where page_type does not exist
     for item in items:
@@ -167,7 +176,6 @@ def _pages_update(context, data_dict):
         if key in data:
             extras[key] = data.get(key)
     out.extras = json.dumps(extras)
-
     out.modified = datetime.datetime.utcnow()
     user = model.User.get(context['user'])
     out.user_id = user.id

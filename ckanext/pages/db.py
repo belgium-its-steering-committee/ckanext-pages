@@ -5,6 +5,7 @@ import json
 from six import text_type
 import sqlalchemy as sa
 from sqlalchemy.orm import class_mapper
+
 try:
     from sqlalchemy.engine.result import RowProxy
 except ImportError:
@@ -20,10 +21,15 @@ def make_uuid():
 
 
 def init_db():
+    print("#"*15)
+    print("#   init db   #")
+    print("#"*15)
     if pages_table is None:
+        print("--> define_tables")
         define_tables()
 
     if not pages_table.exists():
+        print("--> pages_table.create")
         pages_table.create()
 
 
@@ -31,13 +37,13 @@ class Page(DomainObject):
 
     @classmethod
     def get(cls, **kw):
-        '''Finds a single entity in the register.'''
+        """Finds a single entity in the register."""
         query = model.Session.query(cls).autoflush(False)
         return query.filter_by(**kw).first()
 
     @classmethod
     def pages(cls, **kw):
-        '''Finds a single entity in the register.'''
+        """Finds a single entity in the register."""
         order = kw.pop('order', False)
         order_publish_date = kw.pop('order_publish_date', False)
         order_publish_date_asc = kw.pop('order_publish_date_asc', False)
@@ -84,6 +90,7 @@ def define_tables():
                            sa.Column('extras', types.UnicodeText, default=u'{}'),
                            sa.Column('parent_name', types.UnicodeText, default=u''),
                            sa.Column('side_menu_order', types.UnicodeText, default=u'0'),
+                           sa.Column('side_menu_grouping', types.UnicodeText, default=None),
                            extend_existing=True
                            )
 
@@ -120,7 +127,7 @@ def define_tables():
 
 
 def table_dictize(obj, context, **kw):
-    '''Get any model object and represent it as a dict'''
+    """Get any model object and represent it as a dict"""
     result_dict = {}
 
     if isinstance(obj, RowProxy):
@@ -136,7 +143,7 @@ def table_dictize(obj, context, **kw):
             continue
         if name == 'continuity_id':
             continue
-        value = getattr(obj, name)
+        value = getattr(obj, name) if hasattr(obj, name) else None
         if name == 'extras' and value:
             result_dict.update(json.loads(value))
         elif value is None:
