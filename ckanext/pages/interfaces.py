@@ -3,12 +3,12 @@ import ckan.plugins as p
 
 
 class IPagesSchema(Interface):
-    '''
+    """
     Interface to define custom schemas.
-    '''
+    """
 
     def update_pages_schema(self, schema):
-        u'''
+        u"""
         Return a schema with the fields of the pages.
 
         ckanext-pages will use the returned schema to define the fields of the
@@ -26,7 +26,7 @@ class IPagesSchema(Interface):
         :returns: a dictionary mapping fields keys to lists of
           validator and converter functions to be applied to those keys
         :rtype: dictionary
-        '''
+        """
         try:
             unicode_safe = p.toolkit.get_validator('unicode_safe')
         except p.toolkit.UnknownValidator:
@@ -40,4 +40,5 @@ class IPagesSchema(Interface):
         schema['title_de'] = [p.toolkit.get_validator('ignore_missing'), unicode_safe]
         schema['parent_name'] = [p.toolkit.get_validator('ignore_missing'), unicode_safe]
         schema['side_menu_order'] = [p.toolkit.get_validator('ignore_missing'), unicode_safe]
+        schema['side_menu_grouping'] = [p.toolkit.get_validator('ignore_missing'), unicode_safe]
         return schema

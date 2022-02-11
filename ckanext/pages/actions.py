@@ -51,7 +51,8 @@ def _menu_list(context, data_dict):
                   'title_fr': pg.title_fr,
                   'title_de': pg.title_de,
                   'name': pg.name,
-                  'side_menu_order': pg.side_menu_order if hasattr(pg, 'side_menu_order') else '0'
+                  'side_menu_order': pg.side_menu_order if hasattr(pg, 'side_menu_order') else '0',
+                  'side_menu_grouping': pg.side_menu_grouping if hasattr(pg, 'side_menu_grouping') else None
                   }
         out_list.append(pg_row)
 
@@ -154,7 +155,7 @@ def _pages_update(context, data_dict):
         out.group_id = org_id
         out.name = page
     items = ['title', 'title_nl', 'title_fr', 'title_de', 'content', 'content_nl', 'content_fr', 'content_de', 'name',
-             'private', 'order', 'page_type', 'publish_date', 'parent_name', 'side_menu_order']
+             'private', 'order', 'page_type', 'publish_date', 'parent_name', 'side_menu_order', 'side_menu_grouping']
 
     # backward compatible with older version where page_type does not exist
     for item in items:
