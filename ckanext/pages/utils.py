@@ -72,15 +72,11 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
     about_pages = [g['grouping_list'] for g in about_pages]
     about_pages = reduce(operator.concat, about_pages)
 
-    print(about_pages)
-
     news_pages = tk.get_action('ckanext_menu_list')(
         data_dict={'parent_name': 'news'}
     )
     news_pages = [g['grouping_list'] for g in news_pages]
     news_pages = reduce(operator.concat, news_pages)
-
-    print(news_pages)
 
     _parents = _parents + about_pages + news_pages
 
