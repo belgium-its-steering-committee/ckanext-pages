@@ -41,7 +41,7 @@ def init_db():
             pages_table.append_column(sa.Column('side_menu_grouping', sa.types.UnicodeText, default=None))
             table = Table('ckanext_pages', model.meta.metadata)
             col = Column('side_menu_grouping', sa.types.UnicodeText, default=None)
-            col.create(table)
+            # col.create(table)
 
 
 class Page(DomainObject):
