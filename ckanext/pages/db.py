@@ -37,7 +37,9 @@ def init_db():
             else pages_table.columns
         if 'side_menu_grouping' not in [c.name for c in pages_columns]:
             print('side_menu_grouping')
-            pages_table.append_column(sa.Column('side_menu_grouping', sa.types.UnicodeText, default=None))
+            col = sa.Column('side_menu_grouping', sa.types.UnicodeText, default=None)
+            pages_table.append_column(col)
+            col.create(pages_table)
 
 
 class Page(DomainObject):
