@@ -38,7 +38,6 @@ def init_db():
         if 'side_menu_grouping' not in [c.name for c in pages_columns]:
             print('side_menu_grouping')
             pages_table.append_column(sa.Column('side_menu_grouping', sa.types.UnicodeText, default=None))
-            model.Session.get_bind().execute('alter table ckanext_pages add column side_menu_grouping text')
 
 
 class Page(DomainObject):
