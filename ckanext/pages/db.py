@@ -149,7 +149,7 @@ def table_dictize(obj, context, **kw):
             continue
         if name == 'continuity_id':
             continue
-        value = getattr(obj, name)
+        value = getattr(obj, name) if hasattr(obj, name) else None
         if name == 'extras' and value:
             result_dict.update(json.loads(value))
         elif value is None:
