@@ -1,2 +1,3 @@
 ckantoolkit
 six
+sqlalchemy-migrate
