@@ -47,7 +47,7 @@ def _menu_list(context, data_dict):
     out_dict = {}
 
     for pg in out:
-        side_menu_grouping = pg.side_menu_grouping if hasattr(pg, 'side_menu_grouping') else 'None'
+        side_menu_grouping = pg.side_menu_grouping if hasattr(pg, 'side_menu_grouping') else None
         pg_row = {'title': pg.title,
                   'title_nl': pg.title_nl,
                   'title_fr': pg.title_fr,
