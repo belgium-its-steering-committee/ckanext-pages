@@ -98,7 +98,9 @@
   </h2>
   <div class="module-content">
     {% for grouping in c.pages_dict %}
-      <p>{{ grouping.grouping }}</p>
+      {% if grouping.grouping != 'None' %}
+        <p>{{ grouping.grouping }}</p>
+      {% endif %}
       <ul class="pages-menu" style="margin-left:10px;">
         {% for page in grouping.grouping_list %}
           {% set url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + page.name) %}
