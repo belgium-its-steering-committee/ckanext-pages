@@ -35,6 +35,7 @@ def init_db():
         print("--> pages_table.exported_columns")
         for c in pages_table.exported_columns:
             print(c.name)
+            #  sa.Column('side_menu_grouping', types.UnicodeText, default=None),
 
 
 class Page(DomainObject):
@@ -94,7 +95,6 @@ def define_tables():
                            sa.Column('extras', types.UnicodeText, default=u'{}'),
                            sa.Column('parent_name', types.UnicodeText, default=u''),
                            sa.Column('side_menu_order', types.UnicodeText, default=u'0'),
-                           sa.Column('side_menu_grouping', types.UnicodeText, default=None),
                            extend_existing=True
                            )
 
