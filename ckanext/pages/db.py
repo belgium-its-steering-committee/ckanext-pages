@@ -21,11 +21,20 @@ def make_uuid():
 
 
 def init_db():
+    print("#"*15)
+    print("#   init db   #")
+    print("#"*15)
     if pages_table is None:
+        print("--> define_tables")
         define_tables()
 
     if not pages_table.exists():
+        print("--> pages_table.create")
         pages_table.create()
+    else:
+        print("--> pages_table.exported_columns")
+        for c in pages_table.exported_columns:
+            print(c.name)
 
 
 class Page(DomainObject):
