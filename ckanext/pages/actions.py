@@ -63,7 +63,6 @@ def _menu_list(context, data_dict):
 def _pages_show(context, data_dict):
     org_id = data_dict.get('org_id')
     page = data_dict.get('page')
-    context['current_year'] = datetime.datetime.now().year
     out = db.Page.get(group_id=org_id, name=page)
     if out:
         out = db.table_dictize(out, context)
@@ -143,7 +142,6 @@ def _pages_update(context, data_dict):
     # we need the page in the context for name validation
     context['page'] = page
     context['group_id'] = org_id
-    context['current_year'] = datetime.datetime.now().year
     schema = update_pages_schema()
 
     data, errors = df.validate(data_dict, schema, context)

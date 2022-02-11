@@ -1,5 +1,6 @@
 import six
 import json
+import datetime
 
 import ckantoolkit as tk
 import ckan.lib.navl.dictization_functions as dict_fns
@@ -85,6 +86,7 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
         page_dict['org_id'] = None
         page_dict['page'] = page
         page_dict['page_type'] = 'page' if page_type == 'pages' else page_type
+        page_dict['current_year'] = datetime.datetime.now().year
 
         try:
             tk.get_action('ckanext_pages_update')(
