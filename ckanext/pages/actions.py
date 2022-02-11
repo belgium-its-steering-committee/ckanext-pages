@@ -44,8 +44,10 @@ def _menu_list(context, data_dict):
 
     out = db.Page.pages(**search)
     out_list = []
+    out_dict = {}
 
     for pg in out:
+        side_menu_grouping = pg.side_menu_grouping if hasattr(pg, 'side_menu_grouping') else 'None'
         pg_row = {'title': pg.title,
                   'title_nl': pg.title_nl,
                   'title_fr': pg.title_fr,
@@ -54,9 +56,15 @@ def _menu_list(context, data_dict):
                   'side_menu_order': pg.side_menu_order if hasattr(pg, 'side_menu_order') else '0',
                   'side_menu_grouping': pg.side_menu_grouping if hasattr(pg, 'side_menu_grouping') else None
                   }
-        out_list.append(pg_row)
+        if side_menu_grouping not in out_dict:
+            out_dict[side_menu_grouping] = []
+        out_dict[side_menu_grouping].append(pg_row)
 
-    out_list = sorted(out_list, key=lambda k: (int(k['side_menu_order']), k['name']))
+    for out_grouping in out_dict:
+        grouping_list = sorted(out_dict[out_grouping], key=lambda k: (int(k['side_menu_order']), k['name']))
+        out_list.append({'grouping': out_grouping, 'grouping_list': grouping_list})
+
+    out_list = sorted(out_list, key=lambda k: k['grouping'])
     return out_list
 
 
