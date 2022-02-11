@@ -139,7 +139,7 @@
       <div class="controls">
         <select id="field-side_menu_grouping" class="form-control" name="side_menu_grouping">
             <option value="">{{ _('None') }}</option>
-          {% for y in range(2019, current_year) %}
+          {% for y in range(2019, data.current_year) %}
             <option value="{{ y }}" {% if y|string == data.side_menu_grouping %}selected="selected"{% endif %}>{{ y }}</option>
           {% endfor %}
         </select>
