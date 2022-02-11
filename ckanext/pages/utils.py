@@ -64,13 +64,17 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
 
     _parents = [{'name': '', 'title': 'N/A'}, {'name': 'about', 'title': 'About'}, {'name': 'news', 'title': 'News'}]
 
-    _parents = _parents + tk.get_action('ckanext_menu_list')(
+    about_pages = tk.get_action('ckanext_menu_list')(
         data_dict={'parent_name': 'about'}
     )
+    about_pages = [p for p in g['grouping_list'] for g in about_pages]
 
-    _parents = _parents + tk.get_action('ckanext_menu_list')(
+    news_pages = tk.get_action('ckanext_menu_list')(
         data_dict={'parent_name': 'news'}
     )
+    news_pages = [p for p in g['grouping_list'] for g in news_pages]
+
+    _parents = _parents + about_pages + news_pages
 
     if page_dict is None:
         page_dict = {}
