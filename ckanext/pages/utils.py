@@ -1,6 +1,8 @@
 import six
 import json
 import datetime
+import operator
+from functools import reduce
 
 import ckantoolkit as tk
 import ckan.lib.navl.dictization_functions as dict_fns
@@ -67,22 +69,16 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
     about_pages = tk.get_action('ckanext_menu_list')(
         data_dict={'parent_name': 'about'}
     )
-    print("-" * 25)
-    print(about_pages)
-    print("-" * 25)
     about_pages = [g['grouping_list'] for g in about_pages]
-    about_pages = [p for p in about_pages][0]
+    about_pages = reduce(operator.concat, about_pages)
 
     print(about_pages)
 
     news_pages = tk.get_action('ckanext_menu_list')(
         data_dict={'parent_name': 'news'}
     )
-    print("-"*25)
-    print(news_pages)
-    print("-"*25)
     news_pages = [g['grouping_list'] for g in news_pages]
-    news_pages = [p for p in news_pages][0]
+    news_pages = reduce(operator.concat, news_pages)
 
     print(news_pages)
 
