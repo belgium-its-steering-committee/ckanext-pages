@@ -31,13 +31,13 @@ def init_db():
     if not pages_table.exists():
         print("--> pages_table.create")
         pages_table.create()
-    else:
-        print("--> pages_table.exported_columns")
-        pages_columns = pages_table.exported_columns if hasattr(pages_table, 'exported_columns') \
-            else pages_table.columns
-        if 'side_menu_grouping' not in [c.name for c in pages_columns]:
-            print('side_menu_grouping')
-            pages_table.append_column(sa.Column('side_menu_grouping', sa.types.UnicodeText, default=None))
+   # else:
+        # print("--> pages_table.exported_columns")
+        # pages_columns = pages_table.exported_columns if hasattr(pages_table, 'exported_columns') \
+        #     else pages_table.columns
+        # if 'side_menu_grouping' not in [c.name for c in pages_columns]:
+        #     print('side_menu_grouping')
+        #     pages_table.append_column()
 
 
 class Page(DomainObject):
@@ -97,6 +97,7 @@ def define_tables():
                            sa.Column('extras', types.UnicodeText, default=u'{}'),
                            sa.Column('parent_name', types.UnicodeText, default=u''),
                            sa.Column('side_menu_order', types.UnicodeText, default=u'0'),
+                           sa.Column('side_menu_grouping', types.UnicodeText, default=None),
                            extend_existing=True
                            )
 
