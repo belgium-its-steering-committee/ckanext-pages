@@ -68,7 +68,7 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
         data_dict={'parent_name': 'about'}
     )
     about_pages = [g['grouping_list'] for g in about_pages]
-    about_pages = [p for p in about_pages]
+    about_pages = [p for p in about_pages][0]
 
     print(about_pages)
 
@@ -76,7 +76,7 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
         data_dict={'parent_name': 'news'}
     )
     news_pages = [g['grouping_list'] for g in news_pages]
-    news_pages = [p for p in news_pages]
+    news_pages = [p for p in news_pages][0]
 
     print(news_pages)
 
