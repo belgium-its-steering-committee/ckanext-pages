@@ -146,10 +146,6 @@ def _pages_update(context, data_dict):
 
     data, errors = df.validate(data_dict, schema, context)
 
-    print("-"*25)
-    print(data)
-    print("-"*25)
-
     if errors:
         raise p.toolkit.ValidationError(errors)
 
@@ -173,6 +169,10 @@ def _pages_update(context, data_dict):
         if key in data:
             extras[key] = data.get(key)
     out.extras = json.dumps(extras)
+
+    print("-" * 25)
+    print(out)
+    print("-" * 25)
 
     out.modified = datetime.datetime.utcnow()
     user = model.User.get(context['user'])
