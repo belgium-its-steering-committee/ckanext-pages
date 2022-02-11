@@ -33,7 +33,9 @@ def init_db():
         pages_table.create()
     else:
         print("--> pages_table.exported_columns")
-        for c in pages_table.exported_columns:
+        pages_columns = pages_table.exported_columns if hasattr(pages_table, 'exported_columns') \
+            else pages_table.columns
+        for c in pages_columns:
             print(c.name)
             #  sa.Column('side_menu_grouping', types.UnicodeText, default=None),
 
