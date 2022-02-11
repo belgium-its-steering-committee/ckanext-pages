@@ -142,6 +142,7 @@ def _pages_update(context, data_dict):
     # we need the page in the context for name validation
     context['page'] = page
     context['group_id'] = org_id
+    context['current_year'] = datetime.datetime.now().year
     schema = update_pages_schema()
 
     data, errors = df.validate(data_dict, schema, context)

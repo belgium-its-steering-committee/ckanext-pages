@@ -138,7 +138,8 @@
       <label for="field-side_menu_grouping" class="control-label">{{ _('Left Menu Grouping') }}</label>
       <div class="controls">
         <select id="field-side_menu_grouping" class="form-control" name="side_menu_grouping">
-          {% for y in range(2019, (datetime.datetime.now().year)) %}
+            <option value="">{{ _('None') }}</option>
+          {% for y in range(2019, current_year) %}
             <option value="{{ y }}" {% if y|string == data.side_menu_grouping %}selected="selected"{% endif %}>{{ y }}</option>
           {% endfor %}
         </select>
