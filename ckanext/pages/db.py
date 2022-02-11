@@ -35,9 +35,9 @@ def init_db():
         print("--> pages_table.exported_columns")
         pages_columns = pages_table.exported_columns if hasattr(pages_table, 'exported_columns') \
             else pages_table.columns
-        for c in pages_columns:
-            print(c.name)
-            #  sa.Column('side_menu_grouping', types.UnicodeText, default=None),
+        if 'side_menu_grouping' not in [c.name for c in pages_columns]:
+            print('side_menu_grouping')
+            pages_table.append_column(sa.Column('side_menu_grouping', sa.types.UnicodeText, default=None))
 
 
 class Page(DomainObject):
