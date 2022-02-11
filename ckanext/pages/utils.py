@@ -54,7 +54,6 @@ def pages_list_pages(page_type):
 
 
 def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type='pages'):
-
     page_dict = None
     if page:
         if page.startswith('/'):
@@ -116,15 +115,15 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
     error_summary = error_summary or {}
 
     data["parents"] = _parents
+    data["current_year"] = datetime.datetime.now().year
     form_snippet = config.get('ckanext.pages.form', 'ckanext_pages/base_form.html')
 
-    vars = {'data': data, 'errors': errors,
-            'error_summary': error_summary, 'page': page or '',
-            'form_snippet': form_snippet,
-            'current_year': datetime.datetime.now().year}
+    extra_vars = {'data': data, 'errors': errors,
+                  'error_summary': error_summary, 'page': page or '',
+                  'form_snippet': form_snippet }
 
     return tk.render(
-        'ckanext_pages/%s_edit.html' % page_type, extra_vars=vars)
+        'ckanext_pages/%s_edit.html' % page_type, extra_vars=extra_vars)
 
 
 def _inject_views_into_page(_page):
@@ -315,7 +314,6 @@ def _template_setup_group(id, group_type):
 
 
 def group_show(id, group_type, page=None):
-
     if page and page.startswith('/'):
         page = page[1:]
 
@@ -349,7 +347,6 @@ def group_show(id, group_type, page=None):
 
 
 def group_edit(id, group_type, page=None, data=None, errors=None, error_summary=None):
-
     _template_setup_group(id, group_type)
 
     page_dict = None
@@ -406,7 +403,6 @@ def group_edit(id, group_type, page=None, data=None, errors=None, error_summary=
 
 
 def group_delete(id, group_type, page):
-
     _template_setup_group(id, group_type)
 
     if page.startswith('/'):
