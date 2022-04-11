@@ -58,7 +58,7 @@ class Page(DomainObject):
         elif order_publish_date_asc:
             query = query.order_by(cls.publish_date.asc()).filter(cls.publish_date is not None)
         elif order_side_menu_order:
-            query = query.order_by(cls.side_menu_order.asc())
+            query = query.order_by(cls.side_menu_order.desc())
         else:
             query = query.order_by(cls.created.desc())
         return query.all()
