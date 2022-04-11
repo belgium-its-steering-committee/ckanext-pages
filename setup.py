@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='ckanext-pages',
-    version='2.1.1',
+    version='2.1.2',
     description='Basic CMS extension for CKAN (Belgian ITS fork)',
     long_description='',
     classifiers=[
