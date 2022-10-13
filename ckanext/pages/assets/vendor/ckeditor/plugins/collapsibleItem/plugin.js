@@ -3,7 +3,7 @@ function getCollapsibleItem() {
         '<div class="panel panel-default collapsible-item" id="collapbsible-1">' +
         '   <div class="panel-heading collapsible-item-heading" role="tab" id="headingCollapbsible">' +
         '       <h4 class="panel-title collapsible-item-title">' +
-        '           <a class="collapsed collapsible-item-title-link-icon pull-right" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseCollapbsible" aria-expanded="false" aria-controls="collapseCollapbsible"><span class="glyphicon glyphicon-chevron-down">&nbsp;</span></a>' +
+        '           <a class="collapsed collapsible-item-title-link-icon pull-right" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseCollapbsible" aria-expanded="false" aria-controls="collapseCollapbsible"><span class="glyphicon"><i class="icon-arrow-down"></i>&nbsp;</span></a>' +
         '           <a class="collapsed collapsible-item-title-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseCollapbsible" aria-expanded="false" aria-controls="collapseCollapbsible"><span class="collapsible-item-title-link-text">Title Text</span></a>' +
         '       </h4>' +
         '   </div>' +
