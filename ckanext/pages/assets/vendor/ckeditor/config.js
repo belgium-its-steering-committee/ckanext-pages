@@ -38,7 +38,4 @@ CKEDITOR.editorConfig = function( config ) {
 
 	//extra plugins
 	config.Extraplugins ='collapsibleItem';
-
-	//allow ALL content
-	config.allowedContent = true;
 };
