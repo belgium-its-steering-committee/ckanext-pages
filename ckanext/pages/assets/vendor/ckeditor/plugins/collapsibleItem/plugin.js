@@ -34,7 +34,7 @@ CKEDITOR.plugins.add('collapsibleItem', {
                     allowedContent: 'p;h1;h2;h3;h4;br;span(*)[*];ul;ol;li;strong;em;u;table(*)[*];tbody;thead;tr;td;th;hr;a;a[*];a(*)[*];img(*)[*];*{color};*{size}'
                 }
             },
-            allowedContent: 'div(!collapsible-item*,panel*,collapse)[*];h4(!collapsible-item*,panel*)[*];a(!collapsible-item*,collapsed,panel*)[*];span[*];i(!fa*)[*]',
+            allowedContent: 'div(!collapsible-item*,panel*,collapse)[*];h4(!collapsible-item*,panel*)[*];a(!collapsible-item*,collapsed,panel*)[*];span[*];i(fa*)[*]',
             requiredContent: 'div(collapsible-item);',
             upcast: function (element) {
                 return element.name == 'div' && element.hasClass('collapsible-item');
