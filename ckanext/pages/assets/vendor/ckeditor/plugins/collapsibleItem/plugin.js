@@ -3,8 +3,8 @@ function getCollapsibleItem() {
         '<div class="panel panel-default collapsible-item" id="collapbsible-1">' +
         '   <div class="panel-heading collapsible-item-heading" role="tab" id="headingCollapbsible">' +
         '       <h4 class="panel-title collapsible-item-title">' +
-        '           <a class="collapsed collapsible-item-title-link-icon pull-right" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseCollapbsible" aria-expanded="false" aria-controls="collapseCollapbsible"><span><i class="fa fa-arrow-down"></i>&nbsp;</span></a>' +
-        '           <a data-info="test div" class="collapsed collapsible-item-title-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseCollapbsible" aria-expanded="false" aria-controls="collapseCollapbsible"><span class="collapsible-item-title-link-text">Title Text</span></a>' +
+        '           <a data-info="test div" class="collapsed collapsible-item-title-link-icon pull-right" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseCollapbsible" aria-expanded="false" aria-controls="collapseCollapbsible"><span><i class="fa fa-arrow-down"></i>&nbsp;</span></a>' +
+        '           <a class="collapsed collapsible-item-title-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseCollapbsible" aria-expanded="false" aria-controls="collapseCollapbsible"><span class="collapsible-item-title-link-text">Title Text</span></a>' +
         '       </h4>' +
         '   </div>' +
         '   <div id="collapseCollapbsible" class="panel-collapse collapse collapsible-item-collapse" role="tabpanel" aria-labelledby="headingCollapbsible">' +
@@ -27,14 +27,14 @@ CKEDITOR.plugins.add('collapsibleItem', {
             editables: {
                 title: {
                     selector: '.collapsible-item-title-link',
-                    allowedContent: 'span i strong em u;*{color}'
+                    allowedContent: 'span; i(fa*); strong; em; u;*{color}'
                 },
                 content: {
                     selector: '.collapsible-item-body',
                     allowedContent: 'p;h1;h2;h3;h4;br;span(*)[*];ul;ol;li;strong;em;u;table(*)[*];tbody;thead;tr;td;th;hr;a;a[*];a(*)[*];img(*)[*];*{color};*{size}'
                 }
             },
-            allowedContent: 'div(!collapsible-item*,panel*,collapse)[*];h4(!collapsible-item*,panel*)[*];a(!collapsible-item*,collapsed,panel*)[*];span[*];i(!fa*)[*]',
+            allowedContent: 'div(!collapsible-item*,panel*,collapse)[*];h4(!collapsible-item*,panel*)[*];a(!collapsible-item*,collapsed,panel*)[*];span(*)[*];i(fa*)[*]',
             requiredContent: 'div(collapsible-item);',
             upcast: function (element) {
                 return element.name == 'div' && element.hasClass('collapsible-item');
