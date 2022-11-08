@@ -38,4 +38,9 @@ CKEDITOR.editorConfig = function( config ) {
 
 	//extra plugins
 	config.Extraplugins ='collapsibleItem';
+
+	//allow additional elements
+	config.extraAllowedContent ='i'
 };
+
+
