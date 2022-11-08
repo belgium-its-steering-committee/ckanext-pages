@@ -31,10 +31,10 @@ CKEDITOR.plugins.add('collapsibleItem', {
                 },
                 content: {
                     selector: '.collapsible-item-body',
-                    allowedContent: 'p;br;span(*)[*];ul;ol;li;strong;em;u;table(*)[*];tbody;thead;tr;td;th;hr;a;a[*];a(*)[*];img(*)[*];'
+                    allowedContent: 'p;h1;h2;h3;h4;br;span(*)[*];ul;ol;li;strong;em;u;table(*)[*];tbody;thead;tr;td;th;hr;a;a[*];a(*)[*];img(*)[*];*{color};*{size}'
                 }
             },
-            allowedContent: 'div(!collapsible-item*,panel*,collapse)[*];h4(!collapsible-item*,panel*)[*];a(!collapsible-item*,collapsed,panel*)[*];span(!glyphicon*)[*];',
+            allowedContent: 'div(!collapsible-item*,panel*,collapse)[*];h4(!collapsible-item*,panel*)[*];a(!collapsible-item*,collapsed,panel*)[*];span(!glyphicon*)[*];*{color}',
             requiredContent: 'div(collapsible-item);',
             upcast: function (element) {
                 return element.name == 'div' && element.hasClass('collapsible-item');

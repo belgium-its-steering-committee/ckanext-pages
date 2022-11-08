@@ -36,7 +36,7 @@ this.ckan.module('textbox', function (jQuery, _) {
       // Make dialogs simpler.
       config.removeDialogTabs = 'image:advanced;link:advanced';
       config.filebrowserUploadUrl = this.options.site_url + 'pages_upload';
-      config.extraPlugins = 'divarea';
+      config.extraPlugins = 'divarea, collapsibleItem ';
       config.height = '400px';
       config.customConfig = false;
 

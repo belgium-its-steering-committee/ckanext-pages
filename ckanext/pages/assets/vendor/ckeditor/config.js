@@ -37,6 +37,6 @@ CKEDITOR.editorConfig = function( config ) {
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
 	//extra plugins
-	config.Extraplugins ='collapsibleItem', 'accordionList';
+	config.Extraplugins ='collapsibleItem';
 
 };
