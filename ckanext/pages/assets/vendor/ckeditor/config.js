@@ -31,7 +31,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.removeButtons = 'Underline,Subscript,Superscript';
 
 	// Set the most common block elements.
-	config.format_tags = 'p;h1;h2;h3;pre;i';
+	config.format_tags = 'p;h1;h2;h3;pre;';
 
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
@@ -39,8 +39,6 @@ CKEDITOR.editorConfig = function( config ) {
 	//extra plugins
 	config.Extraplugins ='collapsibleItem';
 
-	//allow additional elements
-	config.extraAllowedContent ='i'
 };
 
 
