@@ -27,11 +27,11 @@ CKEDITOR.plugins.add('collapsibleItem', {
             editables: {
                 title: {
                     selector: '.collapsible-item-title-link',
-                    allowedContent: 'span[*];h1[*];h2[*];h3[*];h4[*]; strong[*]; em[*]; u[*];'
+                    allowedContent: 'span[style]{*};h1[style]{*};h2[style]{*};h3[style]{*};h4[style]{*}; strong[syle]{*}; em[style]{*}; u[style]{*};'
                 },
                 content: {
                     selector: '.collapsible-item-body',
-                    allowedContent: 'p[*];h1[*];h2[*];h3[*];h4[*];br[*];span(*)[*];ul[*];ol[*];li[*];strong[*];b[*];em[*];u[*];table(*)[*];tbody[*];thead[*];tr[*];td[*];th[*];hr[*];a;a[*];a(*)[*];img(*)[*];'
+                    allowedContent: 'p[style]{*};h1[style]{*};h2[style]{*};h3[style]{*};h4[style]{*};br[style]{*};span[style]{*};ul[style]{*};ol[style]{*};li[style]{*};strong[style]{*};b[style]{*};em[style]{*};u[style]{*};table[style]{*};tbody[style]{*};thead[style]{*};tr[style]{*};td[style]{*};th[style]{*};hr[style]{*};a;a[style]{*};a(*)[*];img(*)[*];'
                 }
             },
             allowedContent: 'div(!collapsible-item*,panel*,collapse)[*];h4(!collapsible-item*,panel*)[*];a(!collapsible-item*,collapsed,panel*)[*];span(*)[*];*{color};*{border};*{background-color}',
