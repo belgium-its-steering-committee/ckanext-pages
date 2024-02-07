@@ -32,7 +32,7 @@ def _menu_list(context, data_dict):
         db.init_db()
     search['private'] = False
     search['group_id'] = None
-    search['order_side_menu_order'] = True
+    search['side_menu_order'] = True
     search['parent_name'] = data_dict.get('parent_name')
 
     out = db.Page.pages(**search)
@@ -234,7 +234,7 @@ def pages_update(context, data_dict):
     return _pages_update(context, data_dict)
 
 
-def pages_delete(context, data_dict):
+ def pages_delete(context, data_dict):
     try:
         p.toolkit.check_access('ckanext_pages_delete', context, data_dict)
     except p.toolkit.NotAuthorized:

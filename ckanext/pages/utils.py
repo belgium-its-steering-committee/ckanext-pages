@@ -206,14 +206,16 @@ def pages_show(page=None, page_type='page'):
     )
     if _page is None:
         return pages_list_pages(page_type)
+    # custom
 
     _childs = tk.get_action('ckanext_menu_list')(
-        data_dict={'parent_name': _page.get('name')}
+        data_dict={
+            'parent_name': _page.get('name')}
     )
 
     _parent = tk.get_action('ckanext_pages_show')(
-        data_dict={'org_id': None,
-                   'page': _page.get('parent_name')}
+        data_dict={
+            'org_id': None, 'page': _page.get('parent_name')}
     )
 
     if _childs:
@@ -225,6 +227,7 @@ def pages_show(page=None, page_type='page'):
         )
         tk.c.parent = _parent
 
+    # orginal
     tk.c.page = _page
     _inject_views_into_page(_page)
 
