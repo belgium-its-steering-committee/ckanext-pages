@@ -52,9 +52,9 @@ class Page(DomainObject):
         if order:
             query = query.order_by(sa.cast(cls.order, sa.Integer)).filter(cls.order != '')
         elif order_publish_date:
-            query = query.order_by(cls.publish_date.desc()).filter(cls.publish_date != None)  # noqa: E711
+            query = query.order_by(cls.publish_date.desc()).filter(cls.publish_date is not None)  # noqa: E711
         elif order_publish_date_asc:
-            query = query.order_by(cls.publish_date.asc()).filter(cls.publish_date != None)
+            query = query.order_by(cls.publish_date.asc()).filter(cls.publish_date is not None)
         elif order_side_menu_order:
             query = query.order_by(cls.side_menu_order.desc())
         else:

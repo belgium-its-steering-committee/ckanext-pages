@@ -163,7 +163,7 @@ def _inject_views_into_page(_page):
             package_id = context['resource'].resource_group.package_id
             package = tk.get_action('package_show')(context, {'id': package_id})
         except tk.ObjectNotFound:
-            error = _('ERROR: View not found {view_id}'.format(view_id=iframe_src))
+            error = _('ERROR: View not found {view_id}'.format(view_id= iframe_src))
 
         if error:
             resource_view_html = '<h4> %s </h4>' % error

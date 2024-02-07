@@ -46,7 +46,7 @@ def _menu_list(context, data_dict):
                   'title_fr': pg.title_fr,
                   'title_de': pg.title_de,
                   'name': pg.name,
-                  'side_menu_order': pg.side_menu_order if hasattr(pg, 'side_menu_order') else '0',
+                  'order_side_menu_order': pg.side_menu_order if hasattr(pg, 'side_menu_order') else '0',
                   'side_menu_grouping': pg.side_menu_grouping if hasattr(pg, 'side_menu_grouping') else None
                   }
         if side_menu_grouping not in out_dict:
