@@ -7,18 +7,11 @@ import ckan.lib.navl.dictization_functions as df
 import ckan.lib.uploader as uploader
 import ckan.lib.helpers as h
 from ckan.plugins import toolkit as tk
+from html.parser import HTMLParser
 
-
-try:
-    from html.parser import HTMLParser
-except ImportError:
-    from HTMLParser import HTMLParser
 from ckanext.pages.logic.schema import update_pages_schema
 
-try:
-    import ckan.authz as authz
-except ImportError:
-    import ckan.new_authz as authz
+import ckan.authz as authz
 
 from ckanext.pages import db
 
@@ -186,20 +179,35 @@ def _pages_update(context, data_dict):
 
 
 def pages_upload(context, data_dict):
+    """ Upload a file to the CKAN server.
+
+    This method implements the logic for file uploads used by CKEditor. For
+    more details on implementation and expected return values see:
+     - https://ckeditor.com/docs/ckeditor4/latest/guide/dev_file_upload.html#server-side-configuration
+
+    """
 
     try:
         p.toolkit.check_access('ckanext_pages_upload', context, data_dict)
     except p.toolkit.NotAuthorized:
         p.toolkit.abort(401, p.toolkit._('Not authorized to see this page'))
 
-    if p.toolkit.check_ckan_version(min_version='2.5'):
-        upload = uploader.get_uploader('page_images')
-    else:
-        upload = uploader.Upload('page_images')
+    upload = uploader.get_uploader('page_images')
 
     upload.update_data_dict(data_dict, 'image_url',
                             'upload', 'clear_upload')
-    upload.upload(uploader.get_max_image_size())
+
+    max_image_size = uploader.get_max_image_size()
+
+    try:
+        upload.upload(max_image_size)
+    except p.toolkit.ValidationError:
+        message = (
+            "Can't upload the file, size is too large. "
+            "(Max allowed is {0}mb)".format(max_image_size)
+        )
+        return {'uploaded': 0, 'error': {'message': message}}
+
     image_url = data_dict.get('image_url')
     if image_url and image_url[0:6] not in {'http:/', 'https:'}:
         image_url = h.url_for_static(

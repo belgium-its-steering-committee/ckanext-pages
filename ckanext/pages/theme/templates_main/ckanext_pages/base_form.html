@@ -3,13 +3,6 @@
 
 {% set data = data or {} %}
 {% set errors = errors or {} %}
-{% set ckan_29_or_higher = h.ckan_version().split('.')[1] | int >= 9 %}
-
-{% if data.parents is mapping %}
-  {% set parents = [data.parents] or [] %}
-{% else %}
-  {% set parents = data.parents or [] %}
-{% endif %}
 
 {% if type == 'org' %}
     {% set prefix = 'organization_pages_' %}
@@ -21,29 +14,17 @@
     {% set prefix = 'blog_' %}
     {% set args = {} %}
 {% else %}
-    {% if ckan_29_or_higher %}
-       {% set prefix = '' %}
-    {% else %}
-       {% set prefix = 'pages_' %}
-    {% endif %}
+     {% set prefix = 'pages_' %}
     {% set args = {} %}
 {% endif %}
 
-{% if ckan_29_or_higher %}
-  {% set page_url = page %}
-{% else %}
-  {% set page_url = '/' + page %}
-{% endif %}
-{% if ckan_29_or_higher %}
-   {% set prefix = 'pages.' + prefix %}
-{% endif %}
+{% set page_url = page %}
+{% set prefix = 'pages.' + prefix %}
 
 {% set cancel_url = h.url_for(prefix + 'index', **args) %}
 {% set slug_prefix = cancel_url ~ '/' %}
 {% set slug_domain = h.url_for(prefix + 'index', qualified=true, **args) %}
 {% if page %}
-  {% if ckan_29_or_higher %}
-
     {% if type == 'org' %}
       {% set delete_url = h.url_for('pages.organization_pages_delete', page=page_url, **args) %}
     {% elif type == 'group' %}
@@ -51,9 +32,6 @@
     {% else %}
       {% set delete_url = h.url_for('pages.blog_delete' if type == 'blog' else 'pages.delete', page=page_url, **args) %}
     {% endif %}
-  {% else %}
-    {% set delete_url = h.url_for(prefix + 'delete', page=page_url, **args) %}
-  {% endif %}
 {% endif %}
 
 {% if type == 'blog' %}
@@ -75,7 +53,9 @@
 {% endif %}
 
 
-<form class="dataset-form pages-form" method="post" action="{{ action_url }}" data-module="basic-form" class="dataset-form">
+<form class="dataset-form pages-form" method="post" action="{{ action_url }}" data-module="basic-form">
+  {{ h.csrf_input() if 'csrf_input' in h }}
+  {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
 
   {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
 
@@ -89,7 +69,7 @@
     {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain~'/', 'data-module-placeholder': '<page>'} %}
     {{ form.prepend('name', id='field-name', label=_('URL'), prepend=slug_prefix, placeholder=_(url_placeholder), value=data.name, error=errors.name, attrs=attrs) }}
 
-    {#{{ form.input('publish_date', id='field-publish_date', label=_('Publish Date'), placeholder=_('2021-04-23'), value=data.publish_date, error=errors.publish_date, classes=[], attrs={'data-module': 'datepicker', 'data-date-format': 'yyyy-mm-dd'}) }}#}
+    {{ form.input('publish_date', id='field-publish_date', label=_('Publish Date'), placeholder=_('2021-04-23'), value=data.publish_date, error=errors.publish_date, classes=[], attrs={'data-module': 'datepicker', 'data-date-format': 'yyyy-mm-dd'}) }}
 
   {% endblock %}
 
@@ -233,7 +213,9 @@
 </form>
 
 {% block scripts %}
-  {% if ckan_29_or_higher %}
-    <script src="/vendor/ckeditor/ckeditor.js"></script>
-  {% endif %}
+ <!--
+  CKEditor needs to be loaded here instead of using webassets
+  or it won't load properly when setting debug=False
+  -->
+  <script src="/vendor/ckeditor/ckeditor.js"></script>
 {% endblock %}

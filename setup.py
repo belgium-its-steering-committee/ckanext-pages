@@ -1,11 +1,29 @@
 # encoding: utf-8
 
+import io
+import os.path
+import re
+
 from setuptools import setup, find_packages
+
+
+# Extract version
+HERE = os.path.abspath(os.path.dirname(__file__))
+INIT_PY = os.path.join(HERE, 'ckanext', 'pages', '__init__.py')
+version = None
+with io.open(INIT_PY) as f:
+    for line in f:
+        m = re.match(r'__version__\s*=\s*u?[\'"](.*)[\'"]', line)
+        if m:
+            version = m.groups()[0]
+            break
+if version is None:
+    raise RuntimeError('Could not extract version from "{}".'.format(INIT_PY))
 
 
 setup(
     name='ckanext-pages',
-    version='2.1.2',
+    version='version',
     description='Basic CMS extension for CKAN (Belgian ITS fork)',
     long_description='',
     classifiers=[
@@ -14,10 +32,9 @@ setup(
         'License :: OSI Approved :: GNU Affero General Public License v3',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content :: Content Management System',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
     ],
     keywords='CKAN CMS',
     author='David Raznick',
@@ -40,8 +57,6 @@ setup(
         textboxview=ckanext.pages.plugin:TextBoxView
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan
-        [paste.paster_command]
-        pages = ckanext.pages.commands:PagesCommand
     """,
     message_extractors={
         'ckanext': [

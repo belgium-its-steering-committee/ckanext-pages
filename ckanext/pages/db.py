@@ -7,9 +7,13 @@ import sqlalchemy as sa
 from sqlalchemy.orm import class_mapper
 
 try:
-    from sqlalchemy.engine.result import RowProxy
+    from sqlalchemy.engine import Row
 except ImportError:
-    from sqlalchemy.engine.base import RowProxy
+    try:
+        from sqlalchemy.engine.result import RowProxy as Row
+    except ImportError:
+        from sqlalchemy.engine.base import RowProxy as Row
+
 from ckan import model
 from ckan.model.domain_object import DomainObject
 
@@ -21,15 +25,10 @@ def make_uuid():
 
 
 def init_db():
-    print("#"*15)
-    print("#   init db   #")
-    print("#"*15)
     if pages_table is None:
-        print("--> define_tables")
         define_tables()
 
     if not pages_table.exists():
-        print("--> pages_table.create")
         pages_table.create()
 
 
@@ -37,26 +36,24 @@ class Page(DomainObject):
 
     @classmethod
     def get(cls, **kw):
-        """Finds a single entity in the register."""
+        '''Finds a single entity in the register.'''
         query = model.Session.query(cls).autoflush(False)
         return query.filter_by(**kw).first()
 
     @classmethod
     def pages(cls, **kw):
-        """Finds a single entity in the register."""
+        '''Finds a single entity in the register.'''
         order = kw.pop('order', False)
         order_publish_date = kw.pop('order_publish_date', False)
-        order_publish_date_asc = kw.pop('order_publish_date_asc', False)
-        order_side_menu_order = kw.pop('order_side_menu_order', False)
 
         query = model.Session.query(cls).autoflush(False)
         query = query.filter_by(**kw)
         if order:
             query = query.order_by(sa.cast(cls.order, sa.Integer)).filter(cls.order != '')
         elif order_publish_date:
-            query = query.order_by(cls.publish_date.desc()).filter(cls.publish_date is not None)  # noqa: E711
+            query = query.order_by(cls.publish_date.desc()).filter(cls.publish_date != None)  # noqa: E711
         elif order_publish_date_asc:
-            query = query.order_by(cls.publish_date.asc()).filter(cls.publish_date is not None)
+            query = query.order_by(cls.publish_date.asc()).filter(cls.publish_date != None)
         elif order_side_menu_order:
             query = query.order_by(cls.side_menu_order.desc())
         else:
@@ -127,10 +124,10 @@ def define_tables():
 
 
 def table_dictize(obj, context, **kw):
-    """Get any model object and represent it as a dict"""
+    '''Get any model object and represent it as a dict'''
     result_dict = {}
 
-    if isinstance(obj, RowProxy):
+    if isinstance(obj, Row):
         fields = obj.keys()
     else:
         ModelClass = obj.__class__

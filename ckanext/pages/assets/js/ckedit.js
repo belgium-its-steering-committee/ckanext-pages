@@ -36,16 +36,26 @@ this.ckan.module('ckedit', function (jQuery, _) {
       // Make dialogs simpler.
       config.removeDialogTabs = 'image:advanced;link:advanced';
       config.filebrowserUploadUrl = this.options.site_url + 'pages_upload';
-      config.extraPlugins = 'divarea,ckanview,templates,font, collapsibleItem';
+      //Collapsible plugin added
+      config.extraPlugins = 'divarea,ckanview,templates,font,collapsibleItem';
       config.height = '400px';
       config.customConfig = false;
       config.allowedContent = true;
-
       // Override default config options with ones provided by plugins
       if (window.ckan.pages && window.ckan.pages.override_config) {
         $.extend(config, window.ckan.pages.override_config);
       }
-
+      // CSRF Added by ckanOrg/master
+      var csrf_field = $('meta[name=csrf_field_name]').attr('content');
+      var csrf_token = $('meta[name='+ csrf_field +']').attr('content');
+      config.fileTools_requestHeaders = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRFToken': csrf_token
+      };
+      // Override default config options with ones provided by plugins
+      if (window.ckan.pages && window.ckan.pages.override_config) {
+        $.extend(config, window.ckan.pages.override_config);
+      }
       var editor = $(this.el).ckeditor(config);
     },
   }
