@@ -19,7 +19,6 @@ from ckan.model.domain_object import DomainObject
 
 pages_table = None
 
-
 def make_uuid():
     return text_type(uuid.uuid4())
 
@@ -45,6 +44,8 @@ class Page(DomainObject):
         '''Finds a single entity in the register.'''
         order = kw.pop('order', False)
         order_publish_date = kw.pop('order_publish_date', False)
+        order_publish_date_asc = kw.pop('order_publish_date_asc', False)
+        order_side_menu_order = kw.pop('order_side_menu_order', False)
 
         query = model.Session.query(cls).autoflush(False)
         query = query.filter_by(**kw)
