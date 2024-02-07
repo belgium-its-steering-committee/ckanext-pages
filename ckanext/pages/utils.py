@@ -260,8 +260,7 @@ def pages_upload():
                 logic.parse_params(tk.request.files)
             )
         )
-    else:
-        data_dict = tk.request.POST
+    )
     try:
         upload_info = tk.get_action('ckanext_pages_upload')(None, data_dict)
     except tk.NotAuthorized:
