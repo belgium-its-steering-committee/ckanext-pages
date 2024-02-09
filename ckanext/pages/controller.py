@@ -8,6 +8,10 @@ config = ckantoolkit.config
 
 _ = p.toolkit._
 
+"""
+02/2024 DEPRECATED IN FAVOR OF BLEUPRINT
+# NOT FULLY TESTED YET
+"""
 
 class PagesController(p.toolkit.BaseController):
 

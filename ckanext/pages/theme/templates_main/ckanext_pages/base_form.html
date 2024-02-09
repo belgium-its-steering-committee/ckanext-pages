@@ -57,8 +57,6 @@
   {{ h.csrf_input() if 'csrf_input' in h }}
   {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
 
-  {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
-
   {% block form_basic_fields %}
     {{ form.input('title', id='field-title', label=_('Title EN (default)'), placeholder=title_placeholder, value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target'}) }}
     {{ form.input('title_nl', id='field-title-nl', label=_('Title NL'), placeholder=title_placeholder, value=data.title_nl, error=errors.title_nl, classes=['control-full', 'control-large']) }}

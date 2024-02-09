@@ -3,6 +3,7 @@
 {% block styles %}
   {{ super() }}
   {% asset 'pages/index-css' %}
+  {% set type = 'asset'%}
   {% snippet 'ckanext_pages/snippets/pages_' ~ type ~ '.html', name='pages/index-css' %}
 
 {% endblock %}

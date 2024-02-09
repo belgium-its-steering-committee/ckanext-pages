@@ -32,7 +32,7 @@ def _menu_list(context, data_dict):
         db.init_db()
     search['private'] = False
     search['group_id'] = None
-    search['side_menu_order'] = True
+    search['order_side_menu_order'] = True
     search['parent_name'] = data_dict.get('parent_name')
 
     out = db.Page.pages(**search)
@@ -54,10 +54,10 @@ def _menu_list(context, data_dict):
         out_dict[side_menu_grouping].append(pg_row)
 
     for out_grouping in out_dict:
-        grouping_list = sorted(out_dict[out_grouping], key=lambda k: (int(k['side_menu_order']), k['name']))
+        grouping_list = sorted(out_dict[out_grouping], key=lambda k: (int(k['order_side_menu_order']), k['name']))
         out_list.append({'grouping': out_grouping, 'grouping_list': grouping_list})
-
-    out_list = sorted(out_list, key=lambda k: k['grouping'], reverse=True)
+    
+    out_list = sorted(out_list, key=lambda k:(k['grouping'] is None, k['grouping']), reverse=True)
     return out_list
 
 

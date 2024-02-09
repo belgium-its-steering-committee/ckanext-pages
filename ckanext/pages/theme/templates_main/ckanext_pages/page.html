@@ -5,15 +5,15 @@
 
 {% block breadcrumb_content %}
 
-  {% set bread_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + c.page.name) %}
+  {#% set bread_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + c.page.name) %#}
+  {% set bread_url = h.url_for('pages.show', page=c.page.name) %}
   {% if c.page.name == 'about' or c.page.name == 'news' %}
     <li class="active"><a href="{{ bread_url }}" >{{ h.pages_page_title(selected_lang, c.page) }}</a></li>
   {% endif %}
 
-
-
   {% if not c.page.parent_name == '' %}
-    {% set parent_bread_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + c.parent.name if c.parent else 'nn') %}
+    {#% set parent_bread_url = h.url_for('ckanext.pages.controller:PagesController', action='pages_show', page='/' + c.parent.name if c.parent else 'nn') %#}
+    {% set parent_bread_url = h.url_for('pages.show', page=c.parent.name if c.parent else 'nn')%}
     <li class="home"><a href="{{ parent_bread_url }}" >{{ c.parent.title }}</a></li>
     <li class="active"><a href="{{ bread_url }}" >{{ h.pages_page_title(selected_lang, c.page) }}</a></li>
   {% endif %}
@@ -81,7 +81,8 @@
 <div class="module module-narrow module-shallow">
   <h2 class="module-heading">
     {% if c.parent %}
-      {% set parent_bread_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + c.parent.name) %}
+      {#% set parent_bread_url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + c.parent.name) %#}
+      {% set parent_bread_url = h.url_for('pages.show', page=c.parent.name) %}
       <a href="{{ parent_bread_url }}" >{{ h.pages_page_title(selected_lang, c.parent) }}</a>
     {% else %}
         {{ _('Menu') }}
@@ -94,7 +95,8 @@
       {% endif %}
       <ul class="pages-menu" style="margin-left:10px;">
         {% for page in grouping.grouping_list %}
-          {% set url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + page.name) %}
+          {#% set url = h.url_for(controller='ckanext.pages.controller:PagesController', action='pages_show', page='/' + page.name) %#}
+          {% set url = h.url_for('pages.show', page=page.name) %}
           {% if page.name == c.page.name %}
             <li class="pages-menu-item active-menu-item" style="list-style-type: none;padding-bottom:3px;"><a href="{{ url }}" style="color: #000;">{{ h.pages_page_title(selected_lang, page) }}</a></li>
           {% else %}
