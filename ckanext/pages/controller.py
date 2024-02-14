@@ -9,10 +9,11 @@ config = ckantoolkit.config
 _ = p.toolkit._
 
 """
-02/2024 DEPRECATED IN FAVOR OF BLEUPRINT
-# NOT FULLY TESTED YET
+02/2024 [x] DEPRECATED IN FAVOR OF FLASK BLEUPRINT
+        [ ] Fully Tested
+        [ ] Ready For Deletion
 """
-
+"""
 class PagesController(p.toolkit.BaseController):
 
     def org_show(self, id, page=None):
@@ -59,3 +60,4 @@ class PagesController(p.toolkit.BaseController):
 
     def pages_upload(self):
         return utils.pages_upload()
+"""

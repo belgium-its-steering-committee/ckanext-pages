@@ -45,17 +45,13 @@ this.ckan.module('ckedit', function (jQuery, _) {
       if (window.ckan.pages && window.ckan.pages.override_config) {
         $.extend(config, window.ckan.pages.override_config);
       }
-      // CSRF Added by ckanOrg/master
-      var csrf_field = $('meta[name=csrf_field_name]').attr('content');
-      var csrf_token = $('meta[name='+ csrf_field +']').attr('content');
-      config.fileTools_requestHeaders = {
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRFToken': csrf_token
-      };
-      // Override default config options with ones provided by plugins
-      if (window.ckan.pages && window.ckan.pages.override_config) {
-        $.extend(config, window.ckan.pages.override_config);
-      }
+      // CSRF Added by ckanOrg/master - 2024/02 seems not needed
+      //var csrf_field = $('meta[name=csrf_field_name]').attr('content');
+      //var csrf_token = $('meta[name='+ csrf_field +']').attr('content');
+      //config.fileTools_requestHeaders = {
+        //'X-Requested-With': 'XMLHttpRequest',
+        //'X-CSRFToken': csrf_token
+      //};
       var editor = $(this.el).ckeditor(config);
     },
   }

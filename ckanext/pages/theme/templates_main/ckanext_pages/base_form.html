@@ -4,6 +4,12 @@
 {% set data = data or {} %}
 {% set errors = errors or {} %}
 
+{% if data.parents is mapping %}
+  {% set parents = [data.parents] or [] %}
+{% else %}
+  {% set parents = data.parents or [] %}
+{% endif %}
+
 {% if type == 'org' %}
     {% set prefix = 'organization_pages_' %}
     {% set args = {'id': id} %}
@@ -131,8 +137,8 @@
       <div class="controls">
         <select id="field-parent_name" class="form-control" name="parent_name">
             {% for option in parents %}
-          <option value="{{ option.name }}" {% if option.name == data.parent_name %}selected="selected"{% endif %}>{{ option.title }}</option>
-          {% endfor %}
+              <option value="{{ option.name }}" {% if option.name == data.parent_name %}selected="selected"{% endif %}>{{ option.title }}</option>
+            {% endfor %}
         </select>
       </div>
     </div><br/>
@@ -143,49 +149,43 @@
   {% block form_content %}
     {% set type = 'asset' if h.ckan_version().split('.')[1] | int >= 9 else 'resource' %}
     {% set editor = h.get_wysiwyg_editor() %}
+    
     {% if editor == 'medium' %}
-      {% if ckan_29_or_higher %}
-        {% snippet 'ckanext_pages/snippets/pages_' ~ type ~ '.html', name='pages/medium-js' %}
-        {% snippet 'ckanext_pages/snippets/pages_' ~ type ~ '.html', name='pages/medium-css' %}
-      {% else %}
-        {% snippet 'ckanext_pages/snippets/pages_' ~ type ~ '.html', name='pages/medium' %}
-      {% endif %}
-
-
+      {% snippet 'ckanext_pages/snippets/pages_' ~ type ~ '.html', name='pages/medium-js' %}
+      {% snippet 'ckanext_pages/snippets/pages_' ~ type ~ '.html', name='pages/medium-css' %}
       {{ wysiwyg.editor('content', id='field-content', label=_('Content'), placeholder=_('Enter content here'), value=data.content|safe, error=errors.content) }}
+    
     {% elif editor == 'ckeditor' %}
-      {% if ckan_29_or_higher %}
-        {% snippet 'ckanext_pages/snippets/pages_' ~ type ~ '.html', name='pages/main-js' %}
-        {% snippet 'ckanext_pages/snippets/pages_' ~ type ~ '.html', name='pages/main-css' %}
-      {% else %}
-        {% snippet 'ckanext_pages/snippets/pages_' ~ type ~ '.html', name='pages/main' %}
-      {% endif %}
+      {% snippet 'ckanext_pages/snippets/pages_' ~ type ~ '.html', name='pages/main-js' %}
+      {% snippet 'ckanext_pages/snippets/pages_' ~ type ~ '.html', name='pages/main-css' %}
+    
       <div class="control-group">
           <label for="field-content-ck" class="control-label">{{ _('Content EN (default)') }}</label>
       </div>
-      <textarea id="field-content-ck" name="content" placeholder="{{_('My content')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content }}</textarea>
+      <textarea id="field-content-ck" name="content" placeholder="{{_('My content')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url_for('/', locale='default', qualified=true)) }}"> {{ data.content }}</textarea>
       <br/>
       <div class="control-group">
         <label for="field-content-nl-ck" class="control-label">{{ _('Content NL') }}</label>
       </div>
-      <textarea id="field-content-nl-ck" name="content_nl" placeholder="{{_('Mijn  inhoud')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content_nl }}</textarea>
+      <textarea id="field-content-nl-ck" name="content_nl" placeholder="{{_('Mijn  inhoud')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url_for('/', locale='default', qualified=true)) }}"> {{ data.content_nl }}</textarea>
       <br/>
       <div class="control-group">
         <label for="field-content-fr-ck" class="control-label">{{ _('Content FR') }}</label>
       </div>
-      <textarea id="field-content-fr-ck" name="content_fr" placeholder="{{_('Mon contenu')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content_fr }}</textarea>
+      <textarea id="field-content-fr-ck" name="content_fr" placeholder="{{_('Mon contenu')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url_for('/', locale='default', qualified=true)) }}"> {{ data.content_fr }}</textarea>
       <br/>
       <div class="control-group">
         <label for="field-content-de-ck" class="control-label">{{ _('Content DE') }}</label>
       </div>
-      <textarea id="field-content-de-ck" name="content_de" placeholder="{{_('Mein Inhalt')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content_de }}</textarea>
+      <textarea id="field-content-de-ck" name="content_de" placeholder="{{_('Mein Inhalt')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url_for('/', locale='default', qualified=true)) }}"> {{ data.content_de }}</textarea>
       <br/>
+    
     {% else %}
-        {{ form.markdown('content', id='field-content', label=_('Content EN (default)'), placeholder=_('My content'), value=data.content, error=errors.content) }}
-        {{ form.markdown('content_nl', id='field-content-nl', label=_('Content NL'), placeholder=_('Mijn  inhoud'), value=data.content_nl, error=errors.content_nl) }}
-        {{ form.markdown('content_fr', id='field-content-fr', label=_('Content FR'), placeholder=_('Mon contenu'), value=data.content_fr, error=errors.content_fr) }}
-        {{ form.markdown('content_de', id='field-content-de', label=_('Content DE'), placeholder=_('Mein Inhalt'), value=data.content_de, error=errors.content_de) }}
-     {% endif %}
+      {{ form.markdown('content', id='field-content', label=_('Content EN (default)'), placeholder=_('My content'), value=data.content, error=errors.content) }}
+      {{ form.markdown('content_nl', id='field-content-nl', label=_('Content NL'), placeholder=_('Mijn  inhoud'), value=data.content_nl, error=errors.content_nl) }}
+      {{ form.markdown('content_fr', id='field-content-fr', label=_('Content FR'), placeholder=_('Mon contenu'), value=data.content_fr, error=errors.content_fr) }}
+      {{ form.markdown('content_de', id='field-content-de', label=_('Content DE'), placeholder=_('Mein Inhalt'), value=data.content_de, error=errors.content_de) }}
+    {% endif %}
 
   {% endblock %}
 

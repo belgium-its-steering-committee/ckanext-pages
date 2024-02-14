@@ -6,14 +6,17 @@ from six import text_type
 import sqlalchemy as sa
 from sqlalchemy.orm import class_mapper
 
+"""
 try:
-    from sqlalchemy.engine import row
+"""
+from sqlalchemy.engine import Row
+"""
 except ImportError:
     try:
         from sqlalchemy.engine.result import RowProxy as Row
     except ImportError:
         from sqlalchemy.engine.base import RowProxy as Row
-
+"""
 from ckan import model
 from ckan.model.domain_object import DomainObject
 

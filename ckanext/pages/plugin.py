@@ -97,6 +97,8 @@ class PagesPlugin(PagesPluginBase):
     p.implements(p.IConfigurable, inherit=True)
     p.implements(p.IBlueprint)
     p.implements(p.IClick)
+    #Implements flask debug toolbar
+    p.implements(p.Imiddleware)
 
     def get_blueprint(self):
         return [blueprint.pages]
