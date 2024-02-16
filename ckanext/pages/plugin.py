@@ -91,13 +91,8 @@ def get_recent_blog_posts(number=5, exclude=None):
 
 
 def get_plus_icon():
-    '''
-    if tk.check_ckan_version(min_version='2.7'):
-    '''
     return 'plus-square'
-    '''
-     return 'plus-sign-alt'
-    '''
+
 
 
 def pages_page_title(selected_lang, page_data):
