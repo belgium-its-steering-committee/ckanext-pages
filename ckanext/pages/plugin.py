@@ -119,7 +119,7 @@ class PagesPlugin(PagesPluginBase):
     p.implements(p.IBlueprint)
     p.implements(p.IClick)
     #Implements flask debug toolbar
-    p.implements(p.IMiddleware)
+    #p.implements(p.IMiddleware)
 
     def get_blueprint(self):
         return [blueprint.pages]
