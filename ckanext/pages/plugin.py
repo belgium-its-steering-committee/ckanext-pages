@@ -91,7 +91,7 @@ def get_recent_blog_posts(number=5, exclude=None):
 
 
 def get_plus_icon():
-    return 'plus-square'
+    return 'plus-sign-alt'
 
 
 
