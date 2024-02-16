@@ -3,8 +3,7 @@ function getCollapsibleItem() {
         '<div class="panel panel-default collapsible-item" id="collapbsible-1">' +
         '   <div class="panel-heading collapsible-item-heading" role="tab" id="headingCollapbsible">' +
         '       <h4 class="panel-title collapsible-item-title">' +
-        '           <!--"data-bs-toggle" bootstrap naming convention change since v5.0 -->
-                    <a class="collapsed collapsible-item-title-link-icon pull-right" role="button" data-bs-toggle="collapse" data-parent="#accordion" href="#collapseCollapbsible" aria-expanded="true" aria-controls="collapseCollapbsible"><span class="fa fa-arrow-down">&nbsp;</span></a>' +
+        '            <a class="collapsed collapsible-item-title-link-icon pull-right" role="button" data-bs-toggle="collapse" data-parent="#accordion" href="#collapseCollapbsible" aria-expanded="true" aria-controls="collapseCollapbsible"><span class="fa fa-arrow-down">&nbsp;</span></a>' +
         '           <a class="collapsed collapsible-item-title-link" role="button" data-bs-toggle="collapse" data-parent="#accordion" href="#collapseCollapbsible" aria-expanded="true" aria-controls="collapseCollapbsible"><span class="collapsible-item-title-link-text">Title Text</span></a>' +
         '       </h4>' +
         '   </div>' +

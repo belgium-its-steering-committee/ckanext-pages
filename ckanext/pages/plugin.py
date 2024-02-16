@@ -51,6 +51,9 @@ def build_pages_nav_main(*args):
         name = quote(page['name'])
         title = html_escape(page['title'])
         link = tk.h.literal(u'<a href="/{}/{}">{}</a>'.format(type_, name, title))
+        #Custom benap
+
+
         if page['name'] == page_name:
             li = tk.literal('<li class="active">') + link + tk.literal('</li>')
         else:
