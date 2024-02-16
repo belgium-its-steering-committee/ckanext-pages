@@ -131,6 +131,8 @@ class PagesPlugin(PagesPluginBase):
             'render_content': render_content,
             'pages_get_wysiwyg_editor': get_wysiwyg_editor,
             'get_recent_blog_posts': get_recent_blog_posts,
+            'pages_get_plus_icon': get_plus_icon,
+            'pages_page_title': pages_page_title
         }
 
     def get_actions(self):
