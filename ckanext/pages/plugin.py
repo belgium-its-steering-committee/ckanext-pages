@@ -50,10 +50,11 @@ def build_pages_nav_main(*args):
         type_ = 'blog' if page['page_type'] == 'blog' else 'pages'
         name = quote(page['name'])
         title = html_escape(page['title'])
-        link = tk.h.literal(u'<a href="/{}/{}">{}</a>'.format(type_, name, title))
-        #Custom benap
-
-
+        #Custom BENAP
+        if tk.h.lang():
+            link = tk.h.literal(u'<a href="/{}/{}/{}">{}</a>'.format(tk.h.lang(), type_, name, title))
+        else:
+            link = tk.h.literal(u'<a href="/{}/{}">{}</a>'.format(type_, name, title))
         if page['name'] == page_name:
             li = tk.literal('<li class="active">') + link + tk.literal('</li>')
         else:
@@ -86,7 +87,6 @@ def get_recent_blog_posts(number=5, exclude=None):
             break
 
     return new_list
-
 
 class PagesPluginBase(p.SingletonPlugin, DefaultTranslation):
     p.implements(p.ITranslation, inherit=True)
