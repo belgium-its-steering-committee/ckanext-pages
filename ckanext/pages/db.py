@@ -62,9 +62,9 @@ class Page(DomainObject, BaseModel):
     modified = Column(types.DateTime, default=datetime.datetime.utcnow)
     extras = Column(types.UnicodeText, default=u'{}')
     revisions = Column(MutableDict.as_mutable(JSONB), default=u'{}')
-    parent_name = Column(types.UnicodeText, default=u''),
-    side_menu_order = Column(types.UnicodeText, default=u'0'),
-    side_menu_grouping = Column(types.UnicodeText, default=None),
+    parent_name = Column(types.UnicodeText, default=u'')
+    side_menu_order = Column(types.UnicodeText, default=u'0')
+    side_menu_grouping = Column(types.UnicodeText, default=None)
 
     @classmethod
     def get(cls, **kw):
