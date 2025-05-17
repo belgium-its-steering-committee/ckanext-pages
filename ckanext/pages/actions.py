@@ -29,8 +29,6 @@ class HTMLFirstImage(HTMLParser):
 
 def _menu_list(context, data_dict):
     search = {}
-    if db.pages_table is None:
-        db.init_db()
     search['private'] = False
     search['group_id'] = None
     search['order_side_menu_order'] = True
