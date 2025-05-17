@@ -149,7 +149,7 @@
 
   {% block form_content %}
     {% set type = 'asset' if h.ckan_version().split('.')[1] | int >= 9 else 'resource' %}
-    {% set editor = h.get_wysiwyg_editor() %}
+    {% set editor = h.pages_get_wysiwyg_editor() %}
     {% if editor == 'medium' %}
       {% if ckan_29_or_higher %}
         {% snippet 'ckanext_pages/snippets/pages_' ~ type ~ '.html', name='pages/medium-js' %}
@@ -170,22 +170,22 @@
       <div class="control-group">
           <label for="field-content-ck" class="control-label">{{ _('Content EN (default)') }}</label>
       </div>
-      <textarea id="field-content-ck" name="content" placeholder="{{_('My content')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content }}</textarea>
+      <textarea id="field-content-ck" name="content" placeholder="{{_('My content')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url_for('/', locale='default', qualified=true)) }}"> {{ data.content }}</textarea>
       <br/>
       <div class="control-group">
         <label for="field-content-nl-ck" class="control-label">{{ _('Content NL') }}</label>
       </div>
-      <textarea id="field-content-nl-ck" name="content_nl" placeholder="{{_('Mijn  inhoud')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content_nl }}</textarea>
+      <textarea id="field-content-nl-ck" name="content_nl" placeholder="{{_('Mijn  inhoud')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url_for('/', locale='default', qualified=true)) }}"> {{ data.content_nl }}</textarea>
       <br/>
       <div class="control-group">
         <label for="field-content-fr-ck" class="control-label">{{ _('Content FR') }}</label>
       </div>
-      <textarea id="field-content-fr-ck" name="content_fr" placeholder="{{_('Mon contenu')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content_fr }}</textarea>
+      <textarea id="field-content-fr-ck" name="content_fr" placeholder="{{_('Mon contenu')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url_for('/', locale='default', qualified=true)) }}"> {{ data.content_fr }}</textarea>
       <br/>
       <div class="control-group">
         <label for="field-content-de-ck" class="control-label">{{ _('Content DE') }}</label>
       </div>
-      <textarea id="field-content-de-ck" name="content_de" placeholder="{{_('Mein Inhalt')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content_de }}</textarea>
+      <textarea id="field-content-de-ck" name="content_de" placeholder="{{_('Mein Inhalt')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url_for('/', locale='default', qualified=true)) }}"> {{ data.content_de }}</textarea>
       <br/>
     {% else %}
         {{ form.markdown('content', id='field-content', label=_('Content EN (default)'), placeholder=_('My content'), value=data.content, error=errors.content) }}
