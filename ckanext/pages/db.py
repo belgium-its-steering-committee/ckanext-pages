@@ -2,16 +2,33 @@ import datetime
 import uuid
 import json
 
+from collections import OrderedDict
 from six import text_type
 import sqlalchemy as sa
+from sqlalchemy import Column, types
 from sqlalchemy.orm import class_mapper
+from sqlalchemy.ext.mutable import MutableDict
+from sqlalchemy.dialects.postgresql import JSONB
 
 try:
-    from sqlalchemy.engine.result import RowProxy
+    from sqlalchemy.engine import Row
 except ImportError:
-    from sqlalchemy.engine.base import RowProxy
+    try:
+        from sqlalchemy.engine.result import RowProxy as Row
+    except ImportError:
+        from sqlalchemy.engine.base import RowProxy as Row
+
 from ckan import model
 from ckan.model.domain_object import DomainObject
+
+try:
+    from ckan.plugins.toolkit import BaseModel
+except ImportError:
+    # CKAN <= 2.9
+    from ckan.model.meta import metadata
+    from sqlalchemy.ext.declarative import declarative_base
+
+    BaseModel = declarative_base(metadata=metadata)
 
 pages_table = None
 
@@ -20,20 +37,34 @@ def make_uuid():
     return text_type(uuid.uuid4())
 
 
-def init_db():
-    print("#"*15)
-    print("#   init db   #")
-    print("#"*15)
-    if pages_table is None:
-        print("--> define_tables")
-        define_tables()
+class Page(DomainObject, BaseModel):
 
-    if not pages_table.exists():
-        print("--> pages_table.create")
-        pages_table.create()
+    __tablename__ = "ckanext_pages"
 
-
-class Page(DomainObject):
+    id = Column(types.UnicodeText, primary_key=True, default=make_uuid)
+    title = Column(types.UnicodeText, default=u'')
+    title_nl = Column(types.UnicodeText, default=u'')
+    title_fr = Column(types.UnicodeText, default=u'')
+    title_de = Column(types.UnicodeText, default=u'')
+    name = Column(types.UnicodeText, default=u'')
+    content = Column(types.UnicodeText, default=u'')
+    content_nl = Column(types.UnicodeText, default=u'')
+    content_fr = Column(types.UnicodeText, default=u'')
+    content_de = Column(types.UnicodeText, default=u'')
+    lang = Column(types.UnicodeText, default=u'')
+    order = Column(types.UnicodeText, default=u'')
+    private = Column(types.Boolean, default=True)
+    group_id = Column(types.UnicodeText, default=None)
+    user_id = Column(types.UnicodeText, default=u'')
+    publish_date = Column(types.DateTime)
+    page_type = Column(types.UnicodeText)
+    created = Column(types.DateTime, default=datetime.datetime.utcnow)
+    modified = Column(types.DateTime, default=datetime.datetime.utcnow)
+    extras = Column(types.UnicodeText, default=u'{}')
+    revisions = Column(MutableDict.as_mutable(JSONB), default=u'{}')
+    parent_name = Column(types.UnicodeText, default=u''),
+    side_menu_order = Column(types.UnicodeText, default=u'0'),
+    side_menu_grouping = Column(types.UnicodeText, default=None),
 
     @classmethod
     def get(cls, **kw):
@@ -62,75 +93,22 @@ class Page(DomainObject):
         else:
             query = query.order_by(cls.created.desc())
         return query.all()
-
-
-def define_tables():
-    types = sa.types
-    global pages_table
-    pages_table = sa.Table('ckanext_pages', model.meta.metadata,
-                           sa.Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
-                           sa.Column('title', types.UnicodeText, default=u''),
-                           sa.Column('title_nl', types.UnicodeText, default=u''),
-                           sa.Column('title_fr', types.UnicodeText, default=u''),
-                           sa.Column('title_de', types.UnicodeText, default=u''),
-                           sa.Column('name', types.UnicodeText, default=u''),
-                           sa.Column('content', types.UnicodeText, default=u''),
-                           sa.Column('content_nl', types.UnicodeText, default=u''),
-                           sa.Column('content_fr', types.UnicodeText, default=u''),
-                           sa.Column('content_de', types.UnicodeText, default=u''),
-                           sa.Column('lang', types.UnicodeText, default=u''),
-                           sa.Column('order', types.UnicodeText, default=u''),
-                           sa.Column('private', types.Boolean, default=True),
-                           sa.Column('group_id', types.UnicodeText, default=None),
-                           sa.Column('user_id', types.UnicodeText, default=u''),
-                           sa.Column('publish_date', types.DateTime),
-                           sa.Column('page_type', types.UnicodeText),
-                           sa.Column('created', types.DateTime, default=datetime.datetime.utcnow),
-                           sa.Column('modified', types.DateTime, default=datetime.datetime.utcnow),
-                           sa.Column('extras', types.UnicodeText, default=u'{}'),
-                           sa.Column('parent_name', types.UnicodeText, default=u''),
-                           sa.Column('side_menu_order', types.UnicodeText, default=u'0'),
-                           sa.Column('side_menu_grouping', types.UnicodeText, default=None),
-                           extend_existing=True
-                           )
-
-    model.meta.mapper(
-        Page,
-        pages_table,
-    )
-
-    # Create the default about-page
-    about_page = Page.get(name='about')
-    if not about_page:
-        about_page = Page()
-        about_page.name = "about"
-        about_page.title = "About"
-        about_page.parent_name = ""
-        about_page.private = False
-        about_page.order = "4"
-        about_page.side_menu_order = "0"
-        model.Session.add(about_page)
-        model.Session.commit()
-
-    # Create the default news-page
-    news_page = Page.get(name='news')
-    if not news_page:
-        news_page = Page()
-        news_page.name = "news"
-        news_page.title = "News"
-        news_page.parent_name = ""
-        news_page.private = False
-        news_page.order = "3"
-        news_page.side_menu_order = "0"
-        model.Session.add(news_page)
-        model.Session.commit()
+    
+    def get_ordered_revisions(self):
+        # Compare timestamps to avoid different datetime formats error
+        return OrderedDict(reversed(sorted(
+                self.revisions.items(),
+                key=lambda x: datetime.datetime.timestamp(
+                    datetime.datetime.fromisoformat(x[1]['created'])
+                    )
+        )))
 
 
 def table_dictize(obj, context, **kw):
     """Get any model object and represent it as a dict"""
     result_dict = {}
 
-    if isinstance(obj, RowProxy):
+    if isinstance(obj, Row):
         fields = obj.keys()
     else:
         ModelClass = obj.__class__

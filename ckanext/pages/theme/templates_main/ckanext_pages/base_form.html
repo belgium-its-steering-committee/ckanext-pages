@@ -21,29 +21,17 @@
     {% set prefix = 'blog_' %}
     {% set args = {} %}
 {% else %}
-    {% if ckan_29_or_higher %}
-       {% set prefix = '' %}
-    {% else %}
-       {% set prefix = 'pages_' %}
-    {% endif %}
+     {% set prefix = 'pages_' %}
     {% set args = {} %}
 {% endif %}
 
-{% if ckan_29_or_higher %}
-  {% set page_url = page %}
-{% else %}
-  {% set page_url = '/' + page %}
-{% endif %}
-{% if ckan_29_or_higher %}
-   {% set prefix = 'pages.' + prefix %}
-{% endif %}
+{% set page_url = page %}
+{% set prefix = 'pages.' + prefix %}
 
 {% set cancel_url = h.url_for(prefix + 'index', **args) %}
 {% set slug_prefix = cancel_url ~ '/' %}
 {% set slug_domain = h.url_for(prefix + 'index', qualified=true, **args) %}
 {% if page %}
-  {% if ckan_29_or_higher %}
-
     {% if type == 'org' %}
       {% set delete_url = h.url_for('pages.organization_pages_delete', page=page_url, **args) %}
     {% elif type == 'group' %}
@@ -51,9 +39,6 @@
     {% else %}
       {% set delete_url = h.url_for('pages.blog_delete' if type == 'blog' else 'pages.delete', page=page_url, **args) %}
     {% endif %}
-  {% else %}
-    {% set delete_url = h.url_for(prefix + 'delete', page=page_url, **args) %}
-  {% endif %}
 {% endif %}
 
 {% if type == 'blog' %}
@@ -233,7 +218,9 @@
 </form>
 
 {% block scripts %}
-  {% if ckan_29_or_higher %}
-    <script src="/vendor/ckeditor/ckeditor.js"></script>
-  {% endif %}
+ <!--
+  CKEditor needs to be loaded here instead of using webassets
+  or it won't load properly when setting debug=False
+  -->
+  <script src="/vendor/ckeditor/ckeditor.js"></script>
 {% endblock %}
