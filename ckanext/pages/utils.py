@@ -52,7 +52,6 @@ def pages_edit(page=None, data=None, errors=None, error_summary=None, page_type=
         page_dict = tk.get_action('ckanext_pages_show')(
             context={}, data_dict={'org_id': None, 'page': page}
         )
-
     if page_dict is None:
         page_dict = {}
 

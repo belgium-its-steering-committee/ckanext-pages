@@ -68,13 +68,13 @@ class Page(DomainObject, BaseModel):
 
     @classmethod
     def get(cls, **kw):
-        """Finds a single entity in the register."""
+        '''Finds a single entity in the register.'''
         query = model.Session.query(cls).autoflush(False)
         return query.filter_by(**kw).first()
 
     @classmethod
     def pages(cls, **kw):
-        """Finds a single entity in the register."""
+        '''Finds a single entity in the register.'''
         order = kw.pop('order', False)
         order_publish_date = kw.pop('order_publish_date', False)
         order_publish_date_asc = kw.pop('order_publish_date_asc', False)
