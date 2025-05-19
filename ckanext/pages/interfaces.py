@@ -1,4 +1,5 @@
 from ckan.plugins.interfaces import Interface
+import ckan.plugins as p
 
 
 class IPagesSchema(Interface):
