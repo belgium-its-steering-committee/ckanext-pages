@@ -3,7 +3,7 @@
 const TITLE_CLASS = "collapsible-item-heading";
 const BODY_CLASS = "collapsible-item-body";
 const TITLE_ALLOWED_CONTENT =
-  "span[style]{*};h1[style]{*};h2[style]{*};h3[style]{*};h4[style]{*}; strong[syle]{*}; em[style]{*}; u[style]{*};";
+  "span[style]{*};h1[style]{*};h2[style]{*};h3[style]{*};h4[style]{*}; strong[syle]{*}; em[style]{*}; u[style]{*};a(*)[*];";
 const BODY_ALLOWED_CONTENT =
   "p[style]{*};h1[style]{*};h2[style]{*};h3[style]{*};h4[style]{*};br[style]{*};span[style]{*};ul[style]{*};ol[style]{*};li[style]{*};strong[style]{*};b[style]{*};em[style]{*};u[style]{*};table[style]{*};tbody[style]{*};thead[style]{*};tr[style]{*};td[style]{*};th[style]{*};hr[style]{*};a;a[style]{*};a(*)[*];img(*)[*];";
 const ALLOWED_CONTENT =
