@@ -93,7 +93,7 @@ class Page(DomainObject, BaseModel):
         else:
             query = query.order_by(cls.created.desc())
         return query.all()
-    
+
     def get_ordered_revisions(self):
         # Compare timestamps to avoid different datetime formats error
         return OrderedDict(reversed(sorted(

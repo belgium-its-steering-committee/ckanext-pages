@@ -1,5 +1,4 @@
 import six
-import json
 import datetime
 import operator
 from functools import reduce
