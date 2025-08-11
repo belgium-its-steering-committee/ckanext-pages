@@ -21,29 +21,17 @@
     {% set prefix = 'blog_' %}
     {% set args = {} %}
 {% else %}
-    {% if ckan_29_or_higher %}
-       {% set prefix = '' %}
-    {% else %}
-       {% set prefix = 'pages_' %}
-    {% endif %}
+     {% set prefix = 'pages_' %}
     {% set args = {} %}
 {% endif %}
 
-{% if ckan_29_or_higher %}
-  {% set page_url = page %}
-{% else %}
-  {% set page_url = '/' + page %}
-{% endif %}
-{% if ckan_29_or_higher %}
-   {% set prefix = 'pages.' + prefix %}
-{% endif %}
+{% set page_url = page %}
+{% set prefix = 'pages.' + prefix %}
 
 {% set cancel_url = h.url_for(prefix + 'index', **args) %}
 {% set slug_prefix = cancel_url ~ '/' %}
 {% set slug_domain = h.url_for(prefix + 'index', qualified=true, **args) %}
 {% if page %}
-  {% if ckan_29_or_higher %}
-
     {% if type == 'org' %}
       {% set delete_url = h.url_for('pages.organization_pages_delete', page=page_url, **args) %}
     {% elif type == 'group' %}
@@ -51,9 +39,6 @@
     {% else %}
       {% set delete_url = h.url_for('pages.blog_delete' if type == 'blog' else 'pages.delete', page=page_url, **args) %}
     {% endif %}
-  {% else %}
-    {% set delete_url = h.url_for(prefix + 'delete', page=page_url, **args) %}
-  {% endif %}
 {% endif %}
 
 {% if type == 'blog' %}
@@ -76,7 +61,7 @@
 
 
 <form class="dataset-form pages-form" method="post" action="{{ action_url }}" data-module="basic-form" class="dataset-form">
-
+  {{ h.csrf_input() if 'csrf_input' in h }}
   {% block errors %}{{ form.errors(error_summary) }}{% endblock %}
 
   {% block form_basic_fields %}
@@ -164,7 +149,7 @@
 
   {% block form_content %}
     {% set type = 'asset' if h.ckan_version().split('.')[1] | int >= 9 else 'resource' %}
-    {% set editor = h.get_wysiwyg_editor() %}
+    {% set editor = h.pages_get_wysiwyg_editor() %}
     {% if editor == 'medium' %}
       {% if ckan_29_or_higher %}
         {% snippet 'ckanext_pages/snippets/pages_' ~ type ~ '.html', name='pages/medium-js' %}
@@ -185,22 +170,22 @@
       <div class="control-group">
           <label for="field-content-ck" class="control-label">{{ _('Content EN (default)') }}</label>
       </div>
-      <textarea id="field-content-ck" name="content" placeholder="{{_('My content')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content }}</textarea>
+      <textarea id="field-content-ck" name="content" placeholder="{{_('My content')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url_for('/', locale='default', qualified=true)) }}"> {{ data.content }}</textarea>
       <br/>
       <div class="control-group">
         <label for="field-content-nl-ck" class="control-label">{{ _('Content NL') }}</label>
       </div>
-      <textarea id="field-content-nl-ck" name="content_nl" placeholder="{{_('Mijn  inhoud')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content_nl }}</textarea>
+      <textarea id="field-content-nl-ck" name="content_nl" placeholder="{{_('Mijn  inhoud')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url_for('/', locale='default', qualified=true)) }}"> {{ data.content_nl }}</textarea>
       <br/>
       <div class="control-group">
         <label for="field-content-fr-ck" class="control-label">{{ _('Content FR') }}</label>
       </div>
-      <textarea id="field-content-fr-ck" name="content_fr" placeholder="{{_('Mon contenu')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content_fr }}</textarea>
+      <textarea id="field-content-fr-ck" name="content_fr" placeholder="{{_('Mon contenu')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url_for('/', locale='default', qualified=true)) }}"> {{ data.content_fr }}</textarea>
       <br/>
       <div class="control-group">
         <label for="field-content-de-ck" class="control-label">{{ _('Content DE') }}</label>
       </div>
-      <textarea id="field-content-de-ck" name="content_de" placeholder="{{_('Mein Inhalt')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url('/', locale='default', qualified=true)) }}"> {{ data.content_de }}</textarea>
+      <textarea id="field-content-de-ck" name="content_de" placeholder="{{_('Mein Inhalt')}}" data-module="ckedit" style="height:400px" data-module-site_url="{{ h.dump_json(h.url_for('/', locale='default', qualified=true)) }}"> {{ data.content_de }}</textarea>
       <br/>
     {% else %}
         {{ form.markdown('content', id='field-content', label=_('Content EN (default)'), placeholder=_('My content'), value=data.content, error=errors.content) }}
@@ -233,7 +218,9 @@
 </form>
 
 {% block scripts %}
-  {% if ckan_29_or_higher %}
-    <script src="/vendor/ckeditor/ckeditor.js"></script>
-  {% endif %}
+ <!--
+  CKEditor needs to be loaded here instead of using webassets
+  or it won't load properly when setting debug=False
+  -->
+  <script src="/vendor/ckeditor/ckeditor.js"></script>
 {% endblock %}

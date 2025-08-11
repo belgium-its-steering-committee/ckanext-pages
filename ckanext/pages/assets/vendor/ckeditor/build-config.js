@@ -25,7 +25,7 @@
  */
 
 var CKBUILDER_CONFIG = {
-	skin: 'Karma',
+	skin: 'moono-lisa',
 	preset: 'standard',
 	ignore: [
 		'.DS_Store',
@@ -92,7 +92,7 @@ var CKBUILDER_CONFIG = {
 		'toolbar' : 1,
 		'undo' : 1,
 		'uploadimage' : 1,
-		'wysiwygarea' : 1,
+		'wysiwygarea' : 1
 	},
 	languages : {
 		'af' : 1,

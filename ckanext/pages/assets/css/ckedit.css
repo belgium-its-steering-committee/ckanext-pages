@@ -54,11 +54,6 @@ img.left
 	background-color: Yellow;
 }
 
-span[lang]
-{
-	font-style: italic;
-}
-
 .code-featured
 {
 	border: 5px solid red;
